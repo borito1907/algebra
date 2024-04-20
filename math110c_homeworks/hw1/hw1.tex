@@ -1,0 +1,199 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{xr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Nil}{\text{Nil}}
+\newcommand{\gauss}{\Z[i]}
+
+\title{MATH110C Homework 1}
+\date{April 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 1}
+
+\begin{lemma}
+    Let $K/F$ be a field extension. Assume that $char{F} \neq 2$ and $[K : F] = 2$.
+    Then, there exists $\alpha \in K$ such that $\alpha^{2} \in K$.
+\end{lemma}
+\begin{proof}
+    Let $\alpha \in K$ but not in $F$. Then, $[F(\alpha):F] = 2$. Then, $m_{F}(\alpha) = x^{2} + ax + b$
+    for some $a,b \in F$. Then, by completing the square, $m_{F}(\alpha) = (\alpha + \frac{a}{2})^{2} + (b - \frac{a^{2}}{4}) = 0$,
+    so $(\alpha + \frac{a}{2})^{2}$ is in $F$. However, $\alpha + + \frac{a}{2}$ is not in $F$ since $\alpha$ is not in F. Thus, we
+    conclude the proof.
+\end{proof}
+
+\newpage
+
+\section{Exercise 2}
+
+Let $K/F$ be a field extension and let $\alpha, \beta \in K$. Assume $\alpha$ and $\beta$
+are algebraic over $F$, of respective degrees $m$ and $n$.
+
+\begin{lemma}
+    Let $m^{\prime}$ be the degree of $\alpha$ over $F(\beta)$. Then, $\beta$ has degree
+    $\frac{m^{\prime}n}{m}$ over $F(\alpha)$.
+\end{lemma}
+\begin{proof}
+    Notice that $[F(\alpha, \beta): F(\alpha)][F(\alpha): F] = [F(\alpha, \beta): F(\beta)][F(\beta): F]$.
+
+    Since $[F(\alpha): F] = m$ and $[F(\beta): F] = n$ and $[F(\alpha, \beta): F(\beta)] = m^{\prime}$, the result
+    immediately follows. The only lemma we need to continuously apply is that the degree of an element over a field
+    is also the degree of the extension.
+\end{proof}
+
+\begin{lemma}
+    If $m$ and $n$ are coprime, $[F(\alpha, \beta): F] = mn$.
+\end{lemma}
+\begin{proof}
+    By a lemma proven in class, $[F(\alpha, \beta): F] \leq [F(\alpha): F][F(\beta): F] = mn$.
+
+    Also notice that $m \mid [F(\alpha, \beta): F]$ and $n \mid [F(\alpha, \beta): F]$.
+    Since $m$ and $n$ are coprime, $mn \leq [F(\alpha, \beta): F]$.
+
+    We thus conclude the proof.
+\end{proof}
+
+\newpage
+
+\section{Exercise 3}
+
+We give an example where it fails.
+
+Let $p(x) = x^{3} - 2 \in \Q[x]$. Notice that $p$ is irreducible with two of its roots being
+$\alpha = \sqrt[3]{2}$ and $\beta =  \sqrt[3]{2}w$ with $w = e^{2\pi i/3}$. Then, $[\Q(\alpha):\Q] = [\Q(\beta):\Q] = 3$.
+
+We showed in lecture on April 14 that $K = \Q(\alpha, \beta)$ is a splitting field of $p$ over $\Q$
+with $[K:\Q] = 6$. Notice that this implies $[\Q(\alpha, \beta):\Q(\alpha)] = 2$ since
+
+\[ [\Q(\alpha, \beta):\Q(\alpha)][\Q(\alpha):\Q] = 6\]
+
+Then, $[\Q(\alpha, \beta):\Q(\alpha)] = 3$ and $2 = [\Q(\beta):\Q]$.
+
+Since $2 \nmid 3$, we have a counterexample.
+
+\newpage
+
+\section{Elman pg.298 Problem 2}
+
+\begin{lemma}
+    Let $u = \sqrt{2} + \sqrt[3]{5}$. Then, $\Q(u) = \Q(\sqrt{2}, \sqrt[3]{5})$.
+\end{lemma}
+\begin{proof}
+    Clearly, $\Q(u) \subseteq \Q(\sqrt{2}, \sqrt[3]{5})$. Thus, we'd like to show the opposite inclusion.
+    It suffices to show that $\sqrt{2} \in \Q(u)$ since $\sqrt[3]{5} = u - \sqrt{2}$.
+
+    Cubing both sides of this equation and rearranging by combining all $\sqrt{2}$ terms, we have that 
+
+    \[ \sqrt{2} = \frac{u^{3 - 6u - 5}}{3u^{2} + 2}\]
+
+    Notice that $3u^{2} + 2 \neq 0$ since $u \in \R$. Thus, $\sqrt{2} \in \Q(u)$ and we concluce the proof.
+\end{proof}
+
+To find all $w \in \Q(\sqrt{2}, \sqrt[3]{5})$ such that $\Q(w) =  \Q(\sqrt{2}, \sqrt[3]{5})$, we'd need to find
+all elements of $\Q(u)$ with degree 6 over $\Q$. Then, $[\Q(u):\Q(w)] = 1$ and therefore they have to be equal.
+
+\newpage
+
+\section{Elman pg.298 Problem 4}
+
+\begin{lemma}
+    $[\Q(\sqrt{2},\sqrt{3}) : \Q] = 4$.
+\end{lemma}
+\begin{proof}
+    Notice that $[\Q(\sqrt{2},\sqrt{3}) : \Q] = [\Q(\sqrt{2},\sqrt{3}) : \Q(\sqrt{2})][\Q(\sqrt{2}) : \Q]$.
+    
+    $[\Q(\sqrt{2}) : \Q] = 2$ since $\sqrt{2} \notin \Q$ and $\sqrt{2}$ satisfies $p(x) = x^{2} - 2$.
+
+    To show $[\Q(\sqrt{2},\sqrt{3}) : \Q(\sqrt{2})] = 2$, it suffices to show that $\sqrt{3} \notin \Q(\sqrt{2})$
+    since $\sqrt{3}$ satisfies $p(x) = x^{2} - 3$.
+
+    Now, by contradiction, assume that $\sqrt{3} \in \Q(\sqrt{2})$. Then, there exists rationals $a,b$ such that
+
+    \[ a + b \sqrt{2} = \sqrt{3} \]
+
+    Squaring both sides,
+
+    \[ a^{2} + \sqrt{2}ab + 2b^{2} = 3\]
+
+    Rearranging this equation proves that $\sqrt{2}$ is rational, which is a contradiction.
+
+    We thus conclude the proof.
+\end{proof}
+
+\newpage
+
+\section{Elman pg.298 Problem 7}
+
+\begin{lemma}
+    Let $\xi = \cos(\pi/6) + i \sin(\pi/6)$. $[Q(\xi):\Q] = 4$.
+\end{lemma}
+\begin{proof}
+    Notice that $\xi$ is a root of $p(x) = x^{4} - x^{2} + 1$. Thus, it suffices to show that
+    $p(x)$ is irreducible. $p$ doesn't have real roots since $x^{4} - x^{2} + 1 = (x^{2} - \frac{1}{2})^{2} + \frac{3}{4} > 0$. 
+    
+    Notice now that $x^{4} - x^{2} + 1 = (x^{2} + \sqrt{3}x + 1)(x^{2} - \sqrt{3}x + 1)$. Notice that the polynomials in the 
+    RHS are irreducible polynomials 
+    in $\R[x]$, so we don't have a factorization of $p$ in $\Q[x]$ using the fact that $\R[x]$ is a UFD. Therefore, $p$
+    is irreducible.
+\end{proof}
+
+\newpage
+
+\section{Elman pg.298 Problem 8}
+
+\begin{lemma}
+    Let $K = F(u)$ where $u$ is algebraic over $F$ with odd degree. Then, $K = F(u^{2})$.
+\end{lemma}
+\begin{proof}
+    Let $f$ be the minimal polynomial for $u$ and let $\deg(f) = 2k+1$ for some $k \geq 0$.
+
+    Let $g$ be the minimal polynomial for $u^{2}$ and let $\deg(g) = s$ for some $s \geq 1$.
+
+    Notice that $g(x^{2})(u) = 0$ so $2s \geq 2k + 1$. Since they can't be equal as one is
+    odd and the other is even, $2s > 2k + 1$.
+
+    Also notice that \[ [F(u) : F] = [F(u) : F(u^{2})][F(u^{2}) : F] \]. In other words,
+    we have that \[ 2k + 1 = [F(u) : F(u^{2})]s\].
+
+    Since $2s > 2k + 1$, the only possible value of $[F(u) : F(u^{2})]$ is 1. We thus conclude the proof.
+\end{proof}
+
+\newpage
+
+\section{Elman pg.298 Problem 12}
+
+\begin{lemma}
+    If $a^{n}$ is algebraic over a field $F$ for some $n > 0$, $a$ is algebraic over $F$.
+\end{lemma}
+\begin{proof}
+    Assume that $a^{n}$ is algebraic over a field $F$ for some $n > 0$.
+    Recall that $[F(a^{n}) : F] = F[(a^{n}) : F(a)][F(a): F]$ with both sides finite or infinite.
+    Also recall that $[F(a^{n}) : F]$ is finite if and only if $a^{n}$ is algebraic over $F$.
+    Then, $F[(a^{n}) : F(a)][F(a): F]$ is finite so $[F(a): F]$ is finite and thus $a$ is algebraic
+    over $F$.
+\end{proof}
+
+\end{document}

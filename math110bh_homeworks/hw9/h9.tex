@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\def\gauss{\ensuremath\mathbb{Z}[i]}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+
+\title{MATH110BH Homework 9}
+\date{March 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 6}
+
+\begin{lemma}
+    Two $2 \times 2$ non-scalar matrices are similar if and only if they have the same characteristic polynomials.
+\end{lemma}
+\begin{proof}
+    If two matrices are similar, they have the same invariant factors, so they have the same characteristic
+    polynomials. Let's now prove the converse.
+
+    Let $A,B$ be two matrices with the same characteristic polynomial, $f$.
+    
+    Assume $f$ is quadratic. If $f$ has no roots, it's irreducible, there's only one IF decomposition,
+    so the matrices are similar.
+
+    If $f$ has the same repeated root, it's either diagonalizable (in which case it's scalar) or
+    the invariant factor is $(x-a)^{2}$. If it's diagonalizable, it's a scalar matrix, so the only IF
+    is $(x-a)^{2}$.
+
+    If it has different roots, the only IF $(x-a)(x-b)$, so they're similar.
+
+    If the characteristic polynomial is irreducible, there's only one IF decomposition and $A,B$ are similar. 
+
+    We thus conclude the proof.
+\end{proof}
+
+\section{Problem 7}
+
+\begin{lemma}
+    Two $3 \times 3$ matrices are similar if and only if they have the same characteristic and the same
+    minimal polynomials.
+\end{lemma}
+\begin{proof}
+    The forward direction is trivial. Now, let $A,B$ matrices with the same characteristic and similar
+    polynomials. To show that they're similar, it suffices to show that they have the same IF form.
+    
+    If the minimal polynomial has degree 3, $A,B$ have the same IF form.
+    If the minimal polynomial has degree 2, the other invariant factor has degree 1. $A,B$ should have
+    the same invariant factor since otherwise their characteristic polynomial would be different.
+    If the minimal polynomial has degree 1, the IF form is the minimal polynomial repeated thrice,
+    so $A,B$ have the same IF form.
+
+    We thus conclude the proof.
+\end{proof}
+
+\section{Problem 8}
+
+\begin{lemma}
+    Let $A \in M_{n}(F)$. The minimal polynomial of $A$ has the same irreducible divisors
+    as the characteristic polynomial of $A$.
+\end{lemma}
+\begin{proof}
+    Since the minimal polynomial divides the characteristic polynomial, it suffices to show
+    that every irreducible divisor of the characteristic polynomial divides the minimal polynomial.
+
+    Let $f $ be an irreducible polynomial that divides the characteristic polynomial. Then, $f$ is
+    also prime since $F[x]$ is a Euclidean domain. Then, $f$ divides one of the invariant factors by
+    a simple inductive argument on the number of invariant factors. Since the minimal polynomial is
+    the greatest invariant factor, $f$ also divides the minimal polynomial.
+\end{proof}
+
+\section{Problem 9}
+
+\begin{lemma}
+    Let $A \in M_{n}(F)$ be a nilpotent matrix. Then, the invariant factors of $A$
+    are powers of $x$.
+\end{lemma}
+\begin{proof}
+    If $A^{n} = 0$, the minimal polynomial of $A$ divides $x^{n}$. Then, the minimal
+    polynomial is of the form $x^{m}$ for some $m < n$. Since the minimal polynomial
+    is the largest IF, we're done. 
+\end{proof}
+
+Here's another rabbithole that would work but would take some time:
+
+\begin{proof}
+    If $A$ is nilpotent, then the companion matrices of $A$ also have to be nilpotent. We'll induct on $i$
+    to show that $a_{i} = 0$. If $a_{0} \neq 0$, then the companion matrix has full rank and is an isomorphism,
+    which contradicts its nilpotence.
+\end{proof}
+
+\begin{corollary}
+    Let $A \in M_{n}(F)$ be a nilpotent matrix. Then, $A^{n} = 0$.
+\end{corollary}
+\begin{proof}
+    Since the invariant factors of $A$ are powers of $x$ and the characteristic polynomial is the product
+    of the invariant factors, the characteristic polynomial is $c_{A}(x) = x^{n}$. By Cayley-Hamilton, 
+    $A^{n} = 0$.
+\end{proof}
+
+\section{Problem 10}
+
+\begin{lemma}
+    Every $n \times n$ matrix is similar to its transpose.
+\end{lemma}
+\begin{proof}
+    We can use the fact that Jordan blocks are similar to their transposes to show this for algebraically closed
+    fields. However, we'd like a general solution.
+
+    Instead, we can use RCF. Notice that both $XI - A$ and $XI - A^{t}$ are similar to a diagonal matrix.
+    In fact, by replacing every column operation in the computation of $XI - A$ with a row operation
+    and vice versa, we can see that they're the same matrix. Therefore, they have the same RCF form,
+    and are thus similar.
+\end{proof}
+
+
+
+\end{document}
+

@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{xr}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\title{Dummit and Foote Exercises}
+\date{March 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 7.1.13}
+
+\begin{lemma}
+    $\bar{a} \in \Z /n\Z$ is nilpotent if and only if
+    every prime divisor of n is also a divisor of $a$.
+\end{lemma}
+\begin{proof}
+    This is immediate from the classification of the nilradical
+    as the intersection of all the prime ideals.
+\end{proof}
+
+\end{document}

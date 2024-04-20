@@ -1,0 +1,232 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\def\gauss{\ensuremath\mathbb{Z}[i]\ }
+
+\title{MATH110BH Homework 6}
+\date{February 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+\begin{lemma}
+    Let $M$ be a cyclic (left) $R$-module. Then, there is an (left)-ideal $I$ of $R$ such that $M \cong R/I$.
+\end{lemma}
+\begin{proof}
+    Let $M$ be a cyclic (left) $R$-module. By lecture, there is a submodule $N$ of $R$ such that $M \cong R/N$. Since every submodule of $R$ is an ideal of $R$, we conclude the proof.
+\end{proof}
+
+\section{Problem 2}
+
+\begin{lemma}
+    Let $R$ be a commutative ring and $M,N$ be $R$-modules. Then, $Hom_{R}(M,N)$ is an $R$-module. 
+\end{lemma}
+\begin{proof}
+     Let's first show that $Hom_{R}(M,N)$ is an Abelian group using addition of functions. Let $f,g \in Hom_{R}(M,N)$ and $x,y \in M$. It suffices to show that $f+g$ is a module homomorphism from $M$ to $N$. Then, $(f + g)(x + y) = f(x+y) + g(x+y) = f(x) + f(y) + g(x) + g(y) = f(x) + g(x) + f(y) + g(y) = (f+g)(x) + (f+g)(y)$. Let $a \in R$ and $x \in M$. Then, $a(f+g)(x) = a (f(x) + g(x)) = af(x) + ag(x) = f(ax) + g(ax) = (f+g)(ax)$. The fact that it's Abelian follows immediately from the commutativity of $R$.
+
+    Let's now prove that $Hom_{R}(M,N)$ is an $R$-module. 
+     
+    Let $r \in R$, $f,g \in Hom_{R}(M,N)$ and $x \in M$. Then, $r(f+g)(x) = r(f(x) + g(x)) = rf(x) + rg(x)$, where the last equality holds because $N$ is an $R$-module.
+
+    Let $r,s \in R$, $f \in Hom_{R}(M,N)$ and $x \in M$. Then, $(r + s) \cdot f(x) = rf(x) + sf(x)$, again because $N$ is an $R$-module.
+
+    Similarly, $(rs)f = r(sf)$ and $1 \cdot f = f$ follows from the fact that $N$ is an $R$-module.
+\end{proof}
+
+\section{Problem 3}
+
+\begin{lemma}
+    Let $M$ be a (left) R-module and $N$ be a submodule of $M$. If $N$ and $M/N$ are finitely generated, $M$ is finitely generated.
+\end{lemma}
+\begin{proof}
+    Let $\{a_{1}, a_{2}, ..., a_{n}\}$ be a generating set for $N$ and $\{b_{1}, b_{2}, ..., b_{n}\}$ be a generating set for $M/N$. Let $f$ be the canonical surjective module homomorphism from $M$ to $M/N$. Since $f$ is surjective, for every non-zero $\hat{x} \in M/N$, there exists $x \in M$ such that $f(x) = \hat{x}$. For every $b_{i}$, pick some $c_{i}$ such that $f(c_{i}) = b_{i}$. We'll prove that $\{a_{1},a_{2},...,a_{n},c_{1},c_{2},...,c_{m}\}$ is a generating set for $M$. Let $x \in M$. We have the following two cases:
+
+    Case 1: $x \in N$.
+    Then, $x = r_{1}a_{1} + r_{2}a_{2} + ... + r_{n}a_{n}$ for some $r_{1},r_{2}, ..., r_{n}$ in $R$.
+
+    Case 2: $x \in M - N$.
+    Then, $\hat{x}$ is non-zero in $M/N$, so there are $r_{n+1}, r_{n+2}, ..., r_{m+n}$ such that $\hat{x} = r_{n+1}b_{1} + ... , + r_{m+n}b_{m}$. Pulling back using $f$, we have that $x = r_{n+1}c_{1} + ... + r_{n + m}c_{m}$.
+\end{proof}
+
+\section{Problem 4}
+
+\begin{lemma}
+    Let $M$ be a left $R$-module. Then, $Hom_{R}(R,M)$ and $M$ are isomorphic as groups.
+\end{lemma}
+\begin{proof}
+    First of all, notice that setting $f(1) = x$ for any $x \in M$ fully determines $f$ since $f(r) = rf(1) = rx$ by module axioms.
+
+
+    Recall from Problem 3 that $Hom_{R}(R,M)$ is an Abelian group using addition of functions. Consider the following map $\phi:Hom_{R}(R,M) \xrightarrow{} M$ defined by $f \mapsto f(1)$. Clearly, $x \mapsto f$ s.t. $f(1) = x$ is an inverse map. Clearly, $\phi$ is surjective. We thus conclude the proof.
+\end{proof}
+
+\section{Problem 5}
+
+\begin{lemma}
+    Let $f : R^{n} \xrightarrow{} R^{m}$ be a right R-module homomorphism. Then, there exists a unique matrix $A \in M_{mxn}(R)$ such that $f(x) = A \cdot x$.
+\end{lemma}
+\begin{proof}
+    Consider the standard bases for $R^{n}$ and $R^{m}$. Notice that $f(x) = x_{1}f(e_{1}) + ... + x_{n}f(e_{n})$ since $f$ is a module homomorphism. Let $A$ be such that the ith column of $A$ is the column vector $f(e_{i})$. Notice that $A \cdot x = x_{1}f(e_{1}) + ... + x_{n}f(e_{n})$, so $f(x) = A \cdot x$. $A$ is unique because the columns of $A$ are fully determined by $f(e_{i})$.
+\end{proof}
+
+\section{Problem 6}
+
+\begin{lemma}
+    Let $R$ be a commutative ring and $I \subsetneq R$ be an ideal. If $I$ is a free R-module, $I$ is principal. 
+\end{lemma}
+\begin{proof}
+    Let $\beta$ be a finite basis for $I$. Assume by contradiction that $\beta$ has at least two elements. Let $s_{1},s_{2} \in \beta$. Then, $s_{2}s_{1} - s_{1}s_{2} = 0$, which contradicts the linear independence of $\beta$. We thus conclude the proof.
+\end{proof}
+
+\section{Problem 7}
+
+\begin{lemma}
+    $\mathbb{Q}$ is not a free $\mathbb{Z}$-module.
+\end{lemma}
+\begin{proof}
+    Recall from a previous homework exercise that the rational numbers can only be generated using infinitely many elements.
+    
+    Assume by contradiction that there's some basis $\{q_{1},q_{2},...,\}$ for $\mathbb{Q}$. Without loss of generality, we can take all $q_{i}$ to be positive and in simplified form.
+    
+    We'll now prove that any set containing two rational number is independent, reaching a contradiction. Let $q_{1} = \frac{a_{1}}{b_{1}}$ and $q_{2} = \frac{a_{2}}{b_{2}}$. Notice that $b_{1}a_{2} \cdot q_{1} + -b_{2}a_{1} \cdot q_{2} = 0$. We therefore conclude the proof.
+    
+\end{proof}
+
+\section{Problem 8}
+
+\begin{lemma}
+    Every free finitely generated R-module has a finite basis.
+\end{lemma}
+\begin{proof}
+    Let $M$ be a free finitely generated R-module.
+    Let $x_{1},...,x_{n}$ be a generating set for $M$ and $\beta$ be a (possibly infinite) basis for $M$.
+
+    Since $\beta$ is generating, every $x_{i}$ can be written as a finite combination of elements in $\beta$. Then, putting all of these elements together, we get a finite set such that the span of this set includes $x_{1},...,x_{n}$. This set is independent since it's a subset of $\beta$ and generating, so we conclude the proof.
+\end{proof}
+    
+
+\section{Problem 9}
+
+Let $M$ be a (left) R-module and $I \subsetneq R$ be an ideal of $R$. Let $IM$ be the submodule generated by products of the form $sx$ for all $s \in I$ and $x \in M$.
+
+\begin{lemma}
+    Assume $IM = 0$. Then, $M$ admits the structure of an $R/I$-module. 
+\end{lemma}
+\begin{proof}
+    Let $x \in M$ and $s \in R - I$.
+    Define $(s + I) \cdot x = s \cdot x$.
+
+    Let's first show that this is well-defined. Let $r,s \in R$ such that $r \neq s$ and $r + I = s + I$. Then, $r - s \in I \implies (r-s) \cdot x = 0 \implies r \cdot x = s \cdot x$.
+
+    Let's now show that the four module axioms hold.
+
+    Since $I$ is not a unit ideal, $1 \notin I$. Then,$\forall x \in M: (1 + I) \cdot x = x$.
+
+    Let $r,s \in R - I$ and $x \in M$. Then, $((r+I)(s+I))(x) = (rs + I) \cdot x = (rs) \cdot x = r \cdot (s \cdot x) = (r+I)((s+I) \cdot x)$.
+
+    Let $r \in R - I$ and $x,y \in M$. Then, $(r + I)(x + y) = r \cdot (x+y) = r \cdot x + r \cdot y = (r+I) \cdot x + (r+I) \cdot y$.
+
+    Let $r,s \in R - I$ and $x \in M$. Then, $(r + I + s + I) \cdot x = (r + s + I) \cdot x = (r + s) \cdot x = r \cdot x + s \cdot x = (r+I) \cdot x + (s+I) \cdot x$.
+\end{proof}
+
+\begin{lemma}
+    $M/IM$ admits the structure of a (left) module over the factor ring $R/I$.
+\end{lemma}
+\begin{proof}
+    Since $M/IM$ is an R-module, $M/IM$ is an additive Abelian group.
+
+    We define $(r + I) \cdot (x + IM) = rx + IM$. Let's first show that this is well-defined. Let $r,s \in R$ such that $r \neq s$ and $r + I = s + I$ and $x,y \in M$ such that $x \neq y$ and $x + IM = y + IM$. Then, $r - s \in I$ and $x - y \in IM$. 
+    
+    Then, $(r - s)x \in IM$, so $(r+I) \cdot (x + IM) = (s + I) \cdot (x + IM)$.
+
+    Similarly, $r(x-y) \in IM$, so $(r + I) \cdot (x + IM) = (r + I) \cdot (y + IM)$.
+
+    Let's now show that the four module axioms hold.
+
+    As in the previous lemma, $1 + I$ is the identity element.
+
+    Let $r,s \in R$ and $x \in M$. Then, 
+
+    \[ ((r+I)(s+I)) \cdot (x + IM) = (rs + I) \cdot x = (rs) \cdot x = r \cdot (s \cdot x) = (r + I) \cdot ((s+I) \cdot (x + IM)\]
+
+    \[ ((r + I) + (s + I)) \cdot (x + IM) = (r + s + I) \cdot x = (r + s) \cdot x = r \cdot x + s \cdot x = (r + I) \cdot (x + IM) + (s + I) \cdot (x + IM) \]
+
+    Lastly, let $r \in R$ and $x,y \in M$. Then, 
+
+    \[ (r + I) \cdot (x + IM + y + IM) = r \cdot (x + y) = r \cdot x + r \cdot y = (r+I) \cdot (x + IM) + (r + I) \cdot (y + IM) \]
+\end{proof}
+
+\begin{lemma}
+    Let $M$ be a free R-module. Then, $M/IM$ is a free $R/I$-module.
+\end{lemma}
+\begin{proof}
+    Let $S$ be a basis for $M$. We'll prove that $\hat{S} = \{s + IM: s \in S\}$ is a basis for $M/IM$.
+    
+    Let $x \in M$. Then, there exists $r_{1}, ..., r_{n}$ and $s_{1},...,s_{n}$ such that 
+
+    \[ x = r_{1}s_{1} + ... + r_{n}s_{n}\]
+
+    Then,
+
+    \[ x + IM = (r_{1} + I) \cdot (s_{1} + IM) + ... + (r_{n} + I) \cdot (s_{n} + IM)\]
+
+    Thus, $\hat{S}$ generates $M/IM$.
+    Now, let $r_{1},...,r_{n} \in R$ and $s_{1},...,s_{n} \in S$ such that
+
+    \[ (r_{1} + I) \cdot (s_{1} + IM) + ... + (r_{n} + I) \cdot (s_{n} + IM) = 0\]
+
+    Then, 
+
+    \[ r_{1}s_{1} + ... + r_{n}s_{n} = 0\]
+
+    By the linear independence of $S$, $r_{i} = 0$ for all $i$. Thus, $\hat{S}$ is also independent.
+\end{proof}
+
+
+\begin{lemma}
+    Let $R$ be a nonzero commutative ring. If $R^{n} \cong R^{m}$, $n = m$. 
+\end{lemma}
+\begin{proof}
+    Let $R$ be a non-zero commutative ring and $I$ be a maximal ideal of $R$. Then, $R/I$ is a field. Since $R^{n} \cong R^{m}$, $IR^{n} \cong IR^{m}$ by using the existing isomorphism. Then, $R^{n}/IR^{n} \cong R^{m}/IR^{m}$. Notice that these are modules over $R/I$, so they're isomorphic vector spaces. $R^{n}/IR^{n}$ has a basis of $n$ elements and $R^{m}/IR^{m}$ has a basis of $m$ elements. Since isomorphic vector spaces have the same dimension, $n = m$.
+\end{proof}
+
+
+\section{Problem 10}
+
+\begin{lemma}
+    Let $A$ be an Abelian group and $f \in End(A)$. $A$ admits a $Z[x]$-module structure with $x \cdot a = f(a)$.
+\end{lemma}
+\begin{proof}
+    We check all four properties of modules.
+
+    $A$ is an Abelian group by assumption, so the first condition is trivially satisfied.
+
+    For constant polynomials $f(x) = b$ for some $b \in \mathbb{Z}$ define $f \cdot a = ba$. Then, define $x \cdot a = f(a)$. Since $End(A)$ is a ring, any polynomial in $Z[x]$ is an endomorphism (since it's a composition and addition of $f$).
+
+    This immediately produces $\forall a \in A: f \cdot a = a$ where $f$ is the map that's $1$ everywhere.
+
+    Let $f \in End(A)$ and $x,y \in A$.
+    Since $f$ is a group homomorphism, $f(x+y) = f(x) + f(y)$.
+
+    Let $f,g \in End(A)$ and $a \in A$.
+    Since $End(A)$ is an additive Abelian group, $(f+g)(a) = f(a) + g(a)$.
+
+    Let $f,g \in End(A)$ and $a \in A$ . By the associativity of composition, $(fg)(a) = f(g(a))$.
+
+    We have thus satisfied all properties of a module.
+\end{proof}
+
+\end{document}

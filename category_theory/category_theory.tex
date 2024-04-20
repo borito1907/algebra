@@ -1,0 +1,247 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\catname}[1]{\mathbf{#1}}
+\newcommand{\mor}{\text{Mor}}
+\newcommand{\arr}{\text{Arr}}
+\newcommand{\obj}{\text{Obj}}
+
+
+\title{Category Theory}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction and Motivation}
+
+Here's the theme of category theory according to Richard E. Borcherds: ignore
+the internal structure of objects and analyze the morphisms between them.
+
+Categories can be seen as:
+
+\begin{enumerate}
+    \item universes categorizing mathematical objects
+    \item mathematical objects in their own right
+\end{enumerate}
+
+Category theory frames a possible template for any mathematical theory.
+
+The purview of category theory is mathematical analogy. Many properties
+of mathematical systems can be unified and simplified by a presentation
+with diagrams of arrows.
+
+Category theoretical proofs are often very elegant.
+
+\newpage
+
+\section{Definitions}
+
+\begin{definition}[Serge Lang]
+    A \textbf{category $C$} consists of a collection of objects $Obj(C)$ and for any objects
+    $A,B \in Obj(C)$ we associate a set $Hom(A,B)$ called the \textbf{set of morphisms of $A$
+    into $B$}. 
+    
+    Lastly, with any three objects $A,B,C$, we have the \textbf{law of composition},
+    which is a map $Hom(A,B) \times Hom(B,C) \xrightarrow{} Hom(A,C)$ satisfying
+
+    \begin{enumerate}
+        \item $A \neq A^{\prime} \lor B \neq B^{\prime} \implies Hom(A,B) \cap Hom(A^{\prime},B^{\prime}) = \varnothing$
+        Moreover, $A = A^{\prime} \land B = B^{\prime} \implies Hom(A,B) = Hom(A^{\prime}, B^{\prime})$.
+        \item 
+    \end{enumerate}
+\end{definition}
+
+$Hom(A,B)$ can be the empty set. A category can be totally disconnected in the sense
+that $\forall A,B \in Obj(C): A \neq B \implies Hom(A,B) = \varnothing$.
+
+It follows from our axioms that for any object $A$, $End(A)$ is a monoid under composition
+and $Aut(A)$ is a group under composition.
+
+\newpage
+
+\subsection{Examples of Categories}
+
+\begin{example}
+    The \textbf{trivial category} has no objects and therefore no arrows.
+\end{example}
+
+\begin{example}
+    We can have another category with a single object and a single identity mapping.
+    In fact, there's a dictionary between categories with a single object and monoids
+    from set theory.
+\end{example}
+
+\begin{example}
+    Drawing random directed graphs will often define categories where the
+    nodes are objects and the arrows are homomorphisms. However, you have to
+    ensure that the properties of this directed graph obeys the axioms of 
+    category theory.
+\end{example}
+
+\begin{example}
+    Let $G$ be a group. We're going to construct a category $C$ out of this single
+    group $G$. Let $Obj(C)$ be a singleton set. We don't actually care about the
+    contents of this set. The data of the category is going to be fully captured
+    using the homomorphisms.
+
+    Let the homomorphisms of this single object $A$ be $G$, and define the
+    composition law using the group product. 
+\end{example}
+
+\begin{example}
+    Let $X$ be a set and $\leq$ be a preorder on $X$.
+\end{example}
+
+This might give a different lens for looking at categories. You can think of the most basic
+category as a preorder. Then, regular categories are "thick" categories where there are many
+possible relations (or "proofs") among different objects.
+
+We can use the morphisms of an existing category and create new
+categories. 
+
+\newpage
+
+\begin{definition}
+    A category is \textbf{small} if it has only a set's worth of arrows.
+\end{definition}
+
+\begin{definition}
+    A category is \textbf{locally small} if it has only a set's worth of 
+    arrows between every pair of objects. In this case, the set is denoted
+    with $C(X,Y)$ or $\hom(X,Y)$.
+\end{definition}
+
+\begin{definition}
+    A category is a \textbf{thin category} if 
+
+    \[ \forall f \in Arr(C): \lvert Arr(C) \rvert \leq 1\]
+\end{definition}
+
+\begin{definition}
+    Let $A,B \in Obj(C)$ and $f \in Mor(A,B)$. $f$ is an \textbf{epimorphism}
+    if $\forall C \in \obj(C): $
+\end{definition}
+
+\begin{definition}
+    An object $I$ in a category $C$ is called \textbf{initial} if it admits
+    a unique morphism to every $x \in C$. In other words, $Mor_{C}(I,X)$
+    is a singleton for every $X \in C$.
+\end{definition}
+
+\begin{definition}
+    An object $T$ in a category $C$ is called \textbf{terminal} if it admits
+    a unique morphism from every $x \in C$. In other words, $Mor_{C}(X,T)$
+    is a singleton for every $X \in C$.
+\end{definition}
+
+\begin{example}
+    The trivial group is initial and terminal in the category of groups.
+\end{example}
+
+\begin{example}
+    $\Z$ is the initial object in the category of rings.
+\end{example}
+
+\begin{definition}
+    $f \in Mor(A,B)$ is an isomorphism if $\exists g \in Mor(B,A)$ such that
+
+    \[ g \circ f = id_{a} \]
+    \[ f \circ g = id_{b} \]
+\end{definition}
+
+Given a category $C$, you can reverse all the arrows and produce a new category.
+
+\newpage
+
+Notice that the definitions of category theory doesn't allow us
+to peek inside the objects and use their structure. This makes
+certain definitions difficult. For example, how does one define
+injectivity in category theory? We can't consider "elements of
+objects".
+
+Instead, we define it as follows:
+
+\newpage
+
+\section{Kleisli Category}
+
+You can understand Kleisli categories by thinking about adding a global log
+to your functions and functional programming.
+
+Milewski thinks that the difficulty people face when trying to understand monads 
+is because they adopt an imperative programming approach, where a function takes
+an object as an argument and returns another object. Instead, if you take the functional
+programming approach where you are composing certain functions, monads just correspond
+to composing with some flair.
+
+
+
+\newpage
+
+\section{Category Theory and Programming}
+
+Operational semantics vs. denotational semantics
+
+In math, all functions are pure. In programming, you have states (functions are not pure).
+
+Functions have directionality, and this is implicit in category theory.
+
+
+
+\newpage
+
+\section{The Set Theoretical Elephant in the Room}
+
+Consider the category of sets. Notice that the objects of this
+category is the set of all sets! This flies in the face of Russels'
+Paradox. In fact, finding a set-theoretical foundation for 
+category theory is a challenge.
+
+Here are some solutions:
+
+\begin{enumerate}
+    \item Bound the size of objects by some cardinal $\kappa$.
+    \item Use "classes".
+    \item Grothendiech universes
+\end{enumerate}
+
+We're going to ignore this problem for now, since this doesn't
+really represent an issue until we go deep into category theory.
+
+
+
+\newpage
+
+\section{Functors}
+
+Somewhat ironically, functors seem to be defined before categories.
+
+The first such notion comes from considering the homology
+groups of topological spaces.
+
+Functors convert one type of object to another type of object.
+
+A functor may describe the equivalence of categories: finite vector spaces and linear
+maps are equivalent to the natural numbers and matrices.
+
+
+\end{document}

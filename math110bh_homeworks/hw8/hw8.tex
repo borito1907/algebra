@@ -1,0 +1,226 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\def\gauss{\ensuremath\mathbb{Z}[i]}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+
+\title{MATH110BH Homework 8}
+\date{March 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+\begin{lemma}
+    Let $F$ be a free (left) R-module with basis \( \{x_{1},x_{2},...,x_{n} \}\) and let $M$ be an R-module. Then, for all $m_{1},...,m_{n} \in M$ there is a unique R-module homomorphism $f: F \xrightarrow{} M$ such that $f(x_{i}) = m_{i}$. 
+\end{lemma}
+\begin{proof}
+    Our homomorphism will be defined as follows. For every $s \in F$, we'll express $s$ as an R-linear combination of \( \{x_{1},x_{2},...,x_{n} \}\) uniquely as 
+
+    \[ s = a_{1}x_{1} + a_{n}x_{n}\]
+
+    Then, we'll let $f(s) = a_{1}m_{1} + ... + a_{n}m_{n}$.
+    Let's first prove that this is a module homomorphism.
+    
+    Let $s,t \in F$ and $r \in R$. Then, there's unique $a_{1},...,a_{n},b_{1},....b_{n}$ such that
+
+    \[ s = a_{1}x_{1} + a_{n}x_{n}\]
+
+    and 
+
+    \[ t = b_{1}x_{1} + b_{n}x_{n}\]
+
+    Then,
+
+    \[ f(s + rt) = f(a_{1}x_{1} + ... + a_{n}x_{n} + rb_{1}x_{1} + ... + rb_{n}x_{n}) \]
+    
+    \[= (a_{1}+rb_{1})m_{1} + ... + (a_{n} + rb_{n})m_{n} = a_{1}m_{1} + ... + a_{n}m_{n} + r (b_{1}m_{1} + ... + b_{n}m_{n}) = f(s) + rf(t)\]
+
+    Notice that uniqueness immediately follows by the properties of a module homomorphism. More formally, let $g: F \xrightarrow{} M$ such that $g(x_{i}) = m_{i}$. Then, for any $s \in M$, we have that 
+
+    \[g(s) = g(a_{1}x_{1} + ... + a_{n}x_{n}) = a_{1}m_{1} + ... + a_{n}m_{n} = f(s)\]
+
+    We thus conclude the proof.
+\end{proof}
+
+Notice that the proof above goes through with minor modifications when we consider infinite bases.
+
+\section{Problem 2}
+
+\begin{lemma}
+    Let $f: M \xrightarrow{} N$ be a surjective homomorphism of (left) R-modules. If $N$ is free, there's a homomorphism of (left) R-modules $g:N \xrightarrow{} M$ such that $f \circ g$ is the identity of $N$.
+\end{lemma}
+\begin{proof}
+    Let $S$ be a (possibly infinite) basis for $N$ with an index set $I$. Then, for every $n_{i} \in S$, there's some $m_{i} \in M$ such that $g(m_{i}) = n_{i}$. From Problem 1, we get a module homomorphism $f: N \xrightarrow{} M$ such that $f(n_{i}) = m_{i}$. Then, clearly, $f \circ g$ is the identity on $N$.
+\end{proof}
+
+\section{Problem 3}
+
+\begin{lemma}
+    Let $f$ be a linear operator in a vector space V over $\R$ such that $\forall v \in V: f(f(v)) = -v$. V has the structure of a vector space over $\C$ such that $\forall v \in V: f(v) = iv$.  
+\end{lemma}
+
+There are many ways to solve this. Let's first sketch the most straightforward way.
+
+\begin{proof}
+    Define $\C \times V \xrightarrow{} V$ by $(a + bi, v) \mapsto av + bf(v)$.
+    Clearly, this agrees with the structure of $V$ over $\R$. We can now check the
+    module axioms. ...
+\end{proof}
+
+Let's now prove it using a more elegant strategy.
+
+\begin{proof}
+    Recall that linear operators $f$ on a vector space are in bijection with
+    $F[x]$-modules over $V$ where $x \cdot v = f(v)$. Then, there's a ring
+    isomorphism from $\R[x]$ to the $\Z$-module endomorphisms of $V$. 
+    Since $f^{2} + 1 = 0$, the ring homomorphism preserves its structure and
+    gives a ring homomorphism from $\R[x]/(x^{2} + 1)$ to the $\Z$-module endomorphisms of $V$.
+    Since $\R[x]/(x^{2} + 1) \cong \C$, $V$ is a complex vector space. $f^{2} + 1 = 0$ immediately
+    produces $f = \pm i$.
+\end{proof}
+
+
+\section{Problem 4}
+
+\begin{lemma}
+    Let $R$ be a PID and $M$ be an R-module. $M$ is cyclic if and only if $M \cong R/(a)$ for some $a \in R$.
+\end{lemma}
+\begin{proof}
+    Assume $M$ is cyclic. Then, there's some $x \in M$ such that $x$ generates $M$. Consider the module homomorphism $\phi_{x}: R \xrightarrow{} M$ given by $\phi(r) = rx$. Since $x$ generates $M$, $\phi$ is surjective. Since $R$ is a PID, $ker(\phi_{x}) = (a)$ for some $a \in R$.
+    
+    Then, by the first isomorphism theorem for modules, $M \cong R/(a)$. 
+
+    For the converse, notice that $a$ is a generator for the module $R/(a)$.
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a PID and $M$ be a cyclic R-module. Then, every submodule of $M$ is also cyclic.
+\end{corollary}
+\begin{proof}
+    Let $M$ be a cyclic module over a PID R. Then, $M \cong R/aR$ for some $a \in R$. Let $N$ be a submodule of $M$. Then, $N$ is an ideal of $R/aR$. Recall that every ideal in the ring $R/aR$ corresponds to an ideal in the ring $R$ that contains $aR$. Since $R$ is a PID, every ideal in $R/aR$ is also principal. Then, there's a single element that generates $N$.
+\end{proof}
+
+\section{Problem 5}
+
+\begin{lemma}
+    Let $a,b$ be nonzero elements of a PID $R$. Let $d = gcd(a,b)$ and $c = lcm(a,b)$, where $c,d$ are unique modulo multiplication by a unit. Then
+
+    \[ R/aR \oplus R/bR \cong R/cR \oplus R/dR\]
+\end{lemma}
+\begin{proof}
+    Let $a = p_{1}^{\alpha_{1}}...p_{n}^{\alpha_{n}}$ and $b = p_{1}^{\beta_{1}}...p_{n}^{\beta_{n}}$ be prime factorizations of $a$ and $b$, where $\alpha_{i}, \beta_{i} \geq 0$ and $p_{i} \neq p_{j}$. Let $\gamma_{i} = \max{\{\alpha_{i},\beta_{i}\}}$ and $\delta_{i} = \min{\{\alpha_{i},\beta_{i}\}}$. Notice that $\gamma_{i} = \alpha_{i} \land \delta_{i} = \beta_{i}$ or $\gamma_{i} = \beta{i} \land \delta_{i} = \alpha{i}$. Then, by CRT, the elementary divisors of these two modules are equivalent, so these two modules are also equivalent.
+\end{proof}
+
+
+\section{Problem 6}
+
+\begin{lemma}
+    Let M be a finitely generated torsion module over a PID R and let $n = \lvert IF(M) \rvert$. M can be generated by n elements and can't be generated by less than n elements.
+\end{lemma}
+\begin{proof}
+    Let M be a finitely generated torsion module over a PID R and let $n = \lvert IF(M) \rvert$. Then, 
+
+    \[ M \cong R/d_{1}R \oplus ... R/d_{n}R\]
+
+    for some $d_{i} \in R$ such that $d_{i} \mid d_{i + 1}$. Notice that the set $\{e_{1},...,e_{n}\}$ generates the right hand side. 
+    
+    We'll now prove that $M$ can't be generated by $n-1$ elements. Assume by contradiction that $M$ can be generated using $m < n$ elements. Then, $M \cong R^{m}/N$ where $N$ is a submodule of $R^{m}$. However, this immediately implies that $M$ has at most $m$ invariant factors, which is a contradiction.
+\end{proof}
+
+\section{Problem 7}
+
+\begin{definition}
+    A module is called \textbf{indecomposable} if it can't be expressed as a direct sum of its submodules.
+\end{definition}
+
+\begin{lemma}
+    Let $M$ be a finitely generated module over a PID R.
+
+    $M$ is indecomposable if and only if $M \cong R$ or $M \cong R/P^{n}$.
+\end{lemma}
+\begin{proof}
+    Let $M$ be a finitely generated module over a PID R. Then,
+
+    \[ M \cong R/d_{1}R \oplus ... R/d_{n}R \oplus R^{s}\]
+
+    for some $n,s \geq 0$.
+
+    Assume $M$ is decomposable. Then, clearly $s \leq 1$. If $s = 1$, $n = 0$ so $M \cong R$. If $s = 0$, $M \cong R/d_{1}R$. Then, the prime decomposition of $d_{1}$ can't have two primes, since this contradicts the indecomposability of $M$. Then, $M \cong R/p^{m}R$ for some prime $p$ and $m \geq 0$. By the uniqueness of the elementary divisor form, it follows that $M$ is decomposable, since otherwise the elementary divisor form wouldn't be unique.
+
+    Now, assume $M \cong R$ or $M \cong R/p^{n}R$. Both these groups are cyclic. Thus, they can't be the direct product of their submodules, since that would imply that they aren't cyclic by Problem 6, which is a contradiction.
+\end{proof}
+
+\section{Problem 8}
+
+\begin{lemma}
+    Let $A$ be an additive Abelian group with $nA = 0$ for some $n$. Then, $A$ is a $\Z/n\Z$ module.
+\end{lemma}
+\begin{proof}
+    We'll define $k \cdot a = ka$ for any $k \in \Z/n\Z$. This is independent of the representative of the equivalence class since $n \cdot a = na = 0$. Let's now check the four axioms of a module. The existence of the identity element is immediate since $\forall a \in A: 1 \cdot a = a$.
+
+    Let $k \in \Z/n\Z$ and $a,b \in A$. Then,
+
+    \[ k \cdot (a + b) = k(a+b) = ka + kb = k \cdot a + k \cdot b\]
+
+    Let $k,m \in \Z/n\Z$ and $a \in A$. Then,
+
+    \[ (k + m) \cdot a = (k + m)a = ka + ma = (k \cdot a) + (m \cdot a)\]
+
+    Associativity is trivial.
+\end{proof}
+
+\section{Problem 9}
+
+Let $G$ be a $\Z/n\Z$-module. Then, $G$ is an Abelian group since it's also a $\Z$ module. Let $a \in G$. Then, $na = 0$, so the order of $a$ is $n$. Thus, every element of $G$ has an order $m$ such that $m \mid n$.
+
+\section{Problem 10}
+
+\begin{lemma}
+    Let M be a subgroup of a free Abelian group F of finite rank. Assume that for all prime integers $p$, $M \cap pF = pM$. Then, $F/M$ is free.
+\end{lemma}
+
+Here's an illuminating false attempt:
+
+Since $F$ is a free Abelian group of finite rank, $F \cong \Z^{s}$.
+Since $M$ is a submodule of a module over a PID, $M \cong \Z^{m}$ for some $m \leq s$.
+Thus, $F/M \cong \Z^{s-m}$ and is free.
+
+This is clearly false, since letting $F = \Z$ and $M = 2\Z$ produces a contradiction.
+The mistake comes at the last step: it's not important that $M \cong \Z$, what matters
+for $F/M$ to be free is the inclusion of $M$ into $F$. Therefore, we can't work
+with modules isomorphic to $M$, we have to work directly with $M$.
+
+\begin{proof}
+    We'll prove that there's no $p^{n}$ torsion element in $F/M$ for any prime $p$ and $n > 0$ by inducting
+    on $n$. By considering elementary divisor form, this is a sufficient argument.
+    Let $f + M \in F/M$. Let $p$ be a prime such that $p(f + M) = 0$. Then, $pf \in M$.
+    Since $pf \in pF$, it's also in $pM$ by assumption. Then, $f \in M$. Therefore, $f + M = 0$.
+    Now, assume that there are no $p^{n}$ torsion element in $F/M$ for some $n$.
+    Let $f + M \in F/M$ such that $p^{n+1}(f + M) = 0$. Then, $p^{n}f \in M$. By the inductive
+    assumption, $f \in M$.
+    
+    We thus conclude the proof.
+\end{proof}
+
+We can also do a third proof by considering module homomorphisms from $\Z^{n}$ into $F$
+such that the image is $M$. This proof is in Notability.
+
+\end{document}

@@ -1,0 +1,1440 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{xr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Nil}{\text{Nil}}
+\newcommand{\gauss}{\Z[i]}
+
+\title{Ring Theory}
+\date{March 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions and Basic Properties}
+
+\subsection{Definition and Examples}
+
+Algebraists usually assume that rings are unital whereas analysts don't.
+
+Here are some examples of rings:
+
+\begin{example}
+    The zero ring $R = \{ 0 \}$.
+\end{example}
+
+\begin{example}
+    Given any additive Abelian group $G$, we can define the product operation as $\forall a,b \in G: a \cdot b = 0$.
+    This gives $G$ a ring structure. This is called the \textbf{trivial ring}.
+\end{example}
+
+\begin{example}
+    $\Z \subseteq \Q \subseteq \R \subseteq \C$ are commutative unital rings.
+\end{example}
+
+\begin{example}
+    $\Z / n\Z$ is a ring. One needs to check that the operations are well-defined. This is called the 
+    \textbf{ring of congruence classes}.
+\end{example}
+
+\begin{example}
+    Let $A$ be an additive Abelian group. End(A) is a ring where addition is defined as
+    pointwise addition and the product operation is composition of functions.
+    
+    End$(\Z) \cong Z$ since every group endomorphism of $\Z$ is fully determined by
+    where it takes the identity.
+\end{example}
+
+\begin{example}
+    Let $R$ be a ring. $M_{n}(R)$ is also a ring and it is unital if and only if $R$ is unital.
+
+    There's an easy way and a hard way to prove that $M_{n}(R)$ is a ring. The easy way
+    is to remember the correspondence between matrices and linear transformations. The hard
+    way is to write out the associativity rule using matrices.
+\end{example}
+
+\begin{definition}
+    Let $R$ be a ring. $a,b \in R$ are said to be \textbf{relatively prime (coprime)} if their only common divisors are units.
+\end{definition}
+
+\subsection{Basic Properties}
+
+\begin{lemma}
+    Let $u$ be a unit in R. If $a \mid u$, $a$ is also a unit in $R$.
+\end{lemma}
+\begin{proof}
+    Easy.
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a commutative ring and $u$ be a unit in $R$. If $ab = u$, both $a$ and $b$ are units.
+\end{corollary}
+
+\subsection{Integral Domains}
+
+\begin{lemma}\label{finite_domains_are_fields}
+    Every finite integral domain is a field.
+\end{lemma}
+\begin{proof}
+    Let $R$ be a finite integral domain.
+\end{proof}
+
+We can also prove this using the characteristic of the domain $R$. See Section \ref{characteristic_of_rings}
+what that is.
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    The subring of an integral domain is an integral domain.
+\end{lemma}
+
+\subsection{Exercises}
+
+\begin{lemma}
+    Let $R$ be a ring and $u \in R$. If $u$ has a left and a right
+    inverse, $u$ is a unit and the left and right inverses are the same.
+\end{lemma}
+\begin{proof}
+    Let $r$ be the right inverse of $u$ and $x$ be the left inverse. Then,
+
+    \[ x = x(ur) = (xu)r = r\]
+
+    Thus, $x=r$ and they're just the inverse of $u$.
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a ring with identity and $u$ be an element with a right inverse.
+    Then, the following are equivalent:
+
+    \begin{enumerate}
+        \item $u$ has another right inverse.
+        \item $u$ is a zero divisor.
+        \item $u$ is not invertible.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    If $u$ has two right inverses $x,y$, $u(x-y) = ux - uy = 0$, so $u$ is a zero divisor.
+    If $u$ is a zero divisor, $u$ is not invertible. 
+\end{proof}
+
+\begin{lemma}
+    $2\Z$ and $3\Z$ are not isomorphic.
+\end{lemma}
+\begin{proof}
+    Assume by contradiction that $f: 2\Z \xrightarrow{} 3\Z$ is an isomorphism.
+    Then, $f(2) = 3k$ for some $n,k \in \N$. Then, $f(4) = 9k^{2} = 6k$, so 
+    $3k = 2$, which is a contradiction.
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a ring. $R$ is a division ring if and only if the only ideals are the zero
+    ideal and the unit ideal.
+\end{lemma}
+
+\newpage
+
+\section{Ideals}
+
+\begin{definition}
+    Let $R$ be a ring and $I \subseteq R$.
+\end{definition}
+
+\begin{definition}
+    Let $R$ be a ring and $I$ be an ideal. $I$ is a \textbf{principal ideal} if $I = aR$ 
+    for some $a \in R$.
+\end{definition}
+
+\begin{definition}
+    Let $R$ be a ring. The \textbf{sum of ideals} $I$ and $J$ in $R$, 
+    denoted $I + J$, is the set $\{ i + j: i \in I, j \in J\}$.
+\end{definition}
+
+\begin{definition}
+    Let $R$ be a ring. The \textbf{product of ideals} $I$ and $J$ in $R$, denoted $IJ$, 
+    consists of all finite sums $\sum a_{i}b_{i}$, where $a_{i} \in I$ and $b_{i} \in J$.
+\end{definition}
+
+This definition warrants an explanation. The natural definition would be 
+$IJ = \{ ij : i \in I, j \in J\}$. 
+However, this definition is not closed under addition, as the next examples show.
+Therefore, to ensure that $IJ$ is an ideal, we use the definition above.
+
+\begin{example}
+    Let $IJ$ denote the broken product definition.
+    Let $F$ be a field and consider $R = F[x,y]$. Consider $I = (2x)$ and $J = (y)$.
+    $2xy \in I$ and $xy \in J$ so they're both in $IJ$. But $2xy - xy = xy \notin IJ$.
+\end{example}
+
+\begin{example}
+    Let $R = \Z$. Let $I = 4\Z$ and $J = 2\Z$.
+    $4 \in I$ and $2 \in J$ so they're both in $IJ$. But $4 - 2 = 2 \notin IJ$.
+\end{example}
+
+Notice that $IJ \subseteq I \cap J$ for any two ideals $I,J$ in a ring $R$.
+
+\begin{lemma}
+    Let $R$ be a commutative ring. The product of principal ideals is a principal ideal.
+\end{lemma}
+\begin{proof}
+    Let $aR, bR$ be principal ideals. Notice that $aR \cdot bR \subseteq abR$ by a simple rearrangement
+    of the terms in the finite sum. The reverse inclusion is also trivial.
+\end{proof}
+
+\begin{example}
+    If $R$ is not commutative, we can use nilpotent elements of order 2 to contradict $aR \cdot bR = abR$. For example, consider the following matrix in $M_{2}(\R)$:
+
+    \[\begin{bmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{bmatrix}\]
+
+    Letting $a = b$ be the matrix above, we get a counterexample.
+\end{example}
+
+\begin{lemma}
+    Let $\phi: R \xrightarrow{} S$ be a surjective ring homomorphism and $I$
+    be an ideal of $R$. Then, $\phi(I)$ is an ideal of S.
+\end{lemma}
+\begin{proof}
+    We'll show that $\phi(I)$ is closed under addition and multiplication.
+    $\phi(I)$ is non-empty since $0 \in \phi(I)$.
+
+    \textbf{Additive property here.}
+
+    Let $y \in \phi(I)$. Then, $\exists x: \phi(x) = y$. Let $s \in S$.
+    Since $\phi$ is surjective, $\exists r: \phi(r) = s$.
+    Then, $sy = \phi(r) \phi(x) = \phi(rx) \in \phi(I)$.
+\end{proof}
+
+To see that surjectivity is necessary, consider the identity mapping from $\Z$
+to $\Q$ and the ideal of even numbers in $\Z$. Clearly, this is no longer an ideal
+in $\Q$.
+
+\newpage
+
+\section{Characteristic of a Ring}\label{characteristic_of_rings}
+
+Let $R$ be a ring. Recall that there is a unique ring homomorphism from $\Z$ to $R$.
+Then, the kernel of this homomorphism is $n\Z$ for some natural number $n \in \N$.
+$n$ is called the \textbf{characteristic of R} and denoted $char(R)$. Intuitively,
+this is just the number of times you have to add $1$ to itself to get $0$.
+
+Here are some examples:
+
+\begin{example}
+    Every Boolean Ring has characteristic 2. See Lemma \ref{x_plus_x_is_0_in_boolean_rings}.
+\end{example}
+
+We can prove that finite integral domains are fields by considering
+the characteristic.
+
+\begin{lemma}
+    Let $R$ be a finite integral domain. Then, $char(R)$ is a prime.
+\end{lemma}
+\begin{proof}
+    Let $f:\Z \xrightarrow{} R$. Since $R$ is a domain, $ker(f)$
+    is a prime ideal. Thus, $\ker(f) = p\Z$ for some prime $p$.
+\end{proof}
+
+\begin{corollary}
+    Finite integral domains are fields.
+\end{corollary}
+\begin{proof}
+    Prime ideals are maximal in $\Z$, so $R$ is a field.
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a ring of characteristic $p > 0$. Then, $f: R \xrightarrow{} R$
+    defined by $f(x) = x^{p}$ is a ring endomorphism. These are called
+    \textbf{Frobenius endomorphisms}.
+\end{lemma}
+\begin{proof}
+    The fact that $f$ respects multiplication is immediate. To prove that $f$
+    respects addition, use the Binomial Theorem.
+\end{proof}
+
+\newpage
+
+\section{Products of Rings}
+
+\begin{definition}
+    Let $R$ be a ring. An \textbf{idempotent} is an element $a \in R$ such that $a^{2} = a$.
+\end{definition}
+
+\begin{example}
+    $0,1$ are idempotents in every ring. They are called \textbf{trivial idempotents}.
+\end{example}
+
+\begin{lemma}
+    Let $e \in R$ be idempotent. Then, $1-e$ is also idempotent.
+\end{lemma}
+\begin{proof}
+    Assume $e \in R$ is idempotent. Then, $(1-e)(1-e) = 1 - 2e + e^{2} = 1 - 2e + e = 1 - e$.
+\end{proof}
+
+\begin{lemma}
+    Any non-trivial idempotent is a zero divisor.
+\end{lemma}
+\begin{proof}
+    Let $e \in R$ be a non-trivial idempotent. Then, $e^{2} - e = 0 \implies e(e - 1) = 0$. Since $e \neq 0$ and $e - 1 \neq 0$
+    $e$ is a zero divisor. 
+\end{proof}
+
+\begin{corollary}
+    Domains don't have non-trivial idempotents.
+\end{corollary}
+
+
+\begin{lemma}
+    Let $e,f$ be central, orthogonal, idempotent elements with $e + f = 1$. Then, $eR \cap fR = \{0\}$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Let $R,S$ be a ring. Every (left) ideal of the product $R \times S$ is of the form 
+    $I \times J$ where $I$ is an ideal of $R$ and $J$ is an ideal of $S$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}\label{units_respects_products}
+    Let $R,S$ be rings. $(R \times S)^{\times} = R^{\times} \times S^{\times}$
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\newpage
+
+\section{Chinese Remainder Theorem}
+
+\subsection{Comaximal (Coprime) Ideals}
+
+\begin{definition}
+    Let $R$ be a ring and $I,J$ be ideals. $I,J$ are said to be \textbf{comaximal (coprime)} 
+    if $I + J = R$.
+\end{definition}
+
+This is a generalization of the Bezout Identity in $\Z$.
+
+Here are some immediate properties of comaximal ideals:
+
+\begin{enumerate}
+    \item If $I,J$ are comaximal, $1 \in I + J$. (This is why it's a generalization of the Bezout Identity.)
+    \item Let $I,M$ be ideals and $M$ be maximal. If $I,M$ are comaximal, $I \subseteq M$.
+\end{enumerate}
+
+\begin{lemma}[Comaximality is Stronger than Relatively Prime]
+    Let $R$ be a commutative unital ring. Let $a,b \in R$ be comaximal. Then, $a,b$ are relatively prime.
+\end{lemma}
+\begin{proof}
+    Let $a,b \in R$ be comaximal and let $c \in R$ such that $c \mid a$ and $c \mid b$. Since $aR + bR = R$, there's $r_{1},r_{2} \in R$ such that
+    $a r_{1} + b r_{2} = 1$. Then, $c$ divides the left hand side so $c \mid 1$ so $c$ is a unit. We thus conclude the proof.
+\end{proof}
+
+
+The next example shows that there are relatively prime elements that are not comaximal.
+
+\begin{example}
+    Let $F$ be a field and $R = F[x,y]$. Notice that $xR$ and $yR$ are not comaximal since $1 \notin xR + yR$, but they are relatively prime.
+\end{example}
+
+In Lemma \ref{coprime_equals_comaximal_in_pids}, we prove that these two conditions are equivalent in PIDs. 
+Notice that $R$ in the previous example was a UFD.
+
+We now prove some lemmas that will be useful when proving the Chinese Remainder Theorem for rings.
+
+\begin{lemma}[Product of Comaximal Ideals]\label{product_of_coprime_ideals_is_the_intersection}
+    Let $R$ be a commutative ring and $I,J$ be coprime ideals.
+    Then, $IJ = I \cap J$.
+\end{lemma}
+\begin{proof}
+    $IJ \subseteq I \cap J$ for any two ideals, so it suffices to prove the reverse inclusion.
+    Since $I,J$ are comaximal, there's $a \in I$ and $b \in J$ such that $a + b = 1$.
+    
+    Now, let $x \in I \cap J$. Then, $x = x \cdot 1 = x(a + b) = xa + xb$.
+    Notice that both terms are in $IJ$, so $x \in IJ$.
+\end{proof}
+
+\begin{lemma}\label{comaximality_gives_surjective_projection}
+    Let $R$ be a commutative ring and $I,J$ ideals. 
+    The canonical projection map $\phi: R \xrightarrow{} R/I \times R/J$ is surjective 
+    if and only if $I,J$ are comaximal.
+\end{lemma}
+\begin{proof}
+    Let $a \in I$ and $b \in J$ such that $a + b = 1$
+    Reducing this equation mod $I$ and $J$ gives us $\phi(a) = (1,0)$ and 
+    $\phi(b) = (0,1)$. Then, let $(r_{1},r_{2}) \in R/A \times R/B$.
+    Notice that $\phi(r_{1}a + r_{2}b) = (r_{1},r_{2})$, so $\phi$ is surjective.
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a commutative ring and $I,J$ coprime ideals.
+    Then, $R/IJ \cong R/I \times R/J$.
+\end{corollary}
+\begin{proof}
+    Use the first isomorphism theorem on $\phi$.
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a nonzero commutative ring. Let $I_{1},I_{2},...,I_{k}$ be ideals in $R$ that are pairwise comaximal.
+    Then, $I_{1}$ and $I_{2}I_{3}...I_{k}$ are comaximal.
+\end{lemma}
+\begin{proof}
+    Since $I_{1}$ and $I_{j}$ are comaximal for every $j = 2,3,...,k$, there's some $x_{j} \in I_{1}$
+    and $y_{j} \in I_{j}$ such that $1 = x_{j} + y_{j}$. Then, 
+
+    \[ 1 = (x_{2} + y_{2})...(x_{k} + y_{k}) \]
+
+    Notice that the right hand side is in $I_{1} + I_{2}...I_{k}$ since every term with a
+    factor of $x_{j}$ is in $I_{1}$ and $y_{2}y_{3}...y_{k} \in I_{2}...I_{k}$.
+\end{proof}
+
+\subsection{Chinese Remainder Theorem}
+
+\begin{theorem}
+    Let $R$ be a ring and $I_{1},I_{2},...,I_{n}$ be pairwise coprime, two-sided ideals. Then, for every $(a_{1},...,a_{n}) \in R^{n}$,
+    $\exists a \in R$ such that $a \equiv a_{j}$ mod $I_{J}$ for every $j = 1,2,...,n$.
+\end{theorem}
+\begin{proof}
+    We'll induct on $n \geq 2$. Let $I_{1} + I_{2} = R$. 
+    Let $a_{1},a_{2} \in R$.
+    Then, 
+    \[ a_{1} - a_{2} \in R \implies \exists x_{1} \in I_{1}: \exists x_{2} \in I_{2}: x_{1} + x_{2} = a_{1} - a_{2}\]
+
+    Let $a := a_{1} - x_{1} = a_{2} + x_{2}$. Then, $a - a_{j} \in I_{j}$, so the condition is satisfied.
+    Equivalently, Lemma \ref{comaximality_gives_surjective_projection} is a more elegant way of stating the base case.
+
+
+    Let's now do the inductive step. Assume the statement holds for some $n \in \N$.
+    Let $I_{1}, I_{2},...,I_{n+1}$ be pairwise coprime, two-sided ideals.
+    Let $a_{1},a_{2},...,a_{n+1} \in R$.
+    By the inductive hypothesis, $\exists b \in R: \forall j = 1,2,...,n: b \equiv a_{j} \mod{I_{j}}$.
+    In other words, the canonical projection map 
+    $\phi: R \xrightarrow{} R/I_{1} \times ... \times R/I_{n}$ is surjective. In other words,
+    \[ R/I_{1}...I_{n} \cong R/I_{1} \times ... \times R/I_{n} \]
+
+    Since $I_{1}I_{2}...I_{n}$ and $I_{n+1}$ are comaximal, there's a surjective
+    homomorphism $\psi: R \xrightarrow{} R/I_{1}...I_{n} \times R/I_{n+1}$.
+    By the inductive hypothesis, $R/I_{1}...I_{n}  \cong R/I_{1} \times ... \times R/I_{n}$,
+    so we conclude the proof.
+        
+\end{proof}
+
+\begin{corollary}
+    Let $R$ be a ring and $I_{1},I_{2},...,I_{n}$ be pairwise coprime, two-sided ideals. Then,
+
+    \[ R / (I_{1} \cap I_{2} ... \cap I_{n}) \cong (R/I_{1}) \times ... \times (R/I_{n}) \]
+\end{corollary}
+\begin{proof}
+    Combine the theorem with Lemma \ref{product_of_coprime_ideals_is_the_intersection}.
+\end{proof}
+
+Let $n = p_{1}^{\alpha_{1}}...p_{m}^{\alpha_{m}}$.
+We'll now use CRT in conjunction with Lemma \ref{units_respects_products}
+to better understand $(\Z / n\Z)^{\times}$. Combining these statements, we get
+
+\[ (\Z / n\Z)^{\times} \cong  (\Z / p_{1}^{\alpha_{1}}\Z)^{\times} \times ... \times (\Z / p_{m}^{\alpha_{m}}\Z)^{\times}\]
+
+Also notice that this is another way to derive Euler's Totient Function for
+arbitrary numbers by using  $\lvert (\Z / p^{n}\Z)^{\times} \rvert = p^{n-1}(p - 1)$.
+
+
+
+\newpage
+
+\section{Prime and Maximal Ideals}
+
+\subsection{Prime Ideals}
+
+\begin{definition}
+    An \textit{non-zero} ideal $P \subsetneq R$ is a \textbf{prime ideal} if 
+
+    \[ \forall a,b \in R: ab \in P \implies a \in P \lor b \in P \]
+\end{definition}
+
+Here's a basic consequence of the definition:
+
+\begin{lemma}
+    Let $R$ be a ring and $I$ be an ideal of $R$. Then, $I$ is a prime ideal if and
+    only if the set-theoretic complement of $I$ is closed under multiplication and
+    non-empty.
+\end{lemma}
+
+This characterization, coupled with Zorn's lemma, produces the following result:
+
+\begin{corollary}
+    Let $R$ be a commutative ring. Then, the set of prime ideals has a minimal
+    element under inclusion. (This could be the zero ideal.)
+\end{corollary}
+\begin{proof}
+    Consider the subsets of $R$ that are closed under multiplication 
+    ordered using inclusion. Since $R$ is closed under multiplication,
+    every chain in this poset has an upper bound, namely, $R$. Applying
+    Zorn's lemma produces the desired result.
+\end{proof}
+
+\begin{example}
+    If $R$ is a domain, the zero ideal is prime.
+\end{example}
+
+\begin{lemma}
+    Let $R$ be a ring and $I$ be an ideal of $R$. The set of all prime ideals containing $I$ is in bijection
+    with all prime ideals of $R/I$.
+\end{lemma}
+\begin{proof}
+    Let $P$ be a prime ideal of $R$ containing $I$. Then, $(R/I)/(P/I) \cong R/P$. Using the 
+    fact that an ideal is prime if and only if the quotient ring is a domain, we conclude the proof.
+\end{proof}
+
+\newpage
+
+\subsection{Maximal Ideals}
+
+\begin{definition}
+    Let $M$ be a \textit{proper} ideal of a ring $R$. $M$ is said to be a \textbf{maximal ideal}
+    if the only ideals containing $M$ are $M$ and $R$.
+\end{definition}
+
+Here are some equivalent characterizations:
+
+\begin{lemma}
+    Let $R$ be a ring and $I$ be an ideal of $R$.
+    $I$ is maximal if and only if $R/I$ is a field.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\begin{corollary}
+    Every maximal ideal is a prime ideal.
+\end{corollary}
+
+Let $R$ be a ring. Notice that every non-unit element of $R$ lies
+in a maximal ideal $M$ of $R$ by using Zorn's lemma. This is useful when
+one studies local rings.
+
+\subsubsection{Existence of Maximal Ideals using Zorn's Lemma}
+
+\begin{theorem}
+    A nonzero commutative ring has a maximal ideal.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+Notice that the theorem isn't constructive.
+
+\begin{corollary}
+    A nonzero commutative ring has a prime ideal.
+\end{corollary}
+
+The corollary is often more useful than the theorem itself.
+
+\newpage
+
+\subsection{Prime and Maximal Ideals under Ring Homomorphisms}
+
+Let's first examine whether primality and maximality is preserved
+when taking preimages of ring homomorphisms.
+
+\begin{lemma}
+    Let $R,S$ be rings and $\phi: R \xrightarrow{} S$ be a ring homomorphism.
+    Let $P$ be a prime ideal of $S$. Then, $\phi^{-1}(P)$ is a prime ideal in $R$.
+\end{lemma}
+\begin{proof}
+    Define $T = \phi^{-1}(P)$. Since $1_{S} \notin P$, $1_{R} \notin T$ since otherwise
+    $1_{S} \in P$ using the fact that $\phi(1) = 1$. Thus, $T$ is not the unit ideal.
+
+    Now, let $x,y \in R$ such that $xy \in T$. Then, $\phi(xy) \in P \implies \phi(x) \in P$
+    without loss of generality as $P$ is prime. Then, $x \in T$. We thus conclude the proof.
+\end{proof}
+
+However, this fails for maximal ideals, as the next example demonstrates.
+
+\begin{example}
+    Let $p$ be a prime in $\Z$. $p\Z$ is a maximal ideal in $\Z$. Now,
+    consider the inclusion homomorphism from $\Z$ into $\Q$. $p\Z$ is
+    not even an ideal in $\Q$, so it's not a maximal ideal.
+\end{example}
+
+To prove an analogous lemma for maximal ideals, we need to assume that $\phi$ is surjective.
+This is because surjectivity ensures that $\phi(I)$ is an ideal when $I$ is an ideal.
+
+\begin{lemma}
+    Let $R,S$ be rings and $\phi: R \xrightarrow{} S$ be a \textit{surjective} ring homomorphism.
+    Let $M$ be a maximal ideal of $S$. Then, $\phi^{-1}(M)$ is a maximal ideal in $R$.
+\end{lemma}
+\begin{proof}
+    Define $J = \phi^{-1}(M)$. Since $1_{S} \notin P$, $1_{R} \notin J$ since otherwise
+    $1_{S} \in P$ using the fact that $\phi(1_{R}) = 1_{S}$. Thus, $J$ is not the unit ideal.
+
+    Now, assume there's some ideal $I$ such that $J \subseteq I$. Then, $\phi(I)$ is an ideal
+    of $S$ that contains $M$. Then, $\phi(I) = M$ or $\phi(I) = S$. If $\phi(I) = S$, $I$ 
+    contains the unit of $R$ and therefore $I = R$. If $\phi(I) = M$, $I = \phi^{-1}(M) = J$.
+    Therefore, $J$ is maximal in $R$.
+\end{proof}
+
+Let's now examine whether primality and maximality are preserved when we take images of homomorphisms.
+Surjectivity of $\phi$ is needed to ensure that the image is an ideal, so it's definitely needed to
+ensure that the image is a prime/maximal ideal.
+
+Using the lemma for preimages, we can say the following: if $P$ is a prime/maximal ideal of $R$
+such that $\ker(\phi) \subseteq P$ and $\phi$ is surjective, $\phi(P)$ is a prime/maximal ideal.
+
+In fact, this follows from the correspondence between prime/maximal ideals of $R$ and $R/I$, where
+$I = \ker(\phi)$ in this case.
+
+\newpage
+
+\subsection{Exercises}
+
+\begin{lemma}
+    Let $R$ be a commutative, non-zero ring and $P$ be a prime ideal of $R$.
+    If $P$ contains no zero divisors, $R$ is a domain.
+\end{lemma}
+
+\begin{example}
+    Let's now examine some ideals in $R = \Z[x,y]$ and decide whether they're prime or maximal.
+
+    Let $I = (x,y)$. This ideal is prime since $R/I = \Z$ is a Euclidean domain.
+
+    Let $I = (5,x,y)$. This ideal is not prime $R/I = \Z/5\Z$ which is not even an integral domain.
+
+    Let $I = (6,x)$. 
+\end{example}
+
+\begin{lemma}
+    Let $R$ be a finite commutative ring. Then, every prime ideal is maximal.
+\end{lemma}
+\begin{proof}
+    Let $R$ be a finite commutative ring and $I$ be a prime ideal.
+    Then, $R/I$ is a finite domain. Then, by Lemma \ref{finite_domains_are_fields},
+    $R/I$ is a field. Then, $I$ is maximal.
+\end{proof}
+
+\newpage
+
+\section{Localization of a Ring and Local Rings}
+
+Serge Lang's book has a chapter on this, which I liked. I didn't like (and understand)
+the exposition in Dummit and Foote.
+
+Localization is a formal way to introduce denominators to a given ring
+or module.
+
+Let $S$ be a multiplicatively closed set. 
+
+We'll define an equivalence relation on $(R,S)$ by
+
+\[ (r_{1},s_{1}) \sim (r_{2},s_{2}) := \exists s: s(r_{1}s_{2} - r_{2}s_{1}) = 0\]
+
+Denote the equivalence classes by $S^{-1}R$.
+
+Intuitively, we're introducing a formal inverse for every element of $S$.If $S$ if the set of non-zero
+elements from an integral domain, the localization is the field of fractions.
+
+We usually assume that $S$ doesn't contain nilpotent elements, since otherwise $S^{-1}R$
+is the zero ring.
+
+\begin{lemma}
+    There's a bijection between prime ideals of $S^{-1}R$ and the set of prime ideals of $R$
+    that don't intersect $S$.
+\end{lemma}
+
+\begin{definition}
+    A ring $R$ is called \textbf{local} if it has a unique maximal ideal $M$.
+\end{definition}
+
+\begin{lemma}
+    Let $R$ be a local ring. $R^{*} = R - M$.
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+
+
+\newpage
+
+\section{The Nil and Jacobson Radicals}
+
+Radical ideals try to capture the bad elements of a ring.
+
+\subsection{Nilradical}
+
+\begin{definition}
+    $x \in R$ is called \textbf{nilpotent} if $\exists m > 0: x^{m} = 0$.
+    The set of nilpotent elements of a ring $R$ is called the \textbf{nilradical of $R$}
+    and denoted $\Nil(R)$.
+\end{definition}
+
+Notice that every nilpotent element is a zero divisor. 
+Therefore, domains have trivial nilradicals.
+
+Also notice that if $R$ is unital $R \neq \Nil(R)$ since $1 \notin \Nil(R)$.
+
+We now prove some basic properties of nilpotents in commutative rings:
+
+\begin{lemma}
+    Let $R$ be a commutative ring. $\Nil(R)$ is an ideal.
+\end{lemma}
+
+Let's now show that this doesn't hold in non-commutative rings.
+
+\begin{example}
+    Let $R = M_{2}(\R)$. Consider 
+
+    \[ A = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}  \]
+
+    and
+    
+    \[ B = \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}  \]
+
+    $A$ and $B$ are nilpotent but $A+B$ is not nilpotent.
+\end{example}
+
+\begin{lemma}
+    Let  $x$ be a nilpotent element in a commutative ring $R$. Then, $\forall u \in R^{\times}: u + x \in R^{\times}$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Let $\phi: R \xrightarrow{} S$ be a ring homomorphism and $x \in \Nil(R)$.
+    Then, $\phi(x) \in \Nil(S)$.
+\end{lemma}
+
+\begin{lemma}
+    Let $R$ be a commutative unital ring. Then,
+    \[ \forall a \in \Nil(R): \forall b \in R: 1 - ab \in R^{\times} \]
+\end{lemma}
+
+\begin{lemma}
+    Let $R$ be a ring and $I$ be an ideal with $\Nil(R) \subseteq I$.
+    Then, $\Nil(R/I) = \{0\}$.
+\end{lemma}
+
+\begin{lemma}[Nilradical is contained in prime ideals]\label{nilradical_is_contained_in_prime_ideals}
+    Let $R$ be a commutative ring and $P$ be a prime ideal of $R$.
+    Then, $\Nil(R) \subseteq P$.
+\end{lemma}
+\begin{proof}
+    Let $x$ be a nilpotent element. Then, $x^{m} = 0$ for some 
+    $m > 0$. Let $m$ be the smallest such $m$. Then, $x \cdot x^{m-1} = 0 \in P$ 
+    so either $x \in P$ or $x^{m-1} \in P$. If $x \in P$, we're done.
+    Otherwise, notice $x \cdot x^{m-2}$ and repeat. By a simple inductive
+    argument, $x \in P$.
+\end{proof}
+
+\begin{theorem}
+    The nilradical of a commutative ring $R$ is the 
+    intersection of all prime ideals in $R$.
+\end{theorem}
+\begin{proof}
+    Let $I$ be the intersection of all prime ideals in $R$.
+    $\Nil(R) \subseteq I$ is given by Lemma \ref{nilradical_is_contained_in_prime_ideals}.
+
+    In order to show the converse, it suffices to show that for any
+    non-nilpotent element $r \in R$  there's a prime ideal that doesn't
+    contain $r$. 
+    
+    Let $r$ be an element of $R$ that is not nilpotent and $S$ be the 
+    set of ideals of $R$ that don't contain any element of the form $r^{n}$.
+    Since $r$ is not nilpotent, the zero ideal is in $S$, so $S$ is not-empty.
+
+    Thus, $S$ has a maximal element $M$. It suffices to show that $M$ is a prime ideal.
+    By contradiction, assume there's $x,y \notin M$ such that 
+    $xy \in M$.
+
+    Consider the ideal $J = \{ z: zx \in M\}$. Notice that 
+    $y \in J$ and $M \subseteq J$, so $M$ is properly contained 
+    in $J$. By the maximality of $M$, $\exists n > 0: R^{n} \in J$.
+    Then, $r^{n}x \in M$.
+
+    Now, consider $K = \{z: r^{n}z \in M\}$. Similar to $J$,
+    $x \in J$ and $M \subseteq K$, so $M$ is properly contained in $K$.
+    By the maximality of $M$, $\exists m > 0: R^{m} \in K$.
+    Then, $r^{n + m} \in M$, which is a contradiction.
+    
+    We thus conclude the proof.
+\end{proof}
+
+\begin{example}
+    Let $R$ be the ring of functions from a non-empty set $X$
+    to a field $F$. Then, the nilradical of $R$ is the zero ring.
+\end{example}
+
+\subsection{Jacobson Radical}
+
+\begin{definition}
+    Let $R$ be a commutative ring. The \textbf{Jacobson Radical, denoted $J(R)$}
+    is the intersection of all maximal ideals in $R$.
+\end{definition}
+
+There's a more general definition that works for non-commutative rings 
+as well.
+
+\begin{lemma}
+    The nilradical is contained in the Jacobson radical.
+\end{lemma}
+\begin{proof}
+    The nilradical is contained in every prime ideal by Lemma \ref{nilradical_is_contained_in_prime_ideals},
+    so it's also contained in every maximal ideal.
+\end{proof}
+
+\newpage
+
+\section{Boolean Rings}
+
+\begin{definition}
+    A ring $R$ is called a Boolean ring if every element of $R$ is idempotent.
+    In other words, $\forall r \in R: r^{2} = r$.
+\end{definition}
+
+\begin{lemma}
+    Every Boolean ring is commutative.
+\end{lemma}
+\begin{proof}
+    Notice that $a(ab)b = a^{2}b^{2} = ab = (ab)^{2} = abab$.
+\end{proof}
+
+\begin{example}
+    Let $X$ be a non-empty set. Define addition and multiplication on $\mathcal{P}(X)$ to be
+
+    \[ A + B = (A - B) \cup (B - A) \text{  and   } A \times B = A \cap B \]
+
+    In other words, addition is symmetric difference and multiplication is intersection.
+
+    Addition and multiplication are associative by the associativity of the union and intersection.
+    Multiplication is distributive using the distributivity of the union operation. Therefore,
+    this operations turn $R = \mathcal{P}(X)$ into a ring.
+
+    Notice that $X$ is the identity in $R$. Moreover, $R$ is a Boolean ring, so it is commutative.
+\end{example}
+
+\begin{lemma}
+    Let $R$ be a Boolean integral domain. Then, $R \cong \Z / 2\Z$.
+\end{lemma}
+\begin{proof}
+    Since every non-trivial idempotent is a zero divisor and every element of $R$ is idempotent,
+    $R \cong \Z / 2\Z$.
+\end{proof}
+
+\begin{lemma}
+    In a Boolean ring, every prime ideal is a maximal ideal.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Every finitely generated ideal in a Boolean ring is principal.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}\label{x_plus_x_is_0_in_boolean_rings}
+    Let $R$ be a Boolean ring. Then, $\forall x \in R: 2x = 0$.
+\end{lemma}
+\begin{proof}
+    Let $x \in R$. Then, $(1+x) = (1+x)^{2} = 1 + 2x + x^{2} = 1 + 3x$,
+    so $2x = 0$.
+\end{proof}
+
+\begin{corollary}
+    A nonzero Boolean ring has characteristic 2.
+\end{corollary}
+
+\begin{example}
+    Let $X$ be a non-empty set and $R$ be the ring of all functions from $X$ into $\Z / 2\Z$.
+    Let $S = \mathcal{P}(X)$ be the Boolean ring of all subsets of $X$.
+    For every $A \in S$, let $f_{A}: X \xrightarrow{} \Z / 2\Z$ be defined as $f_{A}(x) = 1$ 
+    if and only if $x \in A$. Then, the map $A \mapsto f_{A}$ is a ring homomorphism.
+
+    \textbf{Check the properties of a ring homomorphism.}
+\end{example}
+
+
+\begin{example}
+    The infinite direct product of $\Z / 2\Z$ is an infinite Boolean ring.
+\end{example}
+
+\begin{lemma}
+    Let $R$ be a finite unital Boolean ring. Then, $R \cong \Z / 2\Z \times ... \times \Z / 2\Z$.
+\end{lemma}
+
+\newpage
+
+\section{Principal Ideal Domains}\label{pids}
+
+\subsection{Principal Ideal Rings}
+
+\begin{definition}
+    A ring $R$ is said to be a \textbf{principal ideal ring}
+    if every ideal in $R$ is principal.
+\end{definition}
+
+Notice that principal ideal rings are Noetherian.
+
+\begin{lemma}
+    Let $R$ be a principal ideal ring and $I$ be an ideal of 
+    $R$. Then, $R/I$ is also a principal ideal ring.
+\end{lemma}
+\begin{proof}
+    Let $J$ be an ideal of $R/I$. Consider the canonical surjective homomorphism
+    $\phi: R \xrightarrow{} R/I$. $\phi^{-1}(J)$ is an ideal in $R$, so 
+    $\phi^{-1}(J) = xR$ for some $x \in R$. Then, $\phi(xR) = \phi(x)(R/I) = J$,
+    so we conclude the proof.
+\end{proof}
+
+\subsection{Principal Ideal Domains}
+
+\begin{lemma}\label{coprime_equals_comaximal_in_pids}
+    Let $R$ be a PID and $a,b \in R$.
+    $aR$ and $bR$ are comaximal if and only if $a$ and $b$ are coprime.
+\end{lemma}
+\begin{proof}
+    Recall that the greatest common divisor $d$ is a generator for the smallest ideal containing both $aR$ and $bR$. Then, $(d) = (a,b)$. Then, $(d) = R$ if and only if $d$ is a unit, so we conclude the proof.
+\end{proof}
+
+\begin{example}
+    Notice that this implies that if $n,m \in \Z$ are relatively prime, $n\Z + m\Z = \Z$.
+\end{example}
+
+\begin{lemma}
+    The quotient of a PID by a prime ideal is a field.
+\end{lemma}
+\begin{proof}
+    Prime ideals are maximal in PIDs. Therefore, the quotient of a PID by a prime ideal is a field.
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a PID and $D$ be a multiplicatively closed subset of $R$. Then, $D^{-1}R$ is a PID.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a ring that is not a PID. Then, the set of non-principal ideals has a maximal element.
+\end{lemma}
+\begin{proof}
+    Let $S$ be the set of non-principal ideals. Since $R$ is not a PID, $S$ is not-empty. 
+\end{proof}
+
+
+\begin{lemma}
+    Let $R$ be a ring and assume every prime ideal of $R$ is principal. Then, $R$ is a PID.
+\end{lemma}
+\begin{proof}
+    By the lemma above, the set $S$ of non-principal ideals of $R$ contains a maximal element. 
+
+    Let $I$ be an ideal which is maximal in $S$. Since $I \in S$, $I$ is not prime. Therefore, $\exists a,b \in R: a,b \notin I \land ab \in I$. Let $I_{a} = (I,a)$ and $I_{b} = (I,b)$. Define $J = \{ r \in R: rI_{a} \subseteq I \}$. 
+
+    Since $I$ is a proper subset of $I_{a}$ and $I_{b}$, they're both principal ideals. Moreover, $I_{b} \subseteq J$ since $(a + I)(b + I) = ab + (aI) + (bI) + I$, and these are all in $I$. Since $I$ is a proper subset of $I_{b}$, it's also a proper subset of $J$, which implies that $J$ is a principal ideal. Since $I_{a}J$ is a product of principal ideals, it's also principal.
+    
+    Moreover, by definition of $J$, $I_{a}J \subseteq I$. Let's now prove the opposite inclusion.
+    
+    Let $\alpha$ be the generator for $I_{a}$. Let $x \in I$. Then, $x \in I_{a}$, so $x = r \alpha$ for some $r \in R$. By definition, $r \in J$ so $x \in I_{a}J$. Thus, $I \subseteq I_{a}J$.
+
+    Since $I_{a}J = I$, $I$ is also a principal ideal, which is a contradiction. 
+\end{proof}
+
+\newpage
+
+\section{Greatest Common Divisor and Least Common Multiple}
+
+\begin{definition}
+    $d$ is said to be the \textbf{greatest common divisor} of $a$ and $b$ if $d \mid a$ and $d \mid b$ and every common divisor of $a$ and $b$ divides $d$.
+\end{definition}
+
+
+
+The least common multiple is a generator for the largest principal ideal contained in $aR \cap bR$. Therefore, the least common multiple exists in all principal ideal domains and is the generator for the (trivially principal) ideal $aR \cap bR$. Therefore, the least common multiple is unique modulo multiplication by units.
+
+\begin{lemma}
+    Let $R$ be a Euclidean domain. Then, $lcm(a,b)gcd(a,b) = ab$.
+\end{lemma}
+
+\begin{proof}
+    
+\end{proof}
+
+\newpage
+
+\section{Algebraic Number Theory}
+
+\begin{lemma}
+    Let $p$ be a prime number such that $p \equiv 3 \pmod{4}$. Then, $p$ is prime in $\mathbb{Z}[i]$.
+\end{lemma}
+
+\begin{proof}
+    Notice $\mathbb{Z}[i]/(p) \simeq \mathbb{Z}[x]/(x^{2} + 1)/(p) 
+    \simeq \mathbb{Z}[x]/(p)/(x^{2} + 1) \simeq 
+    \mathbb{Z}/p\mathbb{Z}[x]/(x^{2}+1)$
+    .If $\mathbb{Z}/p\mathbb{Z}[x]/(x^{2}+1)$ is a field, 
+    $(p)$ is maximal in $\mathbb{Z}[i]$ and therefore $(p)$
+     is prime in $\mathbb{Z}[i]$.
+    Thus, it suffices to show that $\mathbb{Z}/p\mathbb{Z}[x]/(x^{2}+1)$ 
+    is a field. 
+    Since $\mathbb{Z}/p\mathbb{Z}$ is a field, $\mathbb{Z}/p\mathbb{Z}[x]$
+    is a PID. Therefore, it suffices to check that $x^{2} + 1$ is 
+    irreducible in $\mathbb{Z}/p\mathbb{Z}[x]$. 
+    This holds if and only if $x^{2}$ is a quadratic residue 
+    modulo $p$, which is true if and only if $p \equiv 1 \pmod 4$.
+\end{proof}
+
+
+\begin{lemma}
+    Let $p$ be a prime number such that $p \equiv 1 \pmod{4}$. Then, $p$ is not prime in $\mathbb{Z}[i]$.
+\end{lemma}
+\begin{proof}
+    Since $p \equiv 1 \pmod{4}$, $\exists x \in \mathbb{Z}: x^{2} \equiv -1 \pmod{p} \implies p \mid x^{2} + 1 = (x - i)(x + i)$. 
+    Therefore, to prove that $p$ is not prime in $\mathbb{Z}[i]$, it suffices to 
+    show that $p \nmid x \pm i$. In order to show this,
+    we'll show that $x \pm i$ is prime. Notice that $N(x \pm i) = p$, so if 
+    $ab = x \pm i$, $N(a) = 1$ without loss of generality. Then, $a \in \gauss^{\times}$,
+    so $x \pm i$ is a prime. Therefore, $p \nmid x \pm i$.
+\end{proof}
+
+\begin{corollary}
+    Let $p$ be a prime number such that $p \equiv 1 \pmod{4}$.
+    Then, $\exists a,b \in \Z: p = a^{2} + b^{2}$.
+\end{corollary}
+\begin{proof}
+    Since $p$ is not prime in $\gauss$, there's a non-unit $a + bi$ that properly
+    divides $p$. Then, the norm of $a + bi$ divides $p$. Since $p$
+    is prime $N(a + bi) = a^{2} + b^{2} = p$, so we conclude the proof.
+\end{proof}
+
+\subsection{Exercises}
+
+\textbf{Find all prime integers p such that the ring $\Z / p\Z[i]$
+is a product of two fields.}
+
+Recall that $\Z[i]$ is a Euclidean domain.
+
+Let $p \equiv 3 \mod{4}$. Then, $p$ is prime in $\gauss$ so
+$p\Z[i]$ is a prime ideal, so it's a maximal ideal and 
+$\Z / p\Z[i]$ is a field. A field can't be written as the product of
+two rings, so it's not a product of two fields.
+
+Let $p \equiv 1 \mod{4}$.
+
+\begin{lemma}
+    Every quotient ring of $\Z[i]$ is finite.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\newpage
+
+\section{Noetherian Rings}
+
+\begin{lemma}
+    Let $R$ be a commutative ring. Then, the following are equivalent:
+
+    \begin{enumerate}
+        \item Every ideal in $R$ is finitely generated.
+        \item Every increasing sequence of ideals $I_{1} \subseteq I_{2} ...$ terminates, i.e. $\exists n \in \mathbb{N}: I_{n} = I_{n+1} = ...$
+        \item Every non-empty set of ideals has a maximal element (by inclusion).
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    A ring $R$ is called \textbf{Noetherian} if any of the conditions above hold.
+\end{definition}
+
+Notice that every PID is Noetherian since every ideal is generated by one element, so the first condition is satisfied.
+
+\begin{theorem}[Hilbert's Basis Theorem]
+    Let $R$ be a (left) Noetherian ring. Then, $R[x]$ is also (left) Noetherian.
+\end{theorem}
+
+\begin{lemma}
+    A ring $R$ is left-Noetherian if and only if every finitely generated left $R$-module is a Noetherian module.
+\end{lemma}
+\begin{proof}
+    Let $R$ be a Noetherian ring and $M$ be a finitely-generated left $R$-module. Then, there's a surjective module homomorphism $f: R^{n} \xrightarrow{} M$. Let $N$ be a submodule of $M$ and let $I = f^{-1}(N)$. Then, $I$ is an ideal of the product ring $R^{n}$, so $I$ is finitely generated since the product of Noetherian rings is Noetherian. Let $x_{1},...,x_{m}$ be a generating set for $I$. Then, $f(x_{1}), ..., f(x_{m})$ is a generating set for $N$.
+
+    \textit{We can use a similar argument to prove the converse.}
+\end{proof}
+
+\newpage
+
+\section{Factorization in Integral Domains}
+
+\begin{definition}
+    An element $x \in R$ is said to be \textbf{irreducible} if $x$ is not invertible and can't be written as the product of two non-invertible elements in $R$.
+\end{definition}
+
+\begin{definition}
+    An element $x \in R$ is said to be \textbf{prime} if $x$ is non-zero, non-unit and for any $a,b \in R$, $x \mid ab \implies x \mid a \wedge x \mid b$.
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be a domain.
+    \begin{enumerate}
+        \item Suppose $R$ admits factorization. If the factorization is unique, every irreducible element is prime.
+        \item If every irreducible element in $R$ is prime, then factorization is unique.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+
+\begin{corollary}
+    Let $R$ be a Noetherian domain. Then, $R$ is a UFD if and only if every irreducible element in $R$ is prime.
+\end{corollary}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Exercises}
+
+\begin{lemma}
+    Consider $R = \Z[\sqrt(-n)]$ where $n$ is a square-free integer greater than 3.
+    Then, $R$ is not a UFD.
+\end{lemma}
+\begin{proof}
+    Notice that 2 is prime in $R$ since $N(2) = 4$. 
+\end{proof}
+
+\begin{lemma}
+    $F[x,y]/(y - x^{2})$ is not isomorphic to $F[x,y]/y^{2} - x^{2}$ for any field $F$.
+\end{lemma}
+\begin{proof}
+    Notice that $y - x^{2}$ is a linear polynomial in $F[x][y]$ and therefore irreducible.
+    However, $y^{2} - x^{2} = (y - x)(y + x)$ and therefore is reducible. Thus, one ring
+    has zero divisors while the other one doesn't. 
+\end{proof}
+
+Let's now actually figure out what $F[x,y]/(y - x^{2})$ is.
+
+\begin{lemma}
+    $F[x,y]/(y - x^{2}) \cong F[t]$ for any field $F$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\newpage
+
+\section{Polynomial Rings}
+
+\begin{lemma}
+    Let $R$ be a ring. If $I$ is a prime ideal in $R$, $(I)$ is a prime ideal in $R[x]$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+This is not true for maximal ideals. However, the ideal generated by $I$ and $x$ is maximal in the polynomial ring, since it just gives back $R/I$.
+
+\subsection{Exercises}
+
+\begin{lemma}
+    $(x)$ and $(x,y)$ are prime in $\mathbb{Q}[x,y]$ but only $(x,y)$ is maximal.
+\end{lemma}
+\begin{proof}
+    $\mathbb{Q}[x,y]/ (x) \cong (\mathbb{Q}[x] /(x))[y] \cong Q[y]$.
+
+    $\Q[x,y] / (x,y) \cong \Q$
+\end{proof}
+
+\begin{lemma}
+    $(x,y)$ is not a principal ideal in $\Q[x,y]$.
+\end{lemma}
+\begin{proof}
+    $x$ and $y$ are relatively prime, so any element that divides has to be a unit. However, $(x,y)$ is not a unit ideal.
+\end{proof}
+
+Notice that this lemma can be extended to the following lemma:
+
+\begin{lemma}
+    Let $R$ be a commutative unital ring. Then, a polynomial ring in more than one variable over R is not a PID.
+\end{lemma}
+
+The statements above can also be proven by using module theory. In particular, we can show
+that these modules are not free modules.
+
+\begin{lemma}
+    Let $f(x) \in R[x]$ be a zero divisor. Then, $\exists b \in R: bf(x) = 0$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Let $R$ be a commutative ring. Prove that $f \in R[x]$ is nilpotent if and only if
+    all coefficients of $f$ are nilpotent in $R$.
+\end{lemma}
+\begin{proof}
+    Let $f \in R[x]$ be nilpotent. We'll induct on the degree of $f$. If $f$ is 
+    a constant polynomial, the statement is trivial. Thus, assume the statement
+    holds for polynomials of degree $n$. Let $f$ be a degree $n + 1$ polynomial.
+    Then,
+
+    
+\end{proof}
+ 
+\newpage
+
+\section{Factorization over Polynomial Rings}
+
+Let $R$ be a UFD.
+
+\begin{definition}
+    Let $0 \neq f \in R[x]$ and $f = a_{0} + ... + a_{n}x^{n}$. The \textbf{content of $f$}, denoted $C(f)$ is defined to be the ideal generated by the greatest common divisor of the coefficients of $f$.
+\end{definition}
+
+The greatest common divisor is defined up to a multiplication by a unit. However, $C(f)$ is unique since it is defined on the level of ideals.
+
+\begin{definition}
+    $f$ is said to be \textbf{monic} if $a_{n} = 1$.  
+\end{definition}
+
+\begin{definition}
+    $f$ is said to be \textbf{primitive} if $C(f) = R$.
+\end{definition}
+
+\subsection{Examples}
+
+\begin{enumerate}
+    \item All monic polynomials are primitive.
+    \item Let $0 \neq f \in R[x]$ and $a \in R$. Then, $a C(f) = C(af)$.
+    \item Let $0 \neq f \in R[x]$ such that $C(f) = aR$. Then, there's a $g \in R[x]$ such that $f = ag$. Then, $C(g) = R$, so $g$ is primitive. \textbf{In other words, we can divide every polynomial by its content to get a primitive polynomial.} (We're dividing by the greatest common divisor to ensure that the coefficients are relatively prime.)
+\end{enumerate}
+
+\begin{lemma}
+    Let $R$ be a UFD and $f,g \in R[x]$ be primitive polynomials. Then, $fg$ is also primitive.
+\end{lemma}
+\begin{proof}
+    Let $p \in R$ be a prime element. It suffices to show that $p$ doesn't divide all coefficients of $fg$ since every element in a UFD is a product of primes. Consider the canonical surjective ring homomorphism from $R$ to $R/pR$. This induces a homomorphism from $R[x]$ to $R/pR[x]$. Notice that $\hat{f}, \hat{g}$ are non-zero since $f$ and $g$ are primitive. Since $R/pR[x]$ is a domain, $\hat{f}\hat{g} = \hat{fg}$ is also non-zero. We thus conclude the proof.
+\end{proof}
+
+Notice that we avoided analyzing the coefficients of $fg$.\textit{How did we do this?}
+
+\begin{corollary}
+    Let $0 \neq f,g \in R[x]$. Then, $C(fg) = C(f)C(g)$.
+\end{corollary}
+\begin{proof}
+    Let $C(f) = aR$ and $C(g) = bR$. Then, $a = af^{\prime}$ and $g = b g^{\prime}$, where $f^{\prime}$ and $g^{\prime}$ are primitive. Then, $f^{\prime}g^{\prime}$ is primitive by the lemma above. Then, $C(fg) = aC(f^{\prime})bC(g^{\prime}) = abR = (aR)(bR) = C(f)C(g)$. 
+\end{proof}
+
+\begin{lemma}[Division in polynomial ring over fields is stronger]
+    Let $f,g \in R[x]$ and assume $g$ is primitive. $g \mid f$ in $F[x]$ implies $g \mid f$ in $R[x]$.
+\end{lemma}
+\begin{proof}
+    Assume $f = gh$ for some $h \in F[x]$. Pick $a \in R$ such that $ah \in R[x]$. Intuitively, we're just clearing the denominators of the coefficients of $h$. Then, $af = g \times (ah) \implies C(af) = C(gah)$.
+    Then, $aC(f) = C(ah)$. Then, all coefficients of $ah$ are divisible by $a$, so $ah/a \in R[x]$. But $ah/a = h$, so we're done.
+\end{proof}
+
+The next proposition shows that irreducibility in $R[x]$ is stronger than
+irreducibility in $\Q[x]$, though the two notions are quite close.
+
+\begin{proposition}
+    Let $f \in R[x]$ be a non-constant polynomial. Then, the following are equivalent:
+
+    \begin{itemize}
+        \item $f$ is irreducible in $R[x]$
+        \item $f$ is irreducible in $\Q[x]$ and $f$ is primitive
+    \end{itemize}
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+Let $F,K$ fields and assume $F$ is a subfield of $K$. irreducibility in $F$
+is irrelevant to irreducibility in $K$. Notice that $x^{2} - 2$ is irreducible
+in $\Q$ but reducible in $\R$.
+
+\begin{proposition}
+    Let $R$ be a UFD. Then, $R[x]$ is a UFD.
+\end{proposition}
+
+Let $R$ be a UFD. We've classified the irreducible elements in $R[x]$:
+
+\begin{enumerate}
+    \item Irreducible constants $0 \neq a \in R$.
+    \item Non-constant polynomials $f \in R[x]$ such that $f$ is irreducible in $F[x]$ and $f$ is primitive
+\end{enumerate}
+
+Now, let's show that the assumption that $R$ is a UFD is necessary. Consider $R = \Z[2i]$. $f(x) = x^{2} + 1$ is irreducible over $R[x]$ since $f$ doesn't have any factors in $R$. However, it's clearly reducible in $F[x]$ since $F = \Q[i]$.
+
+Restricting to $\Z$ and $\Q$, we get the following lemma:
+
+\begin{lemma}
+    Let $f \in \mathbb{Q}[x]$. $f \in \mathbb{Z}[x]$ if and only if $Cont(f) \in \mathbb{Z}$.
+\end{lemma}
+\begin{proof}
+    The forward implication is trivial. Let's prove the converse. Let $f = a_{n}x^{n} + a_{n-1}x^{n-1} + ... + a_{1}x + a_{0}\in \mathbb{Q}[x]$ and $m = min\{n : nf \in \mathbb{Z}[x]\}$. Then, $Cont(f) = \frac{1}{m} \gcd{(ma_{1},...,ma_{n})}$. If $Cont(f) \in \mathbb{Z}$, the greatest common divisor is a multiple of $m$. Then, $\frac{m a_{i}}{m}$ is an integer for every $i$, so $f \in \mathbb{Z}[x]$.
+\end{proof}
+
+\newpage
+
+\subsection{Exercises}
+
+\begin{lemma}
+    Let $R$ be a UFD with quotient field $F$ and let $p(x)$ be a monic polynomial in $R[x]$. Assume $p(x) = a(x)b(x)$ where $a(x)$ and $b(x)$ are monic polynomials in $F[x]$ with smaller degree than $p(x)$. If $a(x) \notin R[x]$, $R$ is not a UFD.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    If $f,g \in \Q[x]$ such that $fg \in \Z[x]$, the product of any coefficient of $g$ and $f$ is an integer.
+\end{lemma}
+\begin{proof}
+    Let $f,g \in \Q[x]$ such that $fg \in \Z[x]$. Then, $C(fg) \in \Z$. Let $C(f) = r$ and $C(g) = s$,
+    where $r$ and $s$ are rational numbers and $rs \in Z$. Notice that every coefficient $a_{i}$ of $f$
+    is $rn$ for some integer $n \in \Z$ and every coefficient $b_{j}$ of $g$ is $sk$ for some $k \in \Z$.
+    Thus, $rnsk = (rs)nk \in \Z$. 
+\end{proof}
+
+
+\begin{example}
+The following example shows us that the subring of a UFD is not necessarily a UFD.
+
+Let $F$ be a field. 
+Let $R$ be the set of polynomials in $F[X]$ whose $X$-coefficient is 0. This set is clearly closed under addition and multiplication. $f = 1$ is also in $R$, so $R$ is a subring of $F[X]$. Moreover, notice that $X^{2}$ and $X^{3}$ are irreducibles in $R$ since $X \notin R$. Moreover, $X^{6} = (X^{2})^{3} = (X^{3})^{2}$ so $X^{6}$ has two different factorizations. Thus, $R$ is a subring of $F[X]$ that is not a UFD.
+\end{example}
+
+\begin{example}
+    Here's an example of a ring that's not a UFD and where every irreducible is prime.
+
+    Let $R = \Z + x \Q[x] \subseteq \Q[x]$. $R$ is an integral domain with units $1$ and $-1$. 
+
+    Let $f$ be a non-constant irreducible polynomial in $R$. Notice that this immediately implies that the constant term of $f$ is $\pm 1$ since otherwise we can write $f = a_{0} f^{\prime}$ and both elements would be non-units. Then, $f$ is primitive. Then, without loss of generality, we can force the constant term of the divisors of $f$ to be $\pm 1$ by multiplying by units, so $f$ is irreducible in $R$ if and only if $f$ is irreducible in $\Q[x]$. Therefore, the irreducibles in $R$ are $\pm p \in \Z$ such that $p$ is prime and irreducibles in $\Q[x]$ with constant term $\pm 1$. 
+
+    Notice that $x$ is not irreducible since $x$ is not invertible and $x = \frac{x}{2} \cdot 2$ and both $\frac{x}{2}$ and $2$ are not invertible in $R$. This example also shows that $x$ is not prime. By the same argument, $qx$ is reducible for any $q \in \Q$. Since one factor in the factorization of $x$ is going to have the form $qx$, $x$ can't be written as a product of irreducible elements in $R$. Thus, $R$ is not a UFD.
+
+    Notice that $R/(x)$ has polynomials where the coefficients of $x$ are rational numbers less than $1$ and the constant term is an integer. Clearly, this is not a domain. 
+
+\end{example}
+
+\begin{lemma}
+    Let $R$ be a commutative ring such that $R[x]$ is a PID. Then, $R$ is a field.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+This immediately implies that $\Z[x]$ is not a PID. 
+
+\newpage
+
+\section{Factorization over Polynomial Rings Over Fields}
+
+\begin{lemma}
+    If $F$ is a field, $F[x]$ is a Euclidean domain with $N(f) = deg(f)$.
+\end{lemma}
+
+
+
+\begin{lemma}
+    Let $x = y + a$ for some $a \in \mathbb{Z}$. $f \in \mathbb{Z}[x]$ is irreducible in $\mathbb{Z}[x]$ if and only if $f$ is irreducible in $\mathbb{Z}[y]$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Exercises}
+
+\begin{lemma}
+    $x^{n-1} + x^{n-2} + ... + x + 1$ is irreducible over $\mathbb{Z}$ if and only if $n$ is prime.
+\end{lemma}
+\begin{proof}
+    Let's first prove the forward direction using the contrapositive, which is somewhat trivial but hard to write. Suppose $n$ is composite. Then, $n = ab$ for some $a,b \in \mathbb{Z}$. Then, $x^{n-1} + x^{n-2} + ... + x + 1 = $
+
+    Let's now prove the reverse direction. Let $p$ be a prime number. We'll use a change of variables to rewrite $f$ and apply Eisenstein's Criterion.
+\end{proof}
+
+\begin{lemma}
+    The polynomial $(x-1)(x-2)...(x-n) - 1$ is irreducible over $\mathbb{Z}$ for all $n \geq 1$.
+\end{lemma}
+\begin{proof}
+    Let $n \in \mathbb{N}$ and $f(x) = (x-1)(x-2)...(x-n) - 1$. Assume by contradiction that there's non-constant polynomials $g,h$ such that $f(x) = g(x)h(x)$ and $deg(g) = m < n$. Then, notice that for all $y \in \{1,2,...,n\}: g(y) = 1$ or $g(y) = -1$. 
+    
+    Assume $g(y) = 1$ for more than $m$ points. Then, $g = 1$, which is a contradiction. Thus, $g(y) = 1$ at at most $m$ points. Then, $h(y) = 1$ at at least $n - m$ points, 
+\end{proof}
+
+\begin{lemma}
+    The polynomial $(x-1)(x-2)...(x-n) + 1$ is irreducible over $\mathbb{Z}$ for all $n \geq 1$ such that $n \neq 4$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\newpage
+
+\section{R-Algebras}
+
+\begin{definition}
+    Let $R$ be a commutative unital ring. An \textbf{R-algebra} is a unital ring $A$
+    and a ring homomorphism $f: R \xrightarrow{} A$ such that $f(R) \subseteq Z(A)$.
+\end{definition}
+
+If $A$ is an R-algebra, $A$ can be given a natural R-module structure by
+setting $r \cdot a := sr =$
+
+\begin{example}
+    Every unital ring is a $\Z$-algebra since $\Z$ is the initial
+    object for the category of rings.
+\end{example}
+
+\begin{definition}
+    Let $A,B$ be R-algebras. An \textbf{R-algebra homomorphism} is a ring homomorphism
+    $f: A \xrightarrow{} B$ such that 
+
+    \[ \forall r \in R:\]
+\end{definition}
+
+\newpage
+
+\section{Rings of Formal Power Series}
+
+Rings of formal power series are denoted $R[[x]]$. Here's a lemma:
+
+\begin{lemma}
+    $f \in R[[x]]$ is a unit if and only if $a_{0}$ is a unit.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+
+\end{document}

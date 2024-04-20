@@ -1,0 +1,260 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{xr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Nil}{\text{Nil}}
+\newcommand{\gauss}{\Z[i]}
+
+\title{Field Theory}
+\date{April 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions and Basic Properties}
+
+\begin{definition}
+    If $L,K$ are fields with $K \subseteq L$, $L$ is said to be a \textbf{field extension of $K$}.
+\end{definition}
+
+Notice that $L$ can be given the structure of a vector space over $K$. The reason we study a pair of fields
+when we study fields is that we often consider a chain of fields $L_{0} \subseteq L_{1} \subseteq ... = L$,
+which helps us prove facts about $L$ is itself.
+
+\begin{definition}
+    The \textbf{degree of an extension $L/K$} is the dimension of $L$ as a vector space over $K$. 
+    This is also denoted $[L : K]$.
+\end{definition}
+
+\begin{definition}
+    $L/K$ is \textbf{finite dimensional} if $[L : K]$ is finite.
+\end{definition}
+
+\begin{definition}
+    Let $L/K$ and $\alpha \in L$. $\alpha$ is \textbf{algebraic} over $K$ if $\exists f \in K[x]: f(\alpha) = 0$.
+    Otherwise, $\alpha$ is called \textbf{transcendental}.
+\end{definition}
+
+\begin{example}
+    Here's a silly example. Consider $\Q \subseteq \Q(x)$, where $\Q(x)$ is the field of rational functions
+    over $\Q$. Then, $x \in \Q(x)$ is transcendental over $\Q$.
+\end{example}
+
+\begin{example}
+    $e$ and $\pi$ are transcendental over $\Q$, but the proof is complicated. 
+\end{example}
+
+In fact, proving that $e + \pi$ and $e \pi$ are transcendental is an open problem.
+However, it's incredibly simple to prove that one of them is transcendental.
+
+\begin{lemma}
+    Let $L/K$ and let $p \in K[x]$ a polynomial with algebraic coefficients
+    and assume $p(\alpha) = 0$. Then, $\alpha$ is algebraic. 
+\end{lemma}
+\begin{proof}
+    Let $p = a_{0} + a_{1}x + ... + a_{n}x^{n}$
+\end{proof}
+
+\begin{theorem}
+    Either $e + \pi$ or $e \pi$ is transcendental.
+\end{theorem}
+\begin{proof}
+    Consider $p(x) = x^{2} = (e + \pi)x + e \pi$. The roots of this polynomial
+    are $e$ and $\pi$. If $e + \pi$ and $e \pi$ are both algebraic, the roots
+    would also be algebraic, which is a contradiction. Therefore, at
+    least one of them needs to be transcendental.
+\end{proof}
+
+\begin{definition}
+    $L/K$ is \textbf{algebraic} if $\forall \alpha \in E: \alpha \text{ is algebraic over $K$}$.
+\end{definition}
+
+\begin{lemma}
+    If $E/K$ is finite, $E/K$ is algebraic.
+\end{lemma}
+\begin{proof}
+    We prove the contrapositive. If $E/K$ is not algebraic, there's some $\alpha \in E$
+    that's not algebraic over $K$. Then, the powers of $\alpha$ are $K$-independent
+    and therefore $E/K$ is not finite. 
+\end{proof}
+
+\begin{lemma}
+    Let $K \subseteq L \subseteq E$ be finite field extensions. Then, $[E : K] = [E : L][L : K]$.
+\end{lemma}
+\begin{proof}
+    Let $x_{1},...,x_{n}$ be a basis for $E/L$ and $y_{1},...,y_{k}$ be a basis for $L/K$.
+    We will prove that $x_{i}y{i}$ is a basis for $E/K$.
+
+    Let's first show that it spans. Let $\alpha \in E$. Then, \[ \alpha = \sum_{i = 1}^{n} a_{i}x_{i}\],
+    where $a_{i} \in L$. Then, \[ \alpha = \sum_{i = 1}^{n} \sum_{j = 1}^{k} b_{i,j} x_{i} y_{j}\], where $b_{i,j} \in K$.
+
+    Thus, $x_{i}y{i}$ spans $E/K$.
+
+    Let's now prove independence.
+
+    Assume \[\exists c_{i,j} \in K: \sum_{i = 1}^{n} (\sum_{j = 1}^{k} c_{i,j} y_{j}) x_{i}\].
+
+    Using the fact that $x_{i}$ is a basis followed up by the fact that $y_{j}$ is a basis
+    concludes the proof.
+\end{proof}
+
+Nathan suggests seeing this through a functional lens. The spanning step is surjectivity and the linear independence
+is injectivity.
+
+\begin{example}
+    Let's now show that $[\Q[\sqrt{2}, \sqrt[3]{3}]:\Q] = 6$.
+
+    Let $E = \Q[\sqrt{2}, \sqrt[3]{3}]$, $L = \Q[\sqrt{2}], K = \Q$.
+    Notice that $[L : K] = 2$.
+    
+    Now, let $L^{\prime} = \Q[\sqrt[3]{3}]$. Notice that $[L^{\prime} : K] = 3$.
+
+    Thus, 2 and 3 divide $[E:K]$ so $[E : K] \geq 6$.
+
+    $[E : K] \leq 6$ as well since
+\end{example}
+
+Let's now solve another example using brute force.
+
+\begin{example}
+    Let's now show that $[\Q[\sqrt{2}, \sqrt{3}]:\Q] = 4$.
+
+    Let $E = \Q[\sqrt{2}, \sqrt{3}]$, $L = \Q[\sqrt{2}], K = \Q$.
+
+    We'll show that $\forall a,b \in Q: \sqrt{3} \neq a\sqrt{2} + b$, therefore proving
+    that $[E: L] > 1$.
+
+    Assume by contradiction that $\exists a,b \in Q: \sqrt{3} \neq a\sqrt{2} + b$.
+
+    ...
+\end{example}
+
+\textit{Justify the existence of $m_{\alpha}(x)$}.
+
+Let $E/K$ be a field extension and $\alpha \in E$. Let $K(\alpha)$ be the smallest
+subfield in $E$ containing $\alpha$. Notice that $K(\alpha)$ will contain $\frac{f(\alpha)}{g(\alpha)}$
+for any $f,g \in K[x]$.
+
+\begin{lemma}
+    Let $E/K$ be a field extension and $\alpha \in E$ be algebraic over $K$.
+    Then, $K(\alpha) = K[\alpha]$.
+\end{lemma}
+\begin{proof}
+    Let's first show that $K[\alpha]$ is a field. Let $0 \neq f \in K[\alpha]$.
+
+    Since $m_{\alpha}(x)$ is an irreducible polynomial, $f$ and $m_{\alpha}$ are
+    relatively prime. Then, by Bezout's Identity, $\exists g,h \in K[x]:$
+
+    \[ g(x)p(x) + h(x)f(x) = 1\] 
+
+    Since $p(\alpha) = 0$, $h(\alpha)f(\alpha) = 1$ and $h = f^{-1}$.
+
+    Let's now show that $K[\alpha]$ is the smallest subfield of $E$ that contains $\alpha$.
+
+    ...
+\end{proof}
+
+Let's now demonstrate how this gives us an algorithm for finding inverses in $K[\alpha]$.
+
+Let $f(x) = ax + b$ and $p(x) = x^{2} - d$.
+
+One goal of Galois Theory is to understand the following: Given a field extension $F \subset K$,
+how many fields are between $F$ and $K$? In other words, how many $E$ are there such that
+$F \subset E \subset K$?
+
+Let $F \subset K$ be a field extension and $\alpha \in K$. The evaluation map at $\alpha$
+produces a map $eval_{\alpha}: F[X] \xrightarrow{} K$ with $p(x) \mapsto p(\alpha)$.
+We denote by $F[\alpha]$ the image of this map.
+In other words, $F[\alpha]$ is the $F$-linear span of $\{1,\alpha, \alpha^{2},...\}$.
+
+$F[\alpha]$ is a subring of $K$. In general, however, it's not a subfield.
+
+\begin{example}
+    Consider $\R \subset \C$ and $\alpha = i$. Then, $\R[i] = \C$.
+\end{example}
+
+\begin{example}
+    Consider $\Q \subset \C$ and let $\alpha$ be transcendental. Then, $\Q[\alpha] = $. WHO KNOWS FIGURE THIS OUT?
+\end{example}
+
+Notice that the definition of algebraicity can be reformulated as requiring that $dim_{F}(F[\alpha]) < \infty$.
+
+It's difficult to figure out whether a number is transcendental over $\Q$.
+
+\begin{example}
+    Let $\Q \subset \C$ and $\alpha = \sqrt{2}$. Notice that $\Q[\alpha]$ is spanned by $1$ and $\sqrt{2}$. 
+\end{example}
+
+
+Let $F,F^{\prime}$ be fields and $F \xrightarrow{\phi} F^{\prime}$ be an isomorphism.
+
+We can extend $\phi$ to be a ring isomorphism between $F[X]$ and $F^{\prime}[X]$ that applies
+$\phi$ to the coefficients.
+
+Let $p \in F[X]$ be a non-constant polynomial and let $p^{\prime} = f(p) \in F^{\prime}[X]$.
+
+\newpage
+
+\section{Algebraic Closure}
+
+\begin{definition}
+    Let $F$ be a field. $F$ is \textbf{algebraically closed} if every polynomial in $f$ can be factored
+    into linear factors.
+\end{definition}
+
+Notice that a polynomial $f \in F[x]$ is irreducible if and only if $deg(f) = 1$.
+
+\begin{definition}
+    Let $K/F$ be a field extension. We say that $K$ is an \textbf{algebraic closure of $F$} if $F \subset K$, $K$ is algebraically
+    closed and $K$ is minimal with these properties. In other words, if $E$ is algebraically closed and $F \subset E \subset K$,
+    $E = K$. 
+\end{definition}
+
+
+
+\begin{lemma}[Fundamental Theorem of Algebra]
+    $\C$ is algebraically closed.
+\end{lemma}
+
+You can also prove this using analytical techniques.
+
+\begin{example}
+    $\bar{\Q} \subseteq \C$ is algebraically closed.
+\end{example}
+
+\begin{example}
+    Puiseux series with cool complex analysis stuff.    
+\end{example}
+
+\begin{theorem}[Uniqueness of Algebraic Closures]
+    
+\end{theorem}
+
+There's no unique isomorphism between algebraic closures. This is a problem for category theorists.
+
+This problem is related to defining the fundamental group of a topological space $X$.
+
+
+
+\end{document}

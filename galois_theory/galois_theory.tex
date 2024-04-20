@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{xr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Nil}{\text{Nil}}
+\newcommand{\gauss}{\Z[i]}
+
+\title{Galois Theory}
+\date{April 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Resources}
+
+\begin{itemize}
+    \item The Basic Graduate Year In Algebra
+    \item Richard Elman, Lectures on Abstract Algebra, Chapters 11 and 12
+\end{itemize}
+
+\section{Definitions and Basic Properties}
+
+\begin{definition}
+    A \textbf{Fermat prime} is $f_{n} = 2^{2^{n}} + 1$ such that $f_{n}$ is prime.
+\end{definition}
+
+$f_{5}$ is not prime. $f_{1},f_{2},f_{3},f_{4}$ are prime. It's unknown whether we have
+infinitely many non Fermat primes or Fermat primes. It's an extremely difficult number
+theoretical problem.
+
+If $n = 2^{n}p_{1}...p_{k}$ where $p_{i}$ is a Fermat prime, we can construct an $n$-gon.
+
+\subsection{Applications of Galois Theory}
+
+Langlands Program: Galois groups of extensions of $\Q$ have "something to do" with modular forms.
+Proving bits of "something to do" leads to striking results. This is also used in the proof
+of Fermat's Last Theorem.
+
+The Galois group turns out to be related to the fundamental group in algebraic topology.
+Field extensions end up corresponding to covering spaces. Algebraic closures end
+up corresponding to universal covering spaces.
+
+Inverse Problem: Given a finite group $G$, is there a Galois extension $K$ of $\Q$ such that Galois Group
+of $K$ over $\Q$ is $G$? This is an open problem though it's been proven for specific types of groups such
+as solvable and Abelian groups.
+
+\newpage
+
+\section{Classical Straightedge and Compass Constructions}
+
+
+Construction by ruler and compass. You can't measure.
+
+The ruler just allows you to draw straight lines between two points on the plane.
+
+The compass allows you to draw a circle with some radius $r$.
+
+Euclid
+
+Here are some problems they considered:
+\begin{enumerate}
+    \item Constructing a sqaure with the area of a circle
+    \item Trisecting an angle
+    \item Constructing a regular polygon
+\end{enumerate}
+
+\newpage
+
+\section{Finite Fields}
+
+
+
+\end{document}
