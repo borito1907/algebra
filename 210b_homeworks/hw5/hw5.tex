@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+
+\title{MATH110BH Homework 4}
+\date{February 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 5}
+
+\begin{lemma}
+    Let $ R $ be a domain. If every module over $ R $ is free, $ R $ is a field.
+\end{lemma}
+\begin{proof}
+    Suppose not. Then, $ R $ has a non-zero non-unit ideal $ I $.
+    Consider the $ R $ module $ R/I $. But free modules over domains have to be
+    torsion-free and therefore $ R/I $ isn't free.
+\end{proof}
+
+
+
+
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+
+
+\title{MATH210B Homework 6}
+\date{March 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 8}
+
+Let $ A : V \to V $ be a linear operator. Let $ \beta $ be a basis such that
+$ [A]_{\beta} $ is diagonal.
+
+Then, $ A(v) = \lambda v $ for any $ v \in \beta $.
+
+If this is the case, then, $ V $ is the direct sum of eigenspaces since
+eigenspaces with different eigenvalues don't intersect and since the eigenbasis generates $ V $,
+they cover all of $ V $.
+
+Then, all elementary divisors of $ A $ are linear since the characteristic polynomial splits.
+
+This immediately implies that all invariant factors of $ A $ are products of distinct linear polynomials
+since they are products of elementary divisors. Since the minimal polynomial is an invariant factor,
+this also immediately implies that the minimal polynomial is a product of linear polynomials.
+
+Lastly, notice that cyclic modules $ F[x] / (x - \lambda_{i}) $ correspond to subspaces where $ A $ acts by
+multiplication by $ \lambda_{i} $, so if we can decompose $ V $ into such subspaces, then $ A $ is diagonalizable.
+
+
+\section{Problem 9}
+
+If $ A^{N} = 0 $ for some $ N > 0 $, $ x^{N} $ acts as zero. Then,
+the minimal polynomial divides $ x^{N} $ and is thus $ x^{k} $ for some
+$ k \leq n $, which produces the desired result.
+ 
+\section{Problem 10}
+
+Notice that $ det(A - tI) = det((A - tI)^{t}) = det(A^{t} - tI) $, so both matrices
+have the same characteristic polynomial. But then they have the same elementary divisors
+and they're thus similar.
+
+
+
+\end{document}

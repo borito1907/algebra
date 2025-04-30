@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+
+\title{Gathmann CA Solutions}
+\date{March 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 0.15(a,d)}
+
+Let $ f \in \mathbb{R}[x] $ be a polynomial vanishing on $ \mathbb{Z} $.
+Then, $ f $ is the zero polynomial, so it vanishes everywhere. Then, $ \mathbb{Z} $
+can't be a variety since then it would be bijective to $ \mathbb{R} $,
+but the cardinalities don't match. The same argument works for part (d)
+as well.
+
+\section{Exercise 0.15(b)}
+
+The coordinate ring of $ \mathbb{R} \backslash \{ 0 \} $ is $ \mathbb{R}[x] $,
+so it's not a variety.
+
+\section{Exercise 0.15(c)}
+
+% TODO:
+
+\section{Exercise 0.15(e)}
+
+% TODO:
+
+\section{Exercise 1.8}
+
+Let $ x \in I_{1} \cap \cdots \cap I_{n} $.
+We'd like to show that $ x \in I_{1} \cdots I_{n} $.
+
+Let's first show it for $ n = 2 $. Since $ I,J $ are coprime,
+there exists $ a_{1}, a_{2} \in R $ and $ z_{1} \in I $ and $ z_{2} \in J $
+such that $ a_{1}z_{1} + a_{2}z_{2} = 1 $ by the partition of unity.
+
+Then, $ x = x(a_{1}z_{1} + a_{2}z_{2}) = x a_{1} z_{1} + x a_{2} z_{2} $.
+
+Notice that both terms are in the product, so we're done.
+
+Now, assume the statement holds for $ n - 1 $. Then, we have that $ z $
+is in $ I_{1} \cdots I_{n - 1} $.
+
+Let's now show that $ I_{1} \cdots I_{n - 1} $ and $ I_{n} $ are coprime.
+This is sufficient since we can apply the $ n = 2 $ case to finish the proof.
+
+% TODO: 
+
+\section{Exercise 1.9}
+
+Let $ I = \langle x_{1}, \ldots, x_{n} \rangle $.
+
+Let $ J = \langle x_{1}^{2}, \ldots, x_{n}^{2} \rangle $.
+
+Consider $ R = K[x_{1}, \ldots, x_{n}]/J $. Since $ I $ contains $ J $,
+the image of $ I $ is nonzero in $ R $. Then, a generator for $ I $ in 
+$ K[x_{1}, \ldots, x_{n}] $ would be a generator for $ I $ in $ R $.
+But $ I $ is now a subspace of the $ n $-dimensional vector space $ R $
+over $ K $, so we need $ n $ generators.
+
+\section{Exercise 1.11(a)}
+
+Let $ J $ be an ideal in $ \mathbb{C}[x] $.
+Since $ \mathbb{C}[x] $ is a PID, $ J = (f) $.
+Let $ f = \pi_{i = 1}^{n} (x - a_{i}) $.
+If $ J $ is a radical ideal, $ f $ is separable over $ \mathbb{C} $.
+Thus, the vanishing ideal is simply the roots of $ f $.
+
+Recall that $ \mathbb{A}^{1}_{\mathbb{C}} $ has the cofinite topology
+as its Zariski topology. Thus, to every subvariety, we can assign
+the ideal generate by the polynomial that has the subvariety as its
+roots.
+
+These two assignments are clearly inverses of each other.
+
+\section{Exercise 1.11(b)}
+
+The vanishing locus of $ (x^{2} + 1) $ is empty, but it's not a unit ideal.
+
+\section{Exercise 2.11(a)}
+
+Let $ f \in R / I_{a} $ be non-zero.
+
+Then, $ f(a) \neq 0 $ and $ f $ is continuous.
+
+Then, $ f $ is non-zero around a small enough neighborhood of $ a $.
+
+\section{Exercise 2.11(b)}
+
+Let $ f_{1}, \ldots, f_{n} \in R $ such that $ V(f_{1}, \ldots, f_{n}) = \varnothing $.
+
+Then, there's no point of $ [0,1] $ where all the functions vanish.
+Then, $ f_{1}^{2} + \cdots + f_{n}^{2} $ is a positive function that doesn't vanish at
+any point of $ [0,1] $.
+
+\section{Exercise 2.24}
+
+Let $ P,Q $ be distinct maximal ideals of a ring $ R $.
+
+Assume $ P $ contains $ Q^{m} $ for some $ m \geq 1 $.
+
+Since $ P $ is maximal, it's prime, and it's thus radical.
+
+Thus, taking the radicals of $ Q^{m} \subset P $, we get $ Q \subseteq P $,
+which is a contradiction.
+
+% I feel like I can use the theory of P-primary modules.
+
+
+
+\section{Exercise 7.22(a)}
+
+Recall that irreducible elements correspond to maximal principal ideals.
+
+Let $ r \in R $. If $ r $ is irreducible, we're done.
+
+Otherwise, $ r = r_{1}r_{2} $ for some $ r_{1}, r_{2} \in R $.
+If $ r_{1} $ and $ r_{2} $ are irreducible, we're done. Otherwise,
+assume without loss of generality that $ r_{1} $ is reducible. Notice that
+$ r_{1} \mid r $ if and only if $ (r) \subseteq (r_{1}) $. Thus, this process
+has to stop at some point since otherwise we'll produce an infinite ascending
+chain of ideals.
+
+\section{Exercise 7.22(b)}
+
+Every ideal $ I $ is finitely generated, so assume $ \sqrt{I} = \langle x_{1}, \ldots, x_{n} \rangle $.
+
+For every $ x_{i} $, $ x_{i}^{k_{i}} \in I $ for some $ k_{i} \geq 1 $.
+
+Let $ k = \sum_{i = 1}^{n}\{k_{i}\} $.
+
+Consider $ \sqrt{I}^{k} $. Then, using the binomial formula, we have the desired result.
+
+\section{Exercise 7.23}
+
+This is an immediate consequence of Proposition 6.7(b).
+In particular, considering the contraction of any ascending (descending)
+chain of ideals, and then extending back, we get the desired result.
+
+
+
+\end{document}

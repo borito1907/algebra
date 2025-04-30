@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+
+
+\title{Unique Factorization Domains}
+\date{April 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+We will show that not every PID is a Euclidean domain by relating the principal
+ideal property with a weakening of the Euclidean condition.
+
+\begin{definition}
+    Let $ N $ be a \textbf{Dedekind-Hasse norm} if $ N: R \to \mathbb{Z}^{\geq 0} $
+    satisfies the following conditions:
+
+    \begin{enumerate}
+        \item $ N(a) = 0 $ if and only if $ a = 0_{R} $.
+        \item For every nonzero $ a,b \in R $, either $ a \in (b) $ or there's a non-zero
+        element $ x \in (a,b) $ such that $ N(x) < N(b) $.
+    \end{enumerate}
+\end{definition}
+
+The second condition can be rephrased as: either $ a $ divides $ b $ or there exists $ s,t \in R $
+such that $ N(as - bt) < N(b) $.
+
+Notice that $ R $ is a Euclidean domain if we can pick $ N $ such that $ s = 1 $ and this condition
+is satisfied.
+
+\begin{proposition}
+    An integral domain $ R $ is a PID if and only if $ R $ has a Dedekind-Hasse norm.
+\end{proposition}
+\begin{proof}
+    Assume $ R $ has a Dedekind-Hasse norm.
+
+    Let $ I $ be a non-zero ideal in $ R $ and let $ b \in I $ be such that
+    $ N(b) $ is minimal. We will show that $ I = (b) $.
+
+    Let $ a \in I $. If $ a = 0 $, we're done.
+
+    Assume that $ 0 \neq a \notin (b) $ by contradiction.
+    Then, by the Dedekind-Hasse condition, there exists $ x \in (a,b) $
+    such that $ N(x) < N(b) $. But $ (a,b) \subseteq I $, so we have contradicted
+    the minimality of $ N(b) $.
+
+    Now, assume that $ R $ is a PID. Then, $ R $ is also a UFD.
+
+    Define $ N $ by letting $ N(0) = 0 $, $ N(u) = 1 $ if $ u $ is a unit,
+    and $ N(a) = 2^{n} $ if $ a = p_{1} \ldots p_{n} $ is the irreducible decomposition of $ a $.
+
+    Clearly, $ N $ is multiplicative. Let's now show that $ N $ is a Dedekind-Hasse norm.
+
+
+\end{proof}
+
+
+
+\newpage
+
+
+
+
+\textbf{Let $ R $ be a UFD. Is there a geometric condition that captures this?}
+
+\textbf{Are localizations of $ R $ also UFDs?}
+
+
+
+\end{document}

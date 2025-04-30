@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}{Corollary}[theorem]
+\newcommand{\nil}{\operatorname{nil}}
+\newcommand{\ann}{\operatorname{Ann}}
+\newcommand{\codim}{\operatorname{codim}}
+
+\title{Dimension in Commutative Algebra}
+\date{April 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+% Borcherds has a lecture where he gives 100 definitions of dimension and shows why they all suck.
+
+\begin{lemma}
+    $ \codim(P) = \dim(R_{P}) $.
+\end{lemma}
+\begin{proof}
+    Prime ideals of $ R $ contained in $ P $ are in inclusion-respecting
+    bijective correspondence with prime ideals of $ R_{P} $, so we have
+    the desired result.
+\end{proof}
+
+\begin{lemma}
+    The dimension of $ R $ is the supremum of
+    the dimensions of $ R_{P} $ where $ P $
+    is a maximal ideal of $ R $.
+
+    In other words, dimension is a local concept.
+\end{lemma}
+
+\begin{lemma}[Gathmann CA Lemma 11.6]
+    Let $ R $ be a ring of finite dimension in which all maximal chains
+    of prime ideals have the same length. Let $ P $ be a prime ideal of $ R $.
+
+    Then, $ R/P $ is a ring of finite dimension where all maximal chains of
+    prime ideals have the same length.
+
+    In particular, we have that $ \dim(R) = \dim(R/P) + \dim(R_{P}) $.
+\end{lemma}
+
+\begin{corollary}
+    $ \dim(R_{P}) = \dim(R) $ if and only if $ P $ is a maximal ideal.
+\end{corollary}
+
+Let's first show that integral ring extensions preserve the dimension of a ring.
+
+\begin{proposition}[Gathmann CA Proposition 11.9]
+    All maximal chains of prime ideals in $ K[x_{1}, \ldots, x_{n}] $
+    have length $ n $.
+\end{proposition}
+\begin{proof}
+    For $ n = 0 $, the statement is trivial.
+    For $ n = 1 $, the statement follows from the fact that $ K[x] $ is a PID.
+
+
+\end{proof}
+
+\begin{corollary}
+    Let $ R $ be a finitely generated algebra over a field $ K $.
+    Assume $ R $ is an integral domain.
+    Then, every maximal chain of prime ideals in $ R $ has length $ \dim(R) $.
+\end{corollary}
+\begin{proof}
+    We can write $ R $ as $ K[x_{1}, \ldots, x_{n}] / P $ for some $ n \geq 1 $
+    and prime ideal $ P $ of $ R $.   % TODO: Finish the proof yourself, I read and understood it.  
+\end{proof}
+
+Let's now convert this statement to geometry.
+
+Let $ Y $ be an irreducible subvariety of an irreducible variety $ X $.
+Then, $ \dim(X) = \dim(A(X)) = \dim(A(X)/I(Y)) + \codim(I(Y)) = \dim(A(Y)) + \codim_{X}(Y) = \dim(Y) + \codim_{X}(Y)$.
+
+Moreover, the local dimension of $ X $ is $ \dim(X) $ at every point of $ X $. In other words,
+all localizations of $ A(X) $ at maximal ideals have dimension $ \dim(X) $.
+
+\begin{definition}
+    Let $ R $ be a ring. Let $ P $ be a prime ideal of $ R $ and $ n \geq 1 $.
+    Let $ P^{(n)} := \{ a \in R : ab \in P^{n} \text{ for some $ b \in R/P $} \} $.
+    $ P^{(n)} $ is called the \textbf{$ n $-th symbolic power of $ P $}.
+\end{definition}
+
+
+
+\end{document}

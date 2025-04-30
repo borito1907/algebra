@@ -1,0 +1,221 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{xr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Nil}{\text{Nil}}
+\newcommand{\gauss}{\Z[i]}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Aut}{Aut}
+
+\title{MATH110C Homework 2}
+\date{April 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 1}
+
+\begin{lemma}
+    Let $F$ be a field and $K$ be the field of rational functions
+    over $F$. Then, $X^{n} - T$ is irreducible over $K[X]$.
+\end{lemma}
+\begin{proof}
+    Notice that $K[T]$ is the field of fractions of $F[T]$.
+    Then, since $F[T]$ is a UFD, we claim that
+    Eisenstein's Criterion
+    applies with the choice of $T$.
+
+    Notice that $(T)$ is a prime ideal as $F[T]/(T) = F$
+    is a domain.
+\end{proof}
+
+Then, $\forall n \geq 1: [L : K] \geq n$ since $L$
+contains the roots of $X^{n} - T$.
+
+\newpage
+
+\section{Exercise 2}
+
+\begin{lemma}
+    Let $\alpha \in \C$ be algebraic over $\Q$
+    with degree $n$. Then, $\exists c \in \R: \forall p,q
+    \in \Z: q \neq 0: \lvert \alpha - \frac{p}{q} \rvert > \frac{c}{q^{n}}$.
+\end{lemma}
+\begin{proof}
+    Notice that if $\alpha$ has a non-zero imaginary component, we
+    can just take $c$ to be the magnitude of the imaginary component
+    and trivially satisfy the inequality. Therefore, without loss
+    of generality, let $\alpha \in \R$ and $f(x) = a_{n}x^{n} + \cdots + a_{0} \in \Z[x]$ 
+    be irreducible. (We can assume it's in $\Z[x]$ by clearing out denominators.)
+
+    Assume that $\lvert \alpha - \frac{p}{q} \rvert < 1$, since otherwise
+    we can pick $c \leq 1$ and trivially satisfy the inequality.
+
+    Let $M = \sup_{\lvert x - \alpha \rvert < 1}\{ \lvert f^{\prime}(x) \rvert \}$.
+
+    By the Mean Value Theorem, $\forall p,q
+    \in \Z: q \neq 0$, we have that there's some $c$ between $\frac{p}{q}$ and $\alpha$
+    such that 
+
+    \[ \lvert f(\frac{p}{q}) - f(\alpha) \rvert \leq \lvert f^{\prime}(c) \rvert \lvert \alpha - \frac{p}{q} \rvert \]
+    
+    Then,
+
+    \[ \lvert f(\frac{p}{q}) \rvert \leq M \lvert \alpha - \frac{p}{q} \rvert \]
+
+    Since $f(\frac{p}{q}) \neq 0$, $f(\frac{p}{q}) \geq \frac{1}{q^{n}}$. Thus,
+
+    \[ \frac{1}{q^{n}M} \leq \lvert \alpha - \frac{p}{q} \rvert \] 
+\end{proof}
+
+\newpage
+
+\section{Exercise 3}
+
+
+
+\newpage
+
+\section{Elman pg.311 Exercise 51.5.2}
+
+\begin{definition}
+    Let $S$ be a collection of polynomials over $F$. We define the \textbf{splitting field
+    of the collection $S$} to be the field where all elements of $S$ factor into linear factors.
+\end{definition}
+
+\begin{lemma}
+    Let $S$ be a collection of polynomials over $F$. The splitting field of $S$
+    exists.
+\end{lemma}
+\begin{proof}
+    Let's first prove existence. Let $K$ be the
+    algebraic closure of $F$.
+    
+    Consider the set of all subfields
+    of $K$ that contain all roots of polynomials
+    in $S$. This set is non-empty since
+    $K$ is in it. Taking the intersection of all
+    these sets produces the desired result.
+\end{proof}
+
+For uniqueness, I prove an even general result.
+
+\begin{lemma}
+    Let $K,L$ be fields and $\sigma: K \xrightarrow{} L$ be an isomorphism.
+    Let $S \subseteq K[x]$ and $S^{\prime} \subseteq L[x]$.
+    Let $F$ be the splitting field of $S$ over $K$ and $M$
+    be the splitting field of $S^{\prime}$ over $L$. Then, we can
+    extend $\sigma$ to $\sigma: F \xrightarrow{} M$.
+\end{lemma}
+\begin{proof}
+    Consider $\mathcal{S} = (E,N,\tau)$, where
+    $K \subset E \subset F$ and $L \subset N \subset M$
+    and $\tau: E \xrightarrow{} N$ extends $\sigma$.
+
+    Notice that the algebraic closures (and the respective
+    isomorphism) of these fields are in $\mathcal{S}$.
+    Moreover, we can take the union of the fields
+    as an upper bound on any chain (identical to how we
+    proved uniqueness of algebraic closures in lecture).
+    Thus, by Zorn's Lemma, a maximal element of this
+    set exists.
+
+    By the exact same argument as how we proved the maximal
+    element equals the algebraic closure (namely, using contradiction
+    and adding the root of the escaped polynomial), we can
+    show that the maximal element of $\mathcal{S}$
+    is $(F,M, \tau)$ for some isomorphism $\tau$. 
+\end{proof}
+
+\begin{lemma}
+    The algebraic closure of $F$ is the splitting field for the collection of irreducible
+    polynomials in $F[t]$.
+\end{lemma}
+\begin{proof}
+    Let $K$ be an algebraic closure of $F$. 
+    
+    We have to show that every irreducible polynomial in $F[t]$
+    splits into linear factors over $K$ and that there's at least one irreducible
+    polynomial doesn't split over any proper subfield of $K$.
+
+    Let's first show that every irreducible polynomial in $F[t]$ splits over $K$.
+    Suppose not. Then, there's a polynomial in $K[t]$ that doesn't split over $K$.
+    Thus, $K$ is not algebraically closed, which is a contradiction.
+
+    Let's now show that if every irreducible polynomial in $F[t]$ splits
+    over some $E \subseteq K$, $E = K$. Let $E$ be such that 
+    every irreducible polynomial in $F[t]$ splits over $E$.
+    Then, notice that every polynomial with coefficients in $E$ can be rewritten
+    as a polynomial with coefficients in $F$ since $E$ is an algebraic extension over $F$.
+    Then, $E$ is algebraically closed. But then $K$ is an algebraic extension of an algebraically
+    closed field, and thus $E = K$.
+
+    Let's now prove the converse of the statement, namely, that the splitting field
+    for the collection of irreducible polynomials in $F[t]$ is the algebraic closure of $F$.
+    
+    Let $K$ be the splitting field for the collection of irreducible polynomials in $F[t]$.
+    Since every polynomial in $F[t]$ can be written as a product of irreducible polynomials,
+    every polynomial in $F[t]$ splits over $K$. Then, it suffices to prove that $K$ is
+    an algebraic extension of $F$.
+
+    Let $L$ be the field generated by adding all roots of all polynomials in $F[t]$.
+    Since $L$ is algebraic and contains $K$, $K$ is algebraic. We thus conclude the proof.
+\end{proof}
+
+
+\newpage
+
+\section{Elman pg.320 Exercise 52.21.5}
+
+\begin{lemma}
+    Let $n \in \Z$. An angle of $2 \pi / n$ radians can be trisected by a straight-edge and compass
+    if and only if $3 \nmid n$.
+\end{lemma}
+\begin{proof}
+    Let's first prove the forward direction by using the contrapositive.
+    Suppose $n = 3^{a}k$ for some $k \in \Z$ such that $a \geq 1$
+    and $\gcd(3,k) = 1$.
+    Recall that $[\Q(\frac{2\pi}{n}) : \Q] = \phi(n)$, where $\phi$
+    is Euler's Totient Function.
+
+    Then, $[\Q(\frac{2\pi}{3n}) : \Q(\frac{2\pi}{n})] = \phi(3n) / \phi(n)$.
+
+    Now, notice that $\phi(3n) = \phi(3^{a+1}) \phi(k) = 2 \times 3^{a} \phi(k)$
+    and $\phi(n) = 2 \times  3^{a-1} \times \phi(k)$, therefore 
+
+    \[ [\Q(\frac{2\pi}{3n}) : \Q(\frac{2\pi}{n})] = 3\].
+
+    We have shown in class that a degree 3 field extension isn't constructible.
+  
+    Let's now prove the reverse direction. Let $n$ such that $3 \nmid n$.
+    Then, $3$ and $n$ are coprime, so by the Bezout Identity, $\exists a,b \in \Z:
+    3a + bn = 1$. Then,
+
+    \[ \frac{2\pi}{3n} = \frac{2\pi}{n} a + \frac{2\pi}{3}b\]
+
+    Since $\cos(\frac{2\pi}{3}) = -0.5$, $2\pi/3$ is constructible. Therefore,
+    we can trisect $2\pi/n$.    
+\end{proof}
+
+\end{document}

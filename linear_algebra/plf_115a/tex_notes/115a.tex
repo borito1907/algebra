@@ -1,0 +1,313 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}{Proposition}[theorem]
+\newtheorem{example}{Example}[theorem]
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Prob}{\mathcal{P}}
+\newcommand{\fdiff}{f^{\prime}}
+\newcommand{\interior}{\text{int}}
+\newcommand{\dom}{\text{Dom}}
+\newcommand{\ran}{\text{Ran}}
+\newcommand{\expect}{\mathbb{E}}
+
+\title{MATH115A Written Exercises}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Q}
+
+We want to show that $ 0 \cdot v = 0 $.
+
+Notice that 
+
+\[ 0v + v = (0 + 1)v = 1v = v = 0 + v \]
+
+The first equality follows by VS8 and the last equality
+follows by VS?.
+
+By the Cancellation Law, we have that $ 0v = 0 $.
+Since $ v $ was arbitrary, we're done.
+
+\newpage
+
+
+\section*{Exercise 1.2.12}
+
+\textbf{Definitions and Setup:}
+\begin{itemize}
+    \item A function \( f : \mathbb{R} \xrightarrow{} \mathbb{\R} \) is \textit{even} if \( f(t) = f(-t) \) for all \( t \in \R \).
+    \item The set of real-valued even functions is denoted \( E \), where
+    \[
+    E = \{ f : \mathbb{R} \to \mathbb{R} \, | \, f(t) = f(-t), \, \forall t \in \mathbb{R} \}.
+    \]
+    \item We'll verify VS1-VS8 for \( E \), with the operations of pointwise addition and scalar multiplication defined as:
+    \[
+    (f + g)(x) = f(x) + g(x), \quad (\alpha f)(x) = \alpha \cdot f(x),
+    \]
+    for all \( f, g \in E \), \( \alpha \in \mathbb{R} \), and \( x \in \mathbb{R} \).
+\end{itemize}
+
+\textbf{Verification of Vector Space Axioms:}
+
+\begin{enumerate}
+    \item \textbf{(VS1) Commutativity of Addition:} For \( f, g \in E \), we need to show \( f + g = g + f \). By definition of pointwise addition,
+    \[
+    (f + g)(x) = f(x) + g(x) \quad \text{and} \quad (g + f)(x) = g(x) + f(x).
+    \]
+    Since addition of real numbers is commutative (\( f(x) + g(x) = g(x) + f(x) \)), we have \( (f + g)(x) = (g + f)(x) \). Thus, \( f + g = g + f \).
+
+    \item \textbf{(VS2) Associativity of Addition:} For \( f, g, h \in E \), we need to show \( (f + g) + h = f + (g + h) \). By definition of pointwise addition,
+    \[
+    ((f + g) + h)(x) = (f + g)(x) + h(x) = (f(x) + g(x)) + h(x),
+    \]
+    and
+    \[
+    (f + (g + h))(x) = f(x) + (g + h)(x) = f(x) + (g(x) + h(x)).
+    \]
+    Since addition of real numbers is associative (\( (f(x) + g(x)) + h(x) = f(x) + (g(x) + h(x)) \)), we have \( ((f + g) + h)(x) = (f + (g + h))(x) \). Thus, \( (f + g) + h = f + (g + h) \).
+
+    \item \textbf{(VS3) Existence of Additive Identity:} The zero function \( 0 \), defined by \( 0(x) = 0 \) for all \( x \in \mathbb{R} \), acts as the additive identity. For \( f \in E \), we need to show \( f + 0 = f \). By definition of pointwise addition,
+    \[
+    (f + 0)(x) = f(x) + 0(x) = f(x) + 0.
+    \]
+    Since \( f(x) + 0 = f(x) \) (additive identity of real numbers), we have \( (f + 0)(x) = f(x) \). Thus, \( f + 0 = f \).
+
+    \item \textbf{(VS4) Existence of Additive Inverses:} For \( f \in E \), we need to show there exists \( g \in E \) such that \( f + g = 0 \). Let \( g = -f \), where \( (-f)(x) = -f(x) \) for all \( x \in \mathbb{R} \). By definition of pointwise addition,
+    \[
+    (f + g)(x) = f(x) + g(x) = f(x) + (-f(x)) = 0.
+    \]
+    Thus, \( f + g = 0 \), and \( g \in E \) because \( (-f)(-x) = -(f(-x)) = -f(x) \) (preserving evenness). Hence, the additive inverse of \( f \) exists and is \( -f \).
+
+    \item \textbf{(VS5) Compatibility of Scalar Multiplication with the Scalar 1:} For \( f \in E \), we need to show \( 1 \cdot f = f \). By definition of scalar multiplication,
+    \[
+    (1 \cdot f)(x) = 1 \cdot f(x) = f(x).
+    \]
+    Thus, \( 1 \cdot f = f \).
+
+    \item \textbf{(VS6) Compatibility of Scalar Multiplication with Scalar Multiplication of Scalars:} For \( \alpha, \beta \in \mathbb{R} \) and \( f \in E \), we need to show \( (\alpha \beta) \cdot f = \alpha \cdot (\beta \cdot f) \). By definition of scalar multiplication,
+    \[
+    ((\alpha \beta) \cdot f)(x) = (\alpha \beta) \cdot f(x),
+    \]
+    and
+    \[
+    (\alpha \cdot (\beta \cdot f))(x) = \alpha \cdot ((\beta \cdot f)(x)) = \alpha \cdot (\beta \cdot f(x)).
+    \]
+    Since multiplication of real numbers is associative (\( (\alpha \beta) \cdot f(x) = \alpha \cdot (\beta \cdot f(x)) \)), we have \( (\alpha \beta) \cdot f = \alpha \cdot (\beta \cdot f) \).
+
+    \item \textbf{(VS7) Distributivity of Scalar Multiplication with Respect to Vector Addition:} For \( \alpha \in \mathbb{R} \) and \( f, g \in E \), we need to show \( \alpha \cdot (f + g) = \alpha \cdot f + \alpha \cdot g \). By definition of scalar multiplication and pointwise addition,
+    \[
+    (\alpha \cdot (f + g))(x) = \alpha \cdot (f + g)(x) = \alpha \cdot (f(x) + g(x)),
+    \]
+    and
+    \[
+    (\alpha \cdot f + \alpha \cdot g)(x) = (\alpha \cdot f)(x) + (\alpha \cdot g)(x) = \alpha \cdot f(x) + \alpha \cdot g(x).
+    \]
+    Since \( \alpha \cdot (f(x) + g(x)) = \alpha \cdot f(x) + \alpha \cdot g(x) \) (distributive property of real numbers), we have \( \alpha \cdot (f + g) = \alpha \cdot f + \alpha \cdot g \).
+
+    \item \textbf{(VS8) Distributivity of Scalar Multiplication with Respect to Scalar Addition:} For \( \alpha, \beta \in \mathbb{R} \) and \( f \in E \), we need to show \( (\alpha + \beta) \cdot f = \alpha \cdot f + \beta \cdot f \). By definition of scalar multiplication,
+    \[
+    ((\alpha + \beta) \cdot f)(x) = (\alpha + \beta) \cdot f(x),
+    \]
+    and
+    \[
+    (\alpha \cdot f + \beta \cdot f)(x) = (\alpha \cdot f)(x) + (\beta \cdot f)(x) = \alpha \cdot f(x) + \beta \cdot f(x).
+    \]
+    Since \( (\alpha + \beta) \cdot f(x) = \alpha \cdot f(x) + \beta \cdot f(x) \) (distributive property of real numbers), we have \( (\alpha + \beta) \cdot f = \alpha \cdot f + \beta \cdot f \).
+\end{enumerate}
+
+\textbf{Conclusion:} Since all vector space axioms (VS1 through VS8) are satisfied, the set of real-valued even functions forms a vector space over \( \mathbb{R} \) under pointwise addition and scalar multiplication.
+
+
+Notice that the set of all even function is NOT a field since for example the (multiplicative) inverse of $f(x) = x^{2}$,
+namely, $g(x) = \frac{1}{x^{2}}$, is undefined at $ 0 $. Thus, we don't have a multiplicative inverse.
+
+In particular, under pointwise multiplication, no function with a zero is going to have a multiplicative inverse.
+
+\newpage
+
+\subsection{Definition after Exercise 1.3.22}
+
+Remember how the union of two subspaces was no longer a subspace. This is an attempt to fix it.
+To show that \( S_1 + S_2 \) is a subspace, we need to check if it satisfies the three conditions for a subspace of a vector space.
+
+
+Notice that $ 0 \in S_{1} $ and $ 0 \in S_{2} $ because they are subspaces. Thus, $ 0 + 0 = 0 \in S_{1} + S_{2} $.
+
+Let's now show closure under addition.
+
+Let \( u_1 + v_1 \in S_1 + S_2 \) and \( u_2 + v_2 \in S_1 + S_2 \), where \( u_1, u_2 \in S_1 \) and \( v_1, v_2 \in S_2 \). We need to show that the sum of these vectors is also in \( S_1 + S_2 \).
+
+\[
+(u_1 + v_1) + (u_2 + v_2) = (u_1 + u_2) + (v_1 + v_2).
+\]
+
+Since \( S_1 \) is closed under addition (as it is a subspace), \( u_1 + u_2 \in S_1 \). Similarly, since \( S_2 \) is closed under addition, \( v_1 + v_2 \in S_2 \).
+
+Thus:
+\[
+(u_1 + u_2) + (v_1 + v_2) \in S_1 + S_2.
+\]
+Therefore, \( S_1 + S_2 \) is closed under addition.
+
+Finally, let's show closure under scalar multiplication.
+
+Let \( u + v \in S_1 + S_2 \), where \( u \in S_1 \) and \( v \in S_2 \), and let \( c \in \mathbb{F} \) be any scalar. We need to show that \( c \cdot (u + v) \in S_1 + S_2 \).
+
+\[
+c \cdot (u + v) = (c \cdot u) + (c \cdot v).
+\]
+
+Since \( S_1 \) is closed under scalar multiplication, \( c \cdot u \in S_1 \). Similarly, since \( S_2 \) is closed under scalar multiplication, \( c \cdot v \in S_2 \).
+
+Thus:
+\[
+(c \cdot u) + (c \cdot v) \in S_1 + S_2.
+\]
+Therefore, \( S_1 + S_2 \) is closed under scalar multiplication.
+
+Since \( S_1 + S_2 \) is non-empty, closed under addition, and closed under scalar multiplication, we conclude that \( S_1 + S_2 \) is indeed a subspace of \( V \).
+
+\newpage
+
+\subsection{Exercise 1.3.10}
+
+We are given two sets:
+
+\[
+W_1 = \{ (a_1, a_2, \dots, a_n) \in \mathbb{F}^n : a_1 + a_2 + \dots + a_n = 0 \}
+\]
+and
+\[
+W_2 = \{ (a_1, a_2, \dots, a_n) \in \mathbb{F}^n : a_1 + a_2 + \dots + a_n = 1 \}.
+\]
+
+To prove that \( W_1 \) is a subspace of \( \mathbb{F}^n \), we need to verify that it contains the zero vector, is closed under addition, and is closed under scalar multiplication.
+
+We begin by checking if the zero vector is in \( W_1 \). The zero vector in \( \mathbb{F}^n \) is \( (0, 0, \dots, 0) \). Substituting into the defining equation of \( W_1 \), we have:
+\[
+0 + 0 + \dots + 0 = 0.
+\]
+Thus, the zero vector is in \( W_1 \).
+
+Next, we verify if \( W_1 \) is closed under addition. Let \( \mathbf{u} = (u_1, u_2, \dots, u_n) \in W_1 \) and \( \mathbf{v} = (v_1, v_2, \dots, v_n) \in W_1 \). Then, by the definition of \( W_1 \),
+\[
+u_1 + u_2 + \dots + u_n = 0 \quad \text{and} \quad v_1 + v_2 + \dots + v_n = 0.
+\]
+Consider their sum \( \mathbf{u} + \mathbf{v} = (u_1 + v_1, u_2 + v_2, \dots, u_n + v_n) \). The sum of the components is:
+\[
+(u_1 + v_1) + (u_2 + v_2) + \dots + (u_n + v_n) = (u_1 + u_2 + \dots + u_n) + (v_1 + v_2 + \dots + v_n) = 0 + 0 = 0.
+\]
+Thus, \( \mathbf{u} + \mathbf{v} \in W_1 \), proving that \( W_1 \) is closed under addition.
+
+Finally, we verify if \( W_1 \) is closed under scalar multiplication. Let \( \mathbf{u} = (u_1, u_2, \dots, u_n) \in W_1 \) and \( c \in \mathbb{F} \). By the definition of \( W_1 \),
+\[
+u_1 + u_2 + \dots + u_n = 0.
+\]
+Consider the scalar multiple \( c \mathbf{u} = (c u_1, c u_2, \dots, c u_n) \). The sum of the components is:
+\[
+c u_1 + c u_2 + \dots + c u_n = c(u_1 + u_2 + \dots + u_n) = c \cdot 0 = 0.
+\]
+Thus, \( c \mathbf{u} \in W_1 \), proving that \( W_1 \) is closed under scalar multiplication.
+
+Since \( W_1 \) contains the zero vector, is closed under addition, and is closed under scalar multiplication, we conclude that \( W_1 \) is a subspace of \( \mathbb{F}^n \).
+
+Now, let us show that \( W_2 \) is not a subspace of \( \mathbb{F}^n \). To do this, we check if it contains the zero vector. The zero vector in \( \mathbb{F}^n \) is \( (0, 0, \dots, 0) \). Substituting into the defining equation of \( W_2 \), we get:
+\[
+0 + 0 + \dots + 0 = 0.
+\]
+However, this does not satisfy the equation defining \( W_2 \), which requires the sum to be 1. Therefore, the zero vector is not in \( W_2 \).
+
+Since \( W_2 \) does not contain the zero vector, it cannot be a subspace of \( \mathbb{F}^n \).
+
+Thus, we conclude that \( W_1 \) is a subspace, but \( W_2 \) is not.
+
+\newpage
+
+\section{1.5.13}
+
+\begin{lemma}
+Let \( V \) be a vector space over a field of characteristic not equal to two.
+\begin{enumerate}
+    \item[(a)] Let \( u \) and \( v \) be distinct vectors in \( V \). Then \( \{u, v\} \) is linearly independent if and only if \( \{u + v, u - v\} \) is linearly independent.
+    
+    \item[(b)] Let \( u, v, \) and \( w \) be distinct vectors in \( V \). Then \( \{u, v, w\} \) is linearly independent if and only if \( \{u + v, u + w, v + w\} \) is linearly independent.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\textbf{(a)}  
+We need to show that \( \{u, v\} \) is linearly independent if and only if \( \{u + v, u - v\} \) is linearly independent.
+
+\textit{Forward direction:}  
+Assume \( \{u, v\} \) is linearly independent. Consider a linear combination 
+\[
+a(u + v) + b(u - v) = 0.
+\]
+Expanding, we get
+\[
+a u + a v + b u - b v = 0 \implies (a + b)u + (a - b)v = 0.
+\]
+Since \( \{u, v\} \) is linearly independent, we must have \( a + b = 0 \) and \( a - b = 0 \). Solving these, we get \( a = b = 0 \), proving that \( \{u + v, u - v\} \) is linearly independent.
+
+\textit{Reverse direction:}  
+Assume \( \{u + v, u - v\} \) is linearly independent. Consider a linear combination
+\[
+a u + b v = 0.
+\]
+Rewrite this as
+\[
+a \left(\frac{u + v}{2} + \frac{u - v}{2}\right) + b \left(\frac{u + v}{2} - \frac{u - v}{2}\right) = 0,
+\]
+which implies that the only solution is \( a = b = 0 \). Thus, \( \{u, v\} \) is linearly independent.
+
+\textbf{(b)}  
+We need to show that \( \{u, v, w\} \) is linearly independent if and only if \( \{u + v, u + w, v + w\} \) is linearly independent.
+
+\textit{Forward direction:}  
+Assume \( \{u, v, w\} \) is linearly independent. Consider a linear combination 
+\[
+a(u + v) + b(u + w) + c(v + w) = 0.
+\]
+Expanding, we get
+\[
+a u + a v + b u + b w + c v + c w = 0 \implies (a + b)u + (a + c)v + (b + c)w = 0.
+\]
+Since \( \{u, v, w\} \) is linearly independent, we must have \( a + b = 0 \), \( a + c = 0 \), and \( b + c = 0 \). Solving these equations, we get \( a = b = c = 0 \), proving that \( \{u + v, u + w, v + w\} \) is linearly independent.
+
+\textit{Reverse direction:}  
+Assume \( \{u + v, u + w, v + w\} \) is linearly independent. Consider a linear combination
+\[
+a u + b v + c w = 0.
+\]
+Expressing each vector in terms of sums:
+\[
+a \left(\frac{(u + v) + (u - v)}{2}\right) + b \left(\frac{(u + w) + (w - u)}{2}\right) + c \left(\frac{(v + w) + (w - v)}{2}\right) = 0,
+\]
+which yields \( a = b = c = 0 \). Thus, \( \{u, v, w\} \) is linearly independent.
+
+
+
+\end{proof}
+
+\newpage
+
+
+
+\end{document}

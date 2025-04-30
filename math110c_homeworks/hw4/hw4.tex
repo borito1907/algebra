@@ -1,0 +1,251 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\usepackage{xr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Nil}{\text{Nil}}
+\newcommand{\gauss}{\Z[i]}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Aut}{Aut}
+
+\title{MATH110C Homework 4}
+\date{May 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercise 53.11.5}
+
+\begin{lemma}\label{idk_what_to_call_this}
+    Let $K/F$ be an algebraic extension. If $\alpha \in K$ is separable over $F(\alpha^{p})$,
+    $\alpha \in F(\alpha^{p})$.
+\end{lemma}
+\begin{proof}
+    Consider $f(x) = x^{p} - \alpha^{p} = {(x - \alpha)}^{p} \in F(\alpha^{p})[x]$. Notice that $f(\alpha) = 0$.
+    Then, $f$ can't be irreducible in $F(\alpha^{p})[x]$ since otherwise $\alpha$ wouldn't be separable as $f$
+    has multiple roots.
+
+    Then, let $f = gh$ for some $g,h \in F(\alpha^{p})$ where $g$ is irreducible. Notice that $g = {(x - \alpha)}^{m}$,
+    where $1 \leq m < p$. Notice that the last coefficient of $g$ is $-\alpha^{m}$, which implies that $\alpha^{m} \in F^{\alpha^{p}}$.
+    
+    Then, $\gcd(p,m) = 1$, so there's some $r,s \in \Z$ such that $1 = rp + sm$ by the Bezout Identity. Then, $\alpha = {(\alpha^{p})}^{r} + 
+    {(\alpha^{m})}^{s}$, so $\alpha \in F({\alpha^{p}})$.
+\end{proof}
+
+\begin{lemma}
+    Let $F$ with $charF = p > 0$ and $K/F$ be a separable field extension.
+    Then, $K = F(K^{p})$, where $K^{p} := \{ x^{p}: x \in K\}$.
+\end{lemma}
+\begin{proof}
+    It suffices to show $K \subset F(K^{p})$, the reverse containment is trivial.
+
+    Let $\alpha \in K$. Then, $\alpha$ is separable over $F$, so $\alpha$ is separable over $F(\alpha^{p})$.
+    Then, by Lemma \ref{idk_what_to_call_this}, $\alpha \in F(\alpha^{p}) \subset K^{p}$. We thus conclude
+    the proof.
+\end{proof}
+
+I couldn't prove the rest of the problem. I wanted to use the Frobenius endomorphism for b, but couldn't work it out.
+
+
+
+\newpage
+
+\section{Exercise 53.11.6}
+
+\begin{lemma}\label{adjoining_separable_elements_produce_separable_extensions}
+    Let $K/F$ be an extension of fields. If $\alpha \in K$ is separable over $F$,
+    $F(\alpha)/F$ is separable.
+\end{lemma}
+\begin{proof}
+    Let $p \in F[x]$ be the minimal polynomial of $\alpha$. Recall that $p$ is separable if and only if
+
+    \[ \#\{\text{roots of $p$ in $L$\}} = \# \{\tau: F(\alpha) \xrightarrow{\tau} L\}\] 
+
+    But then, \[ [F(\alpha): F] = \#\{\text{roots of $p$ in $L$\}} = \# \{\tau: F(\alpha) \xrightarrow{\tau} L\} = [F(\alpha) : F]_{s}\],
+    
+    so $F(\alpha)/F$ is separable.
+\end{proof}
+
+\begin{lemma}
+    If $\alpha_{1}, \ldots, \alpha_{n} \in K$ are separable over $F$, then, $F(\alpha_{1}, \ldots, \alpha_{n})/F$
+    is separable.
+\end{lemma}
+\begin{proof}
+    Notice that if an element $x \in K$ is separable over $F$, it's separable over any extension
+    of $F$ as well. In particular, $\alpha_{i+1}$ is separable over $F(\alpha_{1},\alpha_{2},\ldots,\alpha_{i})$.
+    
+    Therefore, $F(\alpha_{1},\alpha_{2},\ldots,\alpha_{i},\alpha_{i+1})/F(\alpha_{1},\alpha_{2},\ldots,\alpha_{i})$
+    is a separable extension by Lemma \ref{adjoining_separable_elements_produce_separable_extensions}.
+
+    A simple inductive argument using $K/F$ is separable if and only if $K/E$ and $E/F$ is separable concludes the proof.
+\end{proof}
+
+\begin{lemma}\label{separable_part_of_an_extension_is_a_field}
+    Let $F_{sep} = \{ \alpha \in K: \alpha \text{ separable over $F$} \}$. Then, $F_{sep}$ is a field.
+\end{lemma}
+\begin{proof}
+    Let $\alpha, \beta \in F_{sep}$. It suffices to show that $\alpha + \beta, \alpha \beta, \alpha^{-1} \in F_{sep}$.
+
+    Since $F(\alpha)/F$ is separable and $\alpha^{-1} \in F(\alpha)$, $\alpha^{-1}$ is separable.
+
+    Since $F(\alpha, \beta)/F$ is separable and $\alpha + \beta, \alpha \beta \in F(\alpha, \beta)$, 
+    $\alpha + \beta$ and $ \alpha \beta $ are also separable.
+
+    We thus conclude the proof.
+\end{proof}
+
+\newpage
+
+\section{Exercise 53.11.9}
+
+\begin{lemma}
+    Let $F_{0}$ be a field of positive characteristic $p$. Let $F = F_{0}(t_{1}^{p}, t_{2}^{p})$ and 
+    $L = F_{0}(t_{1}, t_{2})$. Then, if $\theta \in L \backslash F$, $[F(\theta): F] = p$.
+\end{lemma}
+\begin{proof}
+    Let $\theta \in L \backslash F$. Then, $\theta^{p} \in F$.
+    Then, $\theta$ satisfies $f = x^{p} - \theta^{p} = (x - \theta)^{p}$.
+    $f$ is irreducible since otherwise $\theta \in F$ using the Bezout trick.
+    Thus, $[F(\theta) : F] = p$.
+\end{proof}
+
+I couldn't find how to prove that there are infinitely many intermediate fields. We can just keep adjoining
+the $\theta$'s, but I don't see how to formally argue it.
+
+\newpage
+
+\section{Exercise 53.11.10}
+
+\begin{lemma}
+    If $F = F^{p}$, $F$ is perfect.
+\end{lemma}
+\begin{proof}
+    If $F = F^{p}$, the Frobenius endomorphism is surjective, which implies
+    that $F$ is perfect.
+\end{proof}
+
+\begin{lemma}
+    If $F$ is not perfect, then $\forall r \geq 1: F \neq F^{p^{r}}$.
+\end{lemma}
+\begin{proof}
+    ? Couldn't prove it.
+\end{proof}
+
+\newpage
+
+\section{Exercise 53.11.11}
+
+\begin{lemma}
+    Let $K/F$ be an extension. $\alpha \in K$ is both separable and purely inseparable
+    if and only if $\alpha \in F$.
+\end{lemma}
+\begin{proof}
+    $\alpha \in K$ is separable and purely inseparable over $F$ if and only if 
+    its irreducible polynomial, $(x - \alpha)^{m}$, has $m$ distinct roots
+    in some splitting field. Clearly, this happens if and only if $m = 1$.
+\end{proof}
+
+\newpage
+
+\section{Exercise 53.11.13}
+
+\begin{theorem}\label{characterizations_of_purely_inseparable_extensions}
+    Let $K/F$ be an extension with $charF = p > 0$.
+    Then, the following statements are equivalent:
+
+    \begin{enumerate}
+        \item $K$ is purely inseparable over $F$.
+        \item The irreducible polynomial of any $\alpha \in K$ is of the form $x^{p^{r}} - a \in K[x]$.
+        \item If $\alpha \in K$, then $\alpha^{p^{n}} \in F$ for some $n \geq 0$.
+        \item $K_{sep} = F$.
+        \item $K$ is generated over $F$ by a set of purely inseparable elements.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Notice that 1 and 5 are equivalent trivially.
+
+    Since the only elements that are both separable and purely inseparable over $F$
+    are elements of $F$, 4 and 5 are equivalent conditions.
+
+    It remains to show that the conditions 1,2,3 are equivalent.
+
+    Let's first prove that 1 implies 2.
+
+    Assume $K$ is purely inseparable over $F$.
+    Let $\alpha \in K$ and $f = {(x - \alpha)}^{m}$ be the irreducible
+    polynomial of $\alpha$. Let $m = n p ^{r}$ with $\gcd(n,p) = 1$.
+    
+    Then, 
+    
+    \[{(x - \alpha)}^{m} = {(x - \alpha)}^{n p ^{r}} = {(x^{p^{r}} - \alpha^{p^{r}})}^{n}\] 
+
+    Then, it suffices to show that $n = 1$. To prove that $n = 1$,
+    it suffices to show that $\alpha^{p^{r}} \in F$. As $f$
+    is irreducible, this will imply that $n = 1$. Notice that
+    the coefficient of $x^{p^{r}(n-1)}$ in $f$ is $\pm n \alpha^{p^{r}}$,
+    which is in $K$ by definition. Since $\gcd(p,n) = 1$, we have that
+    $\alpha^{p^{r}} \in F$ and we thus conclude the proof.
+
+    Notice that 2 implies 3 is trivial.
+
+    Let's now prove that 3 implies 1.
+    Let $\alpha \in K$. We'd like to show that the minimal polynomial $f$ of $\alpha$ in $F[x]$
+    has the form ${(x - \alpha)}^m$ for some $m$. Since $\alpha^{p^{n}} \in F$ for some $n > 0$,
+    $\alpha$ is a root of $x^{p^{n}} - \alpha^{p^{n}} = (x - \alpha)^{pn}$. Since $f$
+    divides this polynomial, we're done with the proof.
+\end{proof}
+
+\newpage
+
+\section{Exercise 53.11.14}
+
+\begin{lemma}\label{powers_of_elements_are_separable_in_fields_of_char_p}
+    Let $K/F$ be an extension with $charF = p > 0$.
+    If $\alpha \in K$ is algebraic over $F$, $\alpha^{p^{n}}$ is separable over $F$ for some $n \geq 0$.
+\end{lemma}
+\begin{proof}
+    We can assume without loss of generality that $\alpha$ is not separable
+    using Lemma \ref{alpha_separable_implies_all_powers_are_separable}.
+    We induct on the degree of $\alpha$, which we denote by $n$. The base case
+    with $n = 1$ is obvious, since $\alpha \in F$. Suppose $n > 1$.
+
+    Let $f$ be the minimal polynomial of $\alpha^{p^{n}}$.
+    Then, $\exists g \in F[t]: f(t) = g(t^{p})$. Notice that
+    the degree of $g$ is less than the degree of $f$ and that $\alpha^{p^{n-1}}$
+    is a root of $g$. Thus, $g$ is separable. Then, $f$ is separable.
+\end{proof}
+
+\begin{lemma}
+    Let $K/F$ be an algebraic field extension. Then, $K/F_{sep}$ is purely inseparable
+    and $K_{psep} := \{ \alpha \in K: \alpha \text{ is purely inseparable over $F$}\}$
+    is a field.
+\end{lemma}
+\begin{proof}
+    If $charF = 0$, $F_{sep} = K$ and thus $K/K$ is a trivial extension.
+
+    Thus, assume $charF = p > 0$. Then, by Lemma \ref{powers_of_elements_are_separable_in_fields_of_char_p},
+    $\exists n > 0: \alpha^{p^{n}} \in F_{sep}$. Then, the third condition from Lemma \ref{characterizations_of_purely_inseparable_extensions}
+    finishes the proof.
+\end{proof}
+
+\end{document}

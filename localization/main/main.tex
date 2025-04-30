@@ -1,0 +1,219 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}{Corollary}[theorem]
+\newcommand{\nil}{\operatorname{nil}}
+
+\title{Localization}
+\date{April 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+The following is ATOCA Chapter 11, Exercise 5.
+
+\begin{lemma}
+    Let $ R^{\prime },R^{\prime \prime} $ be rings.
+    Let $ R := R^{\prime} \times R^{\prime \prime} $.
+    Let $ S = \{ (1,1), (1,0) \} $.
+    Then, $ R^{\prime} $ is the localization of $ R $ at $ S $.
+\end{lemma}
+\begin{proof}
+    We have a ring homomorphism from $ R $ onto $ R^{\prime} $
+    given by the projection map with kernel $ R^{\prime \prime} $.
+
+    By ATOCA 11.10, $ \ker(\phi_{S}) = \langle 0 \rangle^{S} = R^{\prime \prime} $.
+
+    Then, the induced map from $ S^{-1}R $ to $ R^{\prime} $ is injective.
+    The map is also surjective since the diagram given in ATOCA 11.3 commutes.
+    Thus, the two rings are isomorphic.
+\end{proof}
+
+Let $ R $ be a ring and $ S $ be a multiplicative subset of $ R $.
+Let $ J $ be an ideal of $ S^{-1}R $.
+Let $ \phi = \phi_{S} $.
+Let $ I = \phi^{-1}(J) $.
+
+\begin{lemma}
+    $ I $ is saturated.
+\end{lemma}
+\begin{proof}
+    Let $ x \in I^{S} $. Then, there exists $ s \in S $ such that $ xs \in I $. 
+    Then, $ \phi(xs) \in J $. But $ \phi(s) $ is a unit in $ S^{-1}R $, and thus
+    we have that $ \phi(x) = \phi(x) \phi(s) \phi(s^{-1}) = \phi(xs) \phi(s^{-1}) \in J $.
+    Then, $ x \in I $.
+\end{proof}
+
+\begin{lemma}
+    $ J = I (S^{-1}R) $.
+\end{lemma}
+\begin{proof}
+    Let $ \frac{x}{s} \in J $. Then, $ \frac{x}{1} \in J $.
+    Then, $ x \in I $. Then, $ \frac{x}{1} \frac{1}{s} \in I (S^{-1}R) $.
+    Thus, $ J \subseteq I (S^{-1}R) $.
+
+    Let $ x \in I $. Then, $ \frac{x}{1} \in J $.
+    But then $ J $ contains $ I (S^{-1}R) $ as $ J $ is closed under multiplication by $ S^{-1}R $.
+\end{proof}
+
+Now, let $ I $ be an ideal of $ R $.
+
+\begin{lemma}
+    $ I (S^{-1}R) $ is a saturated ideal of $ S^{-1}R $.
+\end{lemma}
+\begin{proof}
+    Let $ x \in (I (S^{-1}R))^{S} $.
+    Then, there exists some $ s \in S $ such that $ xs \in I (S^{-1}R) $.
+    Since $ s $ is a unit in $ S^{-1}R $, this implies that $ x \in I (S^{-1}R) $.
+\end{proof}
+
+\begin{lemma}
+    The preimage of $ I (S^{-1}R) $ under $ \phi $ is the
+    saturation of $ I $.
+\end{lemma}
+\begin{proof}
+    We show both inclusions.
+
+    Let $ x \in I^{S} $. Then, there exists some $ s \in S $
+    such that $ xs \in I $. Then, $ \phi(xs) \in J $, so $ \phi(x) \in J $.
+    Since $ J = I (S^{-1}R) $, we have the desired result.
+
+    Let $ x $ be in the preimage of $ I (S^{-1}R) $.
+    Then, $ \phi(x) \in I (S^{-1}R) $, so $ \frac{x}{1} = \frac{y}{s} $
+    for some $ y \in I $ and $ s \in S $. Then, there is some $ t \in S $
+    such that $ xst = yt \in I $ since $ y \in I $.
+    Then, $ s \in I^{s} $.
+\end{proof}
+
+Let $ R $ be a ring and $ S $ be a multiplicative subset of $ R $.
+Let $ P $ be a prime ideal of $ R $.
+
+Let $ x \in P^{S} $. Then, there exists some $ s \in S $ such that $ xs \in P $.
+Then, either $ x \in P $ or $ s \in P $. Since $ s \notin P $, $ x \in P $.
+Thus, $ P = P^{S} $.
+
+\begin{lemma}
+    $ P (S^{-1}R) $ is a prime ideal.
+\end{lemma}
+\begin{proof}
+    Since the preimage of $ P (S^{-1}R) $ is $ P^{S} = P $, $ P (S^{-1}R) $ can't be a unit ideal.
+    
+    Now, let $ \frac{a}{s} \cdot \frac{b}{t} \in P (S^{-1}R) $.
+    Then, $ \frac{ab}{st} \in P (S^{-1}R) $ and thus $ ab \in P $,
+    and thus $ a \in P $ or $ b \in P $, so $ \frac{a}{s} \in P (S^{-1}R) $
+    or $ \frac{b}{t} \in P (S^{-1}R) $.
+\end{proof}
+
+We thus gave a bijective correspondece that respects inclusions
+between saturated ideals of $ R $ and ideals of $ S^{-1}R $.
+Notice that this bijection also respects prime ideals, which are
+always saturated.
+
+The following is Exercise 11.27(c) from ATOCA.
+
+\begin{lemma}
+    Let $ R $ be a ring, $ S $ be a multiplicative subset of $ R $.
+    Let $ I,J $ be ideals of $ R $.
+    Then, $ (I^{S}J^{S})^{S} = (IJ)^{S} $.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+The following is from ATOCA 12.11 and beyond.
+
+Let $ R $ be a ring, $ S $ be a multiplicative subset of $ R $ and $ N $ be a submodule
+of $ M $.
+
+Let's first show that $ N^{S} $ is a submodule of $ M $.
+
+Let $ x,y \in N^{S} $. Then, there exists $ s,t \in S $ such
+that $ sx + ty \in N $. Then, $ (x + y)st = xst + yst \in N $
+so $ x + y \in N^{S} $. Moreover, for any $ r \in R $, $ rxs \in N $.
+Thus, $ N^{S} $ is a submodule. This gives us ATOCA 12.12(1a).
+
+Notice that 12.12(1b) is an immediate consequence of the exactness of localization.
+
+\begin{lemma}[ATOCA 12.12(3b)]
+    $ S^{-1} N = S^{-1} N^{S} $.
+\end{lemma}
+\begin{proof}
+    Let $ \frac{x}{s} \in S^{-1} N^{S} $.
+
+    Since $ x \in N^{S} $, there exists some $ t \in S $ such that $ tx \in N $.
+    Then, $ \frac{tx}{s} \in N $ so $ \frac{x}{s} = \frac{1}{t} \frac{tx}{s} \in N $.
+\end{proof}
+
+
+
+\begin{lemma}[ATOCA 12.17]
+    Let $ R $ be a ring and $ S $ be a multiplicative subset of $ R $.
+    Let $ M $ be an $ R $-module.
+
+    Then, $ S^{-1} Ann(M) \subset Ann(S^{-1} M) $.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    Let $ R $ be a ring and $ M $ be an $ R $-module.
+    $ x $ is \textbf{nilpotent on M} if there exists
+    some $ n \geq 1 $ such that $ x^{n}M  = 0 $.
+    In other words, $ x \in \sqrt{Ann(M)} $.
+
+    We denote the set of such elements by $ \nil(M) $.
+\end{definition}
+
+Notice that if $ M = R $, we recover the usual definition of a nilpotent element.
+
+\begin{lemma}[ATOCA 12.23]
+    Let $ R $ be a ring and $ I $ be an ideal of $ I $. Then, $ \nil(R/I) = \sqrt{I} $.
+\end{lemma}
+
+\begin{proposition}
+    Let $ R $ be a ring and $ S $ be a multiplicatively closed subset of $ R $.
+    Let $ Q \subsetneq M $ be $ R $-modules.
+
+    Assume $ S \cap \nil(M/Q) \neq \varnothing $.
+
+    Then, $ Q^{S} = M $ and $ S^{-1}Q = S^{-1}M $.
+\end{proposition}
+\begin{proof}
+    Let $ s \in S \cap \nil(M/Q) $.
+
+    Then, there exists some $ n \geq 1 $ such that for every $ m \in M $,
+    $ s^{n}m \in Q $. Since $ s^{n} \in S $, this implies that $ M = Q^{S} $.
+
+    Since $ S^{-1}Q = S^{-1} Q^{S} $, we have the desired result.
+\end{proof}
+
+% TODO: I think it follows from 12.17.
+\begin{lemma}[ATOCA 12.40]
+    Let $ R $ be a ring and $ S $ be a multiplicative subset of $ R $.
+    Let $ M $ be an $ R $-module.
+
+    Then, $ S^{-1} (\nil(M)) \subseteq \nil(S^{-1}M) $.
+\end{lemma}
+\begin{proof}
+    Let $ \frac{x}{s} \in S^{-1} (\nil(M)) $ where $ x \in \nil(M) $
+    and $ s \in S $.
+
+    Then, there exists some $ n \geq 1 $ such that $ x^{n} $
+
+    Notice that $ x \in $
+\end{proof}
+
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}{Corollary}[theorem]
+\newcommand{\nil}{\operatorname{nil}}
+\newcommand{\ann}{\operatorname{Ann}}
+\newcommand{\ass}{\operatorname{Ass}}
+
+\title{Schemes}
+\date{April 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Pushforward}
+
+\begin{lemma}
+    The direct image of a (pre)sheaf on $ X $ is a (pre)sheaf on $ Y $.
+\end{lemma}
+\begin{proof}
+    Let $ \pi: X \to Y $ be a continuous map.
+
+    Let $ \mathcal{F} $ be a sheaf on $ X $.
+    
+    Let's show that the pushforward sheaf on $ Y $ satisfies
+    the sheaf axioms.
+    
+    Let $ V_{1} \subseteq V_{2} $ in $ Y $.
+    Then, $ \pi^{-1}(V_{1}) \subseteq V_{2} $ in $ X $.
+    Thus, we have an induced restriction map using the restriction map from $ X $.
+    
+    Similarly, we have that the restriction triangle is commutative using the commutativity on $ X $.
+    
+    Thus, $ \pi_{*} \mathcal{F} $ is a presheaf.
+    
+    Now, let $ V $ be an open subset of $ Y $ and let $ \{ V_{i} \}_{i \in I } $
+    be an open cover of $ V $. Notice that $ \{ \pi^{-1}(V_{i}) \}_{i \in I } $ is an
+    open cover of $ \pi^{-1}(V) $.
+    
+    Let $ f_{1}, f_{2} \in \pi_{*} \mathcal{F}(V) = \mathcal{F}(\pi^{-1}(V))$ .
+    But then this is simply the gluability axiom and identity axioms on $ X $.
+\end{proof}
+
+
+\begin{lemma}
+    Let $ \pi: X \to Y $ be a continuous map and $ \mathcal{F} $ be a sheaf of sets,
+    rings or $ A $-modules on $ X $. Let $ p \in X $ and $ q \in Y $ such that $ \pi(x) = y $.
+    Then, the pushforward sheaf induces a map on the stalks
+\end{lemma}
+\begin{proof}
+    Let $ (g, V) $ be a germ of $ (\pi_{*} \mathcal{F})_{q} $.
+
+    Let $ U = \pi^{-1}(V) $.
+
+    Then, $ q \in V $ and $ g \in \pi_{*} \mathcal{F}(V) = \mathcal{F}(U)$.
+
+    Map $ (g, V) $ to $ (g, U) $.
+
+    We need to show that this assignment is well-defined.
+
+
+\end{proof}
+
+Let's now prove the stame statement using the colimit definition of stalks.
+
+\begin{proof}
+    
+\end{proof}
+
+
+
+\end{document}

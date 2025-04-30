@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}{Corollary}[theorem]
+\newcommand{\nil}{\operatorname{nil}}
+\newcommand{\ann}{\operatorname{Ann}}
+
+\title{ATOCA Exercises}
+\date{April 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\begin{lemma}[ATOCA 3.38]
+    Let $ R $ be a ring and $ I,J $ be ideals of $ R $.
+    Assume $ J $ is finitely generated modulo $ I $ and
+    assume that $ J \subseteq \sqrt{I} $. Then, there exists some
+    $ n \geq 1 $ such that $ J^{n} \subseteq I $.
+\end{lemma}
+\begin{proof}
+    If $ J $ is contained $ I $, this is trivial. So assume $ J $ is not contained in $ I $.
+
+    Let $ \bar{x}_{1}, \ldots, \bar{x}_{n} $ be the generators of $ J $ in $ R/I $.
+
+    Since for all $ i \in [n] $ we have that $ x_{i} \in J $, for all $ i \in [n] $
+    there exists some $ k_{i} \geq 1 $ such that $ x_{i}^{k_{i}} \in I $.
+
+    Let $ k = k_{1} + \cdots + k_{n} $. By the binomial formula, $ J^{k} $ is contained
+    in $ \langle x_{1}^{k}, x_{2}^{k}, \ldots, x_{n}^{k} \rangle $.
+
+    But $ \langle x_{1}^{k}, x_{2}^{k}, \ldots, x_{n}^{k} \rangle $ is the zero ideal in $ R/I $
+    by construction, so $ J^{k} $ is also the zero ideal, and we have the desired result.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+
+\title{MATH210B Homework 2}
+\date{February 2024}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 2}
+
+Let's first show that the map taking a set $ X $ to $ \mathbb{Z} \langle X \rangle $
+is left adjoint to the forgetful functor taking a (possibly noncommutative ring $ R $)
+to its underlying set.
+
+Let $ \phi : X \to S $ be a set map. Define $ \phi^{*} : \mathbb{Z} \langle X \rangle \to S $
+by taking $ x \in X $ to $ \phi(x) $. Let's show that this is a ring homomorphism.
+
+We'll use the following lemma:
+
+\begin{lemma}
+    Assume $ A $ is a ring that is also a free Abelian group with basis $ \beta $.
+    Assume $ \beta \cdot \beta \subset \beta $.
+    Let $ f : A \to B $ be a group homomorphism such that it's a ring homomorphism when restricted
+    to $ \beta $. Then, $ f $ is a ring homomorphism. 
+\end{lemma}
+\begin{proof}
+    Let $ x,y \in A $. Then, $ x = \sum_{i = 1}^{n} a_{i}v_{i} $ and $ y = \sum_{i = 1}^{n} b_{i}v_{i} $
+    where $ a_{i}, b_{i} \in \mathbb{Z} $ (possibly zero) and $ v_{i} \in \beta $. By distributivity,
+
+    \[ xy = \sum_{i = 1}^{n}\sum_{j = 1} a_{i}b_{j} v_{i}v_{j} \]
+
+    Then,
+
+    \begin{align*}
+        f(xy) &= f\Biggl(\sum_{i=1}^{n}\sum_{j=1}^{n} a_i b_j\, v_i v_j\Biggr)\\
+              &= \sum_{i=1}^{n}\sum_{j=1}^{n} a_i b_j\, f(v_i v_j)\\
+              &= \sum_{i=1}^{n}\sum_{j=1}^{n} a_i b_j\, f(v_i) f(v_j)\\
+              &= \sum_{i=1}^{n} f(a_{i}{v_{i}}) \sum_{j=1}^{n} f(a_{j}v_j)\\
+              &= f(x)f(y)
+    \end{align*}
+\end{proof}
+
+Now, notice that $ \phi^{*} $ is an Abelian group since it matches the coproduct in the category
+of Abelian groups, and it satisfies the conditions of the lemma. Thus, it's a ring homomorphism.
+
+The fact that these maps are adjoint is now immediate.
+
+Let $ X = R $ as a set. Then, there's a surjective
+ring homomorphism from $ \mathbb{Z} \langle X \rangle $ to $ R $
+which is given by $ r \mapsto r $. Thus, we have the desired result.
+
+\section{Problem 3}
+
+Let $ A,B $ be (possibly noncommutative) rings.
+
+By Problem 2, we know that $ A \equiv \mathbb{Z}[X] / I $ and  
+$ B \equiv \mathbb{Z}[Y] / J $ for some sets $ X,Y $ and ideals $ I,J $
+of the ring $ R $.
+
+Let the coproduct of $ A $ and $ B $ be $ \mathbb{Z}[X \sqcup Y ]/ (I + J) $.
+
+We'll show that this is the coproduct by showing that it satisfies the universal property.
+
+Notice that $ \mathbb{Z}[X] / I $ injects into $ \mathbb{Z}[X \sqcup Y]/ (I + J) $
+since $ I $ gets mapped to $ I + J $ where we send $ i \mapsto i + 0 $. By a similar argument with $ B $,
+we have injective ring homomorphisms into $ \mathbb{Z}[X \sqcup Y ]/ (I + J) $.
+
+Moreover, given two ring homomorphisms from $ \mathbb{Z}[X] $ and $ \mathbb{Z}[Y] $,
+this uniquely defines a ring homomorphism from $ \mathbb{Z}[X \sqcup Y] $ using the universal
+property in Problem 2. Moreover, this ring homomorphism factors through the canonical injections
+since it acts the same way on the basis. We thus conclude our proof.
+
+\section{Problem 5}
+
+Let $ \mathcal{P} $ be the set of all prime ideals in $ R $.
+
+Order $ \mathcal{P} $ by reverse inclusion. To apply Zorn's Lemma, we should show
+that every chain has a maximal (which in this case means minimal using set inclusion)
+element.
+
+Let $ P_{1} \supseteq P_{2} \supseteq \ldots $ be chain in $ \mathcal{P} $.
+Take the intersection of all the ideals in the chain.
+This gives another prime ideal contained in all the ideals in the chain.
+Thus, by Zorn's Lemma, we conclude the proof.
+
+
+
+\end{document}

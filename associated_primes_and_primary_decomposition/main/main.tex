@@ -1,0 +1,506 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{parskip}
+\newgeometry{vmargin={15mm}, hmargin={24mm,34mm}}
+\theoremstyle{definition} 
+\newtheorem{definition}{Definition}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}{Corollary}[theorem]
+\newcommand{\nil}{\operatorname{nil}}
+\newcommand{\ann}{\operatorname{Ann}}
+\newcommand{\ass}{\operatorname{Ass}}
+
+\title{Associated Primes, Primary Decomposition, Support of a Module}
+\date{April 2025}
+\author{Boran Erol}
+
+\begin{document}
+
+\maketitle
+
+\section{Associated Primes}
+
+Understanding every topic should begin with examples, so let's start collecting them.
+
+The theory of associated primes aims to extend the notion of unique factorization domains.
+
+Let $ I $ be an ideal of $ R $. By associated primes of $ I $, we mean the associated
+primes of the module $ R/I $ instead of the module $ I $.
+
+This is because the associated primes of the ideal $ I $ are usually useless.
+For example, if $ R $ is a domain and $ I $ is any non-zero ideal, the associated
+primes of $ I $ is the singleton set containing the zero ideal.
+
+Let's first show that if $ R $ is Noetherian, the set of associated primes
+of $ M $ is non-empty.
+
+Consider the collection of all ideals of $ R $ that are annihilators of
+some $ m \in M $. Let $ I $ be a maximal element of this collection.
+Such an $ I $ exists by the Noetherian hypothesis. Our goal will
+be to show that $ I $ is a prime ideal.
+
+Let $ xy \in I $ but assume $ y \notin I $, since otherwise we're done.
+Our goal now is to show that $ x \in I $.
+
+Let $ I = Ann(m) $ for some $ m \in M $. The only hypothesis we have
+is that $ I $ is maximal, so we should use this hypothesis.
+
+We have that $ (xy) m = 0 $ but $ ym \neq 0 $. Thus, $ x \in Ann(ym) $.
+Also notice that $ I $ is contained in $ Ann(ym) $ by the commutativity of $ R $.
+Thus, if $ x \notin I $, $ Ann(ym) $ is an ideal that contains $ I $ and $ x $,
+but it's not the unit ideal since $ Ann(ym) $ is not the zero ideal. We have
+thus proven the following:
+
+\begin{lemma}
+    Every module $ M $ over a Noetherian ring $ R $ satisfies
+    $ Ass(M) $ being non-empty.
+\end{lemma}
+
+% TODO:
+\textbf{Question: What is a ring that is not Noetherian and violates this hypothesis?}
+
+Let's first follow ATOCA Chapter 17.
+
+\begin{lemma}
+    Let $ R $ be a ring, $ M $ be a module, and $ I $ be an ideal of $ R $
+    contained in $ Ann(M) $. Then, there's a bijection between $ Ass_{R}(M) $
+    and $ Ass_{R^{\prime}}(M) $ given by induced bijection between the prime
+    ideals given by the canonical surjection map.
+\end{lemma}
+\begin{proof}
+    Let $ P $ be a prime ideal of $ R $ such that there exists some $ m \in M $
+    and $ P = Ann(m) $. Then, $ I $ is contained in $ P $.
+
+    Recall that since $ I $ is contained in $ Ann(M) $,
+    $ M $ is an $ R/I $-module by simply extending the action.
+    (This can most easily be seen using the ring endomorphism definition
+    of a module.)
+    This immediately implies that $ r + I \in Ann(m) $ if and only if $ r \in Ann(m) $,
+    and thus we get the bijective correspondence we're looking for.
+\end{proof}
+
+This lemma justifies letting $ \ann(M) = 0 $ without loss of generality
+when we are concerned with the associated primes of a module $ M $.
+
+\begin{proposition}
+    Let $ R $ be a ring, $ S $ be a multiplicative subset, $ M $ be an $ R $-module,
+    and $ P $ be a prime ideal of $ R $.
+
+    Let $ P \in Ass(M) $ such that $ P \cap S = \varnothing $.
+    Then, $ S^{-1}P \in Ass(S^{-1}M) $.
+\end{proposition}
+\begin{proof}
+    Let $ P \in Ass(M) $.
+    Then, $ R/P $ injects into $ M $.
+    Since localization is exact, $ S^{-1}(R/P) = S^{-1}R / S^{-1}P $
+    injects into $ S^{-1}M $.
+
+    Recall that $ S^{-1}P = P (S^{-1}R) $, which is a prime ideal of
+    the localized ring.
+
+    Thus, $ S^{-1}P $ is in $ Ass(S^{-1}M) $.
+\end{proof}
+
+% TODO:
+
+% Conversely, assume $ S^{-1}P \in Ass(S^{-1}M) $.
+
+% Then, there exists $ m \in M $ and $ t \in S $ such that $ S^{-1} P = Ann(m/t) $.
+
+% Let $ I = Ann(m) $.
+
+% \textbf{Assume that $ P $ is finitely generated modulo $ Ann(m) $.}
+
+% Then, there exists $ x_{1}, \ldots, x_{n} \in P $ such that $ \bar{x_{1}}, \ldots, \bar{x_{n}} $
+% generate $ (I + P)/ I $.
+
+% Since $ x_{i} \in P $, $ x_{i} \frac{m}{t} = 0 $ as $ \frac{x_{i}}{1} = x_{i} \in S^{-1}P $.
+% Then, there exists some $ s_{i} \in S $ such that $ s x_{i} m = 0 $.
+% Let $ s = s_{1} \cdots s_{n} $.
+% Let $ J = Ann(sm) $.
+% Clearly, $ x_{i} \in J $.
+
+\begin{proposition}
+    Let $ R $ be a ring and $ M $ be an $ R $-module.
+    Assume either that $ R $ is Noetherian or that $ M $ is Noetherian.
+    Then, $ z.div(M) $ is the union of all associated primes of $ M $.
+\end{proposition}
+\begin{proof}
+    Notice that the union of all associated primes in contained in $ z.div(M) $
+    by definition of an associated prime. Let's now prove the reverse
+    inclusion using both hypotheses.
+
+    Let $ x \in z.div(M) $. Then, there exists $ 0 \neq m \in M $
+    such that $ xm = 0 $. Then, $ x \in Ann(m) $.
+
+    Assuming $ R $ is Noetherian, $ Ann(m) $ lies in an ideal $ P $
+    maximal among annihilators of nonzero elements, which is an associated
+    prime of $ M $.
+
+    Assume now that $ M $ is Noetherian.
+
+\end{proof}
+
+\begin{corollary}
+    Let $ R $ be a ring an
+\end{corollary}
+\begin{proof}
+    Notice that $ 0 \notin z.div(M) $ if and only if $ M = 0 $.
+    Since every prime ideal $ P $ contains $ 0 $, $ M = 0 $
+    if and only if $ Ass(M) = \varnothing $.
+\end{proof}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    Let $ M = M_{1} \oplus M_{2} $.
+    Then, $ Ass(M) = Ass(M_{1}) \cup Ass(M_{2}) $.
+\end{lemma}
+\begin{proof}
+    Since $ M_{1} $ and $ M_{2} $ are submodules of $ M $,
+    we have that $ Ass(M_{1}) \cup Ass(M_{2}) $ is contained in $ Ass(M) $.
+
+    Proposition 17.6 in ATOCA produces the other containment.
+\end{proof}
+
+\begin{corollary}
+    Let $ M = M_{1} \oplus M_{2} \oplus \cdots \oplus M_{n} $.
+    Then, $ Ass(M) = Ass(M_{1}) \cup Ass(M_{2}) \cup \cdots M_{n} $.
+\end{corollary}
+
+\newpage
+
+\section{Primary Decomposition}
+
+The following definition is from ATOCA, and it's a pretty general definition.
+I will ease my way into it by using Gathmann's notes as well.
+
+I also like the ATOCA definition better since it explains some of the asymettry in the definition.
+
+\begin{definition}
+    Let $ R $ be a ring and $ Q \subsetneq M $ be $ R $-modules.
+    $ Q $ is called a \textbf{$P$-primary} module if $ Ass(M/Q) = \{ P \} $.
+    $ Q $ is called \textbf{old-primary} if given $ x \in R , m \in M $
+    either $ m \in Q $ or $ x \in nil(M/Q) $. Borcherds calls these
+    \textbf{primary submodules.}
+\end{definition}
+
+Here's a definition from Borcherds' lecture on the Lasker-Noether Theorem:
+
+\begin{definition}
+    A module $ M $ is called \textbf{coprimary} if it has at most one associated prime.
+\end{definition}
+
+\begin{lemma}
+    Let $ M $ be a finitely generated module over a Noetherian ring $ R $.
+    Let $ Q $ be a submodule of $ M $.
+    $ Q $ is $ P $-primary if and only if $ M/Q $ is coprimary.
+\end{lemma}
+
+This is immediate, but showing the equivalence with old-primary submodules requires
+a tiny bit more work.
+
+\begin{lemma}
+    Let $ M $ be a finitely generated module over a Noetherian ring $ R $.
+    Let $ Q $ be a submodule of $ M $.
+    $ Q $ is old-primary if and only if $ M/Q $ is coprimary.
+\end{lemma}
+\begin{proof}
+
+    Assume $ Q $ is old-primary.
+    We'll just work with $ N := M/Q $.
+
+    Let $ 0 \neq n \in M $. Let $ P = \ann(n) $.
+
+    Notice that $ \ann(N) \subseteq P $.
+
+    Also notice that $ P \subseteq z.div(N) \subseteq \nil(N) = \sqrt{\ann(N)} $.
+    as $ Q $ is old-primary.
+
+    If $ P $ is prime, $ \sqrt{\ass(N)} = P $.
+
+    Thus, there's at most one associated prime, which is $ \sqrt{\ann(M)} $.
+
+    Conversely, assume $ N := M/Q $ is coprimary.
+
+    \textit{Without loss of generality, assume $ \ann(M) = 0 $.}
+
+    Let $ P $ be the only associated prime of $ N $.
+    Then, $ P $ contains $ \ann(n) $ for every $ n \in N $ since
+    maximal elements of this form are associated primes.
+
+    We'll show that $ P $ is nilpotent. It suffices
+    to show that every element $ a \in P $ is nilpotent
+    as $ P $ is finitely generated as $ R $ is Noetherian.
+
+    Assume there exists $ a \in P $ is not nilpotent.
+    Then, the localization $ M_{a} $ is not zero 
+    as % TODO:
+
+    Then, the set of associated primes of $ M_{a} $
+    is not empty. Let $ T $ be an associated prime
+    of $ M_{a} $. Then, $ T $ is a prime ideal of $ R_{a} $.
+    The preimage of $ T $ under the canonical localization map
+
+\end{proof}
+
+
+
+\begin{theorem}
+    Any finitely generated module $ M $ over a Noetherian ring
+    is contained in the direct sum 
+
+    \[ \oplus_{P \in \ass(M)} M_{P} \]
+
+    where $ M_{P} $ are $ P $-primary modules.
+\end{theorem}
+
+Notice that prime ideals are both primary and old-primary. Also notice that
+the notion of being primary depends on the submodule $ M $.
+
+Let's now show that this definition agrees with the primary ideal definition from Gathmann's
+commutative algebra notes.
+
+\begin{lemma}
+    An ideal $ I $ in a ring $ R $ is old-primary if and only if for every $ a,b \in R $
+    with $ ab \in I $ we have $ a \in I $ or $ b \in I^{n} $, or equivalently, $ b \in \sqrt{I} $.
+\end{lemma}
+\begin{proof}
+    Assume $ I $ is old-primary. Then, for every $ x, y \in R $ such that $ xy \in I $,
+    either $ x \in I $ and $ y \in nil(R/I) $. Since $ y \in nil(R/I) $ if and only if
+    $ y \in \sqrt{I} $, we're done.
+\end{proof}
+
+\begin{lemma}[Example 8.10 in Gathmann's CA]
+    Let $ R $ be a PID. Then, an ideal $ I $ is old-primary if and only if
+    $ I = (p^{n}) $ for some prime $ p \in R $.
+\end{lemma}
+\begin{proof}
+    Let's first prove the converse. Let $ I = (p^{n}) $.
+
+    Let $ x,y \in R $ such that $ xy \in I $. 
+    Then, $ xy = p^{n} r $ for some $ r \in R $. 
+
+    Consider the irreducible decompositions of $ x $ and $ y $. If $ p $ divides $ y $, we're done.
+    Otherwise, $ p^{n} $ divides $ x $ and we're done again.
+
+    Now, assume $ I = (x) $ is an old-primary ideal. Consider the irreducible decomposition of $ x $.
+    Clearly, if $ x $ has two distinct prime divisor, we can pick $ x $ and $ y $ to mention
+    distinct prime divisors and this would imply that the primary condition doesn't hold.
+\end{proof}
+
+Notice in fact that the argument above works for any principal ideal in a UFD. Also notice
+that if $ Q $ is an old-primary ideal, $ P := \sqrt{Q} $ is a prime ideal. In this case, $ Q $
+is sometimes called \textbf{$ P $-old-primary}.
+
+Let us now return to the general definition of ATOCA.
+
+\begin{lemma}
+    Let $ R $ be a ring and $ Q \subsetneq M $ be $ R $-modules.
+    $ Q $ is old-primary if and only if zero divisors on $ M/Q $
+    correspond to nilpotents on $ M/Q $, i.e. $ z.div(M/Q) = nil(M/Q) $.
+\end{lemma}
+\begin{proof}
+    Assume $ Q $ is old-primary.
+    Let $ y \in R $ be a zero divisor on $ M/Q $, i.e. 
+\end{proof}
+
+Thus, being an old-primary module is really a property of the way
+in which $ Q $ is embedded in $ M $, i.e. it's a property of $ M/Q $.
+
+\begin{lemma}
+    Let $ R $ be a ring and $ Q \subsetneq M $ be $ R $-modules.
+    If $ Q $ is old-primary, $ \nil(M/Q) $ is the smallest prime ideal 
+    containing $ \ann(M/Q) $.
+\end{lemma}
+\begin{proof}
+    Let's first show that $ \nil(M/Q) $ is prime.
+
+    Let $ x,y \in R $ such that $ xy \in \nil(M/Q) $.
+    Assume $ y \notin \nil(M/Q) $.
+
+    Let $ Q $ be a prime ideal containing $ \ann(M/Q) $.
+
+
+\end{proof}
+
+\begin{lemma}[ATOCA 18.4]
+    Let $ R $ be a ring and $ N $ be a Noetherian $ R $-module.
+    Let $ I = \nil(N) $. Then, $ I^{n}N = 0 $ for some $ n \geq 1 $.
+\end{lemma}
+\begin{proof}
+    Let $ J = \ann(N) $.
+    Then, $ I = \sqrt{J} $.
+
+    We know that $ R/J $ is Noetherian.
+    Since $ R/J $ is Noetherian, $ (I + J) / J $ is finitely generated.
+    Since $ I $ is contained in $ \sqrt{J} $ and is finitely generated,
+    wwe have that there exists some $ n \geq 1 $ such that $ I^{n} \subseteq J = \ann(N) $.
+    In other words, $ I^{n}N = 0 $. 
+\end{proof}
+
+\begin{proposition}[ATOCA 18.5]
+    Let $ Q $ be a submodule of $ M $.
+    Assume $ Q $ is $ P $-primary and $ M/Q $ is Noetherian.
+
+    Then, $ P = \nil(M/Q) $ and $ P^{n} (M/Q) = 0 $ for some $ n \geq 1 $.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{proposition}[ATOCA 18.8]
+    Let $ R $ be a ring and $ I $ be a maximal ideal of $ R $.
+    Let $ Q \subsetneq M $ be $ R $-modules.
+
+    Assume $ \nil(M/Q) = I $. Then, $ Q $ is old-primary.
+\end{proposition}
+
+% \begin{proof}
+%     % Let $ J = \ann(M/Q) $.
+
+%     Let $ x \in R $ and $ m \in M $ such that $ xm \in Q $.
+%     Assume $ x \notin I $.
+%     Since $ I $ maximal, there exists some $ y \in R $ such that
+%     $ 1 - xy \in I $. 
+
+
+% \end{proof}
+
+\begin{example}[Gathmann Example 8.13(a)]
+    We show that primary ideals don't need to be powers of prime ideals in general.
+
+    Let $ Q = (x^{2}, y) $ and $ P = (x,y) $ in $ \mathbb{R}[x] $.
+
+    Notice that $ \sqrt{Q} = P $, which is a maximal ideal. Thus, $ Q $ is $ P $-primary.
+    
+    However, $ P^{2} = (x^{2}, xy, y^{2}) $ is strictly contained in $ Q $.
+\end{example}
+
+\begin{example}[Gathmann Example 8.13(b)]
+    Let $ R = \mathbb{R}[x,y,z](xy - z^{2}) $.
+
+    Let $ P = (\bar{x}, \bar{z}) $ be an ideal of $ R $.
+
+
+
+    Notice that $ P^{2} = (\bar{x}^{2}, \bar{x} \bar{z}, \bar{z}^{2}) $ is not primary since
+    $ \bar{x}\bar{y} = \bar{z}^{2} $ is in $ P^{2} $ but $ \bar{x} \notin P^{2} $ and no power
+    of $ \bar{y} $ is in $ P^{2} $.
+
+    This example also highlights the asymmetry of the definition of an old-primary ideal,
+    which is already apparent in the ATOCA definition.
+\end{example}
+
+\begin{definition}
+    Let $ I $ be an ideal in a ring $ R $.
+    A primary decomposition of $ I $ is a finite collection of old-primary ideals $ Q_{1}, \ldots, Q_{n} $
+    such that $ I = Q_{1} \cap Q_{2} \cdots Q_{n} $.
+\end{definition}
+
+\begin{lemma}
+    Let $ R $ be a ring and $ I \subset Q $ be ideals of $ R $.
+    $ Q $ is old-primary in $ R $ if and only if $ Q/I $ is old-primary in $ R/I $.
+\end{lemma}
+\begin{proof}
+    Recall that $ Q $ is old-primary if and only if zero-divisors in $ R/Q $
+    are nilpotent. Since $ R/Q $ is isomorpic to $ (R/I) / (Q/I) $, we have
+    the desired result.
+\end{proof}
+
+\begin{proposition}
+    In a Noetherian ring, every ideal has a primary decomposition.
+\end{proposition}
+\begin{proof}
+    Assume by contradiction that there is an ideal without a primary decomposition.
+
+    Since $ R $ is Noetherian, there's an ideal $ I $ of $ R $ that is maximal
+    among all ideals without primary decompositions.
+
+    Then, in $ S = R/I $, the zero ideal is not a primary ideal.
+    Then, there exists $ a,b \in S $ such that $ ab = 0 $ but $ a \neq 0 $
+    and $ b $ is not nilpotent.
+
+    Since $ S $ is Noetherian, the chain of ideals $ \ann(b) \subseteq \ann(b^{2}) \cdots $
+    becomes stationary at some $ n \geq 1 $.
+
+    Since $ (a) $ and $ (b^{n}) $ are non-zero ideals of $ S $, they have a primary decomposition.
+    Then, $ (a) \cap (b^{n}) $ also has a primary decomposition.
+
+    Let $ x \in (a) \cap (b^{n}) $.
+    Then, $ x = ac = db^{n} $ for some $ c,d \in S $.
+
+    Then, $ 0 = cab = xb = db^{n + 1} $, so $ d \in \ann(b^{n + 1}) = \ann{b^{n}} $,
+    so $ x = 0 $.
+
+    We now have a contradiction since we obtained a primary decomposition of the zero ideal.
+\end{proof}
+
+
+
+
+% TODO: Connect this to the definition used by Merkurjev.
+
+
+
+
+\begin{example}
+
+Let $ R = \mathbb{R}[x,y] / (x^{2} + y^{2} - 1) $ be the coordinate ring of the unit sphere
+over the reals. Let $ X = V( x^{2} + y^{2} - 1 ) $.
+
+Intuitively, $ x^{2} + y^{2} - 1 $ is irreducible as the circle would be a union of two lines
+otherwise, but it clearly is not.
+
+Rigorously, $ x^{2} + y^{2} - 1 $ is irreducible as % TODO:
+
+We will show that $ R $ is not a UFD by showing that $ \bar{x} $ is irreducible
+but not prime.
+
+Notice that $ V(\bar{x}) $ consists of two points, the north and south poles of the sphere.
+
+Thus, $ \bar{x} $ is not zero since otherwise $ V(\bar{x}) = X $.
+
+Similarly, $ bar{x} $ is not a unit since otherwise $ V(\bar{x}) = \varnothing $. % TODO: Why?
+
+The statement that $ \bar{x} $ is not prime simply corresponds to the geometric fact that $ V(\bar{x}) $
+is reducible, as it's a union of two points.
+
+\begin{lemma}
+    $ \bar{x} $ is not prime.
+\end{lemma}
+\begin{proof}
+    We will show that $ \bar{x} $ doesn't divide $ 1 \pm \bar{y} $.
+    Since $ \bar{x}^{2} = (1 + \bar{y})(1 - \bar{y}) $, this shows that $ \bar{x} $
+    is not prime since $ (1 + \bar{y})(1 - \bar{y}) $ is in the ideal $ ( \bar{x} ) $
+    but neither factor is in $ ( \bar{x} ) $.
+
+    Assume $ \bar{x} $ divides $ 1 + \bar{y} $.
+
+    Then, $ 1 + y = xg + (x^{2} + y^{2} - 1) h $ for some $ g,h \in \mathbb{R}[x] $.
+
+    Plugging in $ (x,y) = (0,1) $ produces $ 2 = 0 $, which is a contradiction.
+\end{proof}
+
+\begin{lemma}
+    $ \bar{x} $ is irreducible.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+Notice what the issue is here. $ \bar{x} $ can't be written as a product of two functions,
+but the ideal $ ( \bar{x} ) $ is the intersection of the ideals $ I(\bar{x}, \bar{y} - 1) $
+and $ I(\bar{x}, \bar{y} + 1) $ using the Nullstellensatz and that intersections of ideals
+correspond to unions of the varieties.
+
+\end{example}
+
+\end{document}
